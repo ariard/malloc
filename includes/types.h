@@ -16,3 +16,7 @@
 # include <sys/types.h>
 
 typedef struct s_config		t_config;
+typedef struct s_bin		t_bin;
+typedef struct s_chunk		t_chunk;
+
+#endif

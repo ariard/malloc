@@ -16,9 +16,20 @@
 void		*malloc(size_t size)
 {
 	static t_config		config;
+	t_bin			*temp;
+	void			*freespace;
 
-	if (!config)
+	if (!config.page_size)
 		malloc_init(&config);
-	printf("page size is of %d", config->page_size);
-	return ;
+	temp = first_bin;
+	freesapce = NULL;
+	while(temp)
+	{
+		if (check_bin(temp, size))
+			freespace = pack_bin(temp, size);
+		if (freespace)
+			return (freespace);
+		temp = temp->next;
+	}		
+	return (NULL);
 }

@@ -25,6 +25,25 @@ struct	s_config
 	int		limit_small;
 };
 
+struct	s_chunk
+{
+	s_chunk		*next;
+	s_chunk		*previous;
+	int		status;
+	int		size;
+	char		data[1];
+}
+
+struct	s_bin
+{
+	s_bin		*next;
+	s_chunk		*first;
+	int		size;
+	int		free;
+}
+	
+extern	s_bin		first_bin;
+
 #endif
 
 void		malloc_init(t_config *config);
