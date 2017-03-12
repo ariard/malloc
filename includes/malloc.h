@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 20:17:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/12 01:35:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,49 @@
 # define MALLOC_H
 
 # include <unistd.h>
+# include <sys/mman.h>
 # include "types.h"
+# include "../libft/includes/libft.h"
 
 struct	s_config
 {
 	int		page_size;
 	int		tiny_area;
 	int		small_area;
-	int		limit_tiny;
-	int		limit_small;
+	size_t	limit_tiny;
+	size_t	limit_small;
+};
+
+enum	e_status
+{
+	EMPTY,
+	FULL,
+	FREED,
 };
 
 struct	s_chunk
 {
-	s_chunk		*next;
-	s_chunk		*previous;
-	int		status;
-	int		size;
-	char		data[1];
-}
+	struct	s_chunk		*next;
+	struct 	s_chunk		*previous;
+	int					status;
+	int					size;
+	char				data[1];
+};
 
 struct	s_bin
 {
-	s_bin		*next;
-	s_chunk		*first;
-	int		size;
-	int		free;
-}
+	struct	s_bin		*next;
+	struct s_chunk		*first;
+	size_t				size;
+	t_status			status;
+};
 	
-extern	s_bin		first_bin;
-
-#endif
+extern	struct s_bin	*first_bin;
 
 void		malloc_init(t_config *config);
+void		bin_init(t_bin *bin);
+t_bin		*bin_add(t_config *config, size_t size);
+int			bin_check(t_bin *temp, size_t size);
+void		*bin_pack(t_bin *bin, size_t size);
 
+#endif

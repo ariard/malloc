@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2017/03/10 20:30:27 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/12 01:34:50 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,19 @@ RM		=	/bin/rm -rf
 
 FLAGS		=	-Wall -Wextra -Werror
 
+LIBFT_DIR   = libft/
+LIBFT_LIB	= $(LIBFT_DIR)libft.a
+LIBFT_INC	= $(LIBFT_DIR)includes/
+
 SRC_DIR		= 	src/
 INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
+bin_add.c\
+bin_check.c\
+bin_pack.c\
+bin_init.c\
 malloc_init.c\
 malloc.c
 
@@ -34,25 +42,30 @@ ifeq ($(HOSTTYPE),)
 endif
 
 all:
-	make -j $(NAME)
+	@make -j $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
-	echo hello
-	$(AR) $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@$(AR) $(NAME) $(OBJS)
+	@ranlib $(NAME)
 	
+$(LIBFT_LIB):
+	@make -C $(LIBFT_DIR)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJR_DIR)
-	$(CC) $(FLAGS) -MMD -c $< -o $@\
+	@$(CC) $(FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)
 	
 $(OBJ_DIR):
-	$(MKDIR) $(OBJ_DIR)
-	$(MKDIR) $(dir $(OBJS))
+	@$(MKDIR) $(OBJ_DIR)
+	@$(MKDIR) $(dir $(OBJS))
 clean:
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 fclean: clean
 	@$(RM) $(NAME)
+
+maintest: all
+	gcc -I includes/malloc.h main.c libft_malloc_OSTTYPE.so libft/libft.a
 
 re: fclean all
 

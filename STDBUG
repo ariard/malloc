@@ -1,0 +1,19 @@
+[7m[33m               main.c [1m[34m117[0m[7m[1m[32mstart of shell[0m[0m
+[7m[33m         shell_init.c [1m[34m20 [0mcheck[0m
+[7m[33m         shell_init.c [1m[34m28 [0minteractive shell settings[0m
+[7m[33m               main.c [1m[34m124[0mJOBC is ON, fd=[0][0m
+[7m[33m  job_update_status.c [1m[34m25 [0mpid=[-1][0m
+[7m[33m        token_print.c [1m[34m24 [0mtoken : TK_WORD data [setenv][0m
+[7m[33m        token_print.c [1m[34m24 [0mtoken : TK_WORD data [DYLD_FORCE_FLAT_NAMESPACE][0m
+[7m[33m        token_print.c [1m[34m24 [0mtoken : TK_WORD data [1][0m
+       NEW                                                                      
+  +----+                                                                        
+  CMD                                                                           
+       NEW                                                                      
+  +----+                                                                        
+  CMD                                                                           
+       NEW                                                                      
+  +----+                                                                        
+  CMD                                                                           
+[7m[33m     launch_process.c [1m[34m32 [0mlaunchprocess[0m
+[7m[33m     launch_process.c [1m[34m41 [0mgonna reset fds[0m
