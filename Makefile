@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2017/03/12 01:34:50 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/12 15:40:04 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,12 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(uname -m)_$(uname -s)
 endif
 
-all:
-	@make -j $(NAME)
+all: 
+	gcc -Wall -Wextra -Werror -I includes/ -c src/malloc.c src/malloc_init.c\
+		src/bin_add.c src/bin_check.c src/bin_pack.c src/bin_init.c
+	gcc -shared -o $(NAME) ./malloc.o malloc_init.o bin_add.o bin_check.o\
+		bin_pack.o bin_init.o
+	gcc -I includes/malloc.h main.c libft_malloc_$HOSTTYPE.so libft/libft.a
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
@@ -52,14 +56,14 @@ $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJR_DIR)
-	@$(CC) $(FLAGS) -MMD -c $< -o $@\
+	$(CC) $(FLAGS) -c $< -o $@\
 		-I $(INC_DIR)
 	
 $(OBJ_DIR):
 	@$(MKDIR) $(OBJ_DIR)
 	@$(MKDIR) $(dir $(OBJS))
 clean:
-	@$(RM) $(NAME)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)

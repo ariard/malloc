@@ -5,11 +5,20 @@
 int	main(void)
 {
 	char	*str;
-
-	DG("fewwfewef");
-//	str = malloc(10);
-	return (0);
-	strncpy(str, "voici dix", 10);
+	char	test[20000];
+	int		size = 16000;
+	int		i = 0;
+	
+/*	DBG(RESET "\n\nMAIN\n");
+	DBG(RED "str sizeof %d\n", size);
+*/	while (size--)
+	{
+		strcat(test, "A");
+		i++;
+	}
+	str = NULL;
+	str = malloc(1);
+	strcpy(str, test);
 	printf("%s", str);
 	return (0);
 }

@@ -6,14 +6,14 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 22:59:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 23:23:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/12 15:46:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/includes/libft.h"
+
 int		main(void)
 {
+	DG("hello ");
 	char	*str;
-
-	str = (char *)mmap(0, nb + 1, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
-		-1, 0);
 }

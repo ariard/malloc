@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/12 01:34:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/12 17:53:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ t_bin	*bin_add(t_config *config, size_t size)
 		nb = config->small_area;	
 	else
 		nb = size;
-	bin_init(bin);
-	dprintf(3, "still alive");
-	bin->first = mmap(0, nb + 1, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
+//	DBG(GREEN "size request %zu\n" RESET, size); 
+	DBG(GREEN "page request %d\n" RESET, nb);
+//	DBG(GREEN "page size %d\n" RESET, getpagesize());
+	bin = mmap(0, nb, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
 		-1, 0);
+	bin_init(bin, size);
 	return (bin);
 }

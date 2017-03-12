@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/12 01:34:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/12 17:19:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void		*malloc(size_t size)
 	t_bin				*temp;
 	void				*freespace;
 
-	dprintf(3, "in malloc\n");
+//	dprintf(3, GREEN "\n\nBEGIN MALLOC\n" RESET);
 	if (!config.page_size)
 		malloc_init(&config);
-	dprintf(3, "after malloc init\n");
 	if (!first_bin)
 		first_bin =	bin_add(&config, size);
-	dprintf(3, "after bin add\n");
+	return (first_bin->data);
 	temp = first_bin;
 	freespace = NULL;
 	while (temp)
