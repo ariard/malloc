@@ -14,7 +14,7 @@
 
 int		bin_check(t_bin *temp, size_t size)
 {
-	if (temp->size > size)
+	if (temp->freespace > size)
 		return (1);
 	return (0);
 }

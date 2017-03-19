@@ -28,9 +28,9 @@
 
 struct	s_config
 {
-	int		page_size;
-	int		tiny_area;
-	int		small_area;
+	int	page_size;
+	int	tiny_area;
+	int	small_area;
 	size_t	limit_tiny;
 	size_t	limit_small;
 };
@@ -46,18 +46,18 @@ struct	s_chunk
 {
 	struct	s_chunk		*next;
 	struct 	s_chunk		*previous;
-	int					status;
-	int					size;
-	char				data[1];
+	int			status;
+	size_t			size;
+	char			data[1];
 };
 
 struct	s_bin
 {
-	struct	s_bin		*next;
-	struct s_chunk		*first;
-	size_t				size;
-	t_status			status;
-	char				data[1];
+	struct s_bin		*next;
+	struct s_chunk		*first_chunk;
+	size_t			size;
+	size_t			freespace;
+	char			data[1];
 };
 	
 extern	struct s_bin	*first_bin;
@@ -65,7 +65,9 @@ extern	struct s_bin	*first_bin;
 void		malloc_init(t_config *config);
 void		bin_init(t_bin *bin, size_t size);
 t_bin		*bin_add(t_config *config, size_t size);
-int			bin_check(t_bin *temp, size_t size);
+int		bin_check(t_bin *temp, size_t size);
 void		*bin_pack(t_bin *bin, size_t size);
+int		chunk_check(t_chunk *chunk, size_t size);
+t_chunk		*chunk_init(void *freespace, size_t size, t_chunk *previous);
 
 #endif

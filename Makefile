@@ -18,7 +18,7 @@ RM		=	/bin/rm -rf
 
 FLAGS		=	-Wall -Wextra -Werror
 
-LIBFT_DIR   = libft/
+LIBFT_DIR   	= libft/
 LIBFT_LIB	= $(LIBFT_DIR)libft.a
 LIBFT_INC	= $(LIBFT_DIR)includes/
 
@@ -31,6 +31,8 @@ bin_add.c\
 bin_check.c\
 bin_pack.c\
 bin_init.c\
+chunk_add.c\
+chunk_check.c\
 malloc_init.c\
 malloc.c
 
@@ -43,10 +45,12 @@ endif
 
 all: 
 	gcc -Wall -Wextra -Werror -I includes/ -c src/malloc.c src/malloc_init.c\
-		src/bin_add.c src/bin_check.c src/bin_pack.c src/bin_init.c
+		src/bin_add.c src/bin_check.c src/bin_pack.c src/bin_init.c\
+		src/chunk_init.c src/chunk_check.c
 	gcc -shared -o $(NAME) ./malloc.o malloc_init.o bin_add.o bin_check.o\
-		bin_pack.o bin_init.o
+		bin_pack.o bin_init.o chunk_init.o chunk_check.o
 	gcc -I includes/malloc.h main.c libft_malloc_$HOSTTYPE.so libft/libft.a
+	rm *.o
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(AR) $(NAME) $(OBJS)

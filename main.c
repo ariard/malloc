@@ -2,23 +2,20 @@
 #include <stdio.h>
 #include <string.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	char	*str;
-	char	test[20000];
-	int		size = 16000;
-	int		i = 0;
+	char	*str2;
+	char	test[50000];
+	int	size = atoi(argv[1]);
 	
-/*	DBG(RESET "\n\nMAIN\n");
-	DBG(RED "str sizeof %d\n", size);
-*/	while (size--)
-	{
+	while (size--)
 		strcat(test, "A");
-		i++;
-	}
-	str = NULL;
-	str = malloc(1);
+	str = malloc(atoi(argv[1]));
 	strcpy(str, test);
 	printf("%s", str);
+	printf("\n");
+	strcpy(str2, test);
+	printf("%s", str2);	
 	return (0);
 }

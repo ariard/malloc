@@ -1,4 +1,7 @@
-flag[33min malloc init
-[0m[31mend of malloc init
-[0m[32mpage request 16000
-[0m
+[32m
+BEGIN MALLOC
+[0m[32msize request 1000
+[0m[32mpage request 4096
+[0m[32msize request 1000
+[0m[32mpage request 4096
+[0m[32mInit chunk[0m

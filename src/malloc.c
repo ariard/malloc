@@ -18,24 +18,22 @@ t_bin		*first_bin = NULL;
 void		*malloc(size_t size)
 {
 	static t_config		config;
-	t_bin				*temp;
-	void				*freespace;
+	t_bin			*temp;
+	void			*freespace;
 
-//	dprintf(3, GREEN "\n\nBEGIN MALLOC\n" RESET);
+	DBG(GREEN "\nBEGIN MALLOC\n" RESET);
 	if (!config.page_size)
 		malloc_init(&config);
 	if (!first_bin)
-		first_bin =	bin_add(&config, size);
-	return (first_bin->data);
+		first_bin = bin_add(&config, size);
 	temp = first_bin;
 	freespace = NULL;
-	while (temp)
+	while (temp->next)
 	{
 		if (bin_check(temp, size))
-			freespace = bin_pack(temp, size);
-		if (freespace)
-			return (freespace);
+			return (freespace = bin_pack(temp, size));
 		temp = temp->next;
-	}		
-	return (NULL);
+	}
+	temp->next = bin_add(&config, size);	
+	return ((freespace = bin_pack(temp->next, size)));
 }

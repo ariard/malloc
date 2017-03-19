@@ -24,9 +24,8 @@ t_bin	*bin_add(t_config *config, size_t size)
 		nb = config->small_area;	
 	else
 		nb = size;
-//	DBG(GREEN "size request %zu\n" RESET, size); 
+	DBG(GREEN "size request %zu\n" RESET, size); 
 	DBG(GREEN "page request %d\n" RESET, nb);
-//	DBG(GREEN "page size %d\n" RESET, getpagesize());
 	bin = mmap(0, nb, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
 		-1, 0);
 	bin_init(bin, size);
