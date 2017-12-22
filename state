@@ -2,9 +2,10 @@
 =>free, si zone free, alors libre memoire
 =>realloc, plus grande zone memoire
 =>fastbin
+=>calloc
 =>second_chance_bin
 =>refragmentation
 =>macro debug
 =>log malloc
-=>support thread
+=>thread safe
 =>liste de tests

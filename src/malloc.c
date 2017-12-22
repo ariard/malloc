@@ -19,21 +19,24 @@ void		*malloc(size_t size)
 {
 	static t_config		config;
 	t_bin			*temp;
-	void			*freespace;
+	t_bin			*prev;
 
-	DBG(GREEN "\nBEGIN MALLOC\n" RESET);
+	DBG(GREEN "MALLOC\n" RESET);
 	if (!config.page_size)
 		malloc_init(&config);
 	if (!first_bin)
 		first_bin = bin_add(&config, size);
 	temp = first_bin;
-	freespace = NULL;
-	while (temp->next)
+	while (temp)
 	{
 		if (bin_check(temp, size))
-			return (freespace = bin_pack(temp, size));
-		temp = temp->next;
+			return (bin_pack(temp, size));
+		prev = temp;
+		if (!(temp = temp->next))
+		{
+			temp = bin_add(&config, size);
+			prev->next = temp;
+		}
 	}
-	temp->next = bin_add(&config, size);	
-	return ((freespace = bin_pack(temp->next, size)));
+	return (NULL);
 }

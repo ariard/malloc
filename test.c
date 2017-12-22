@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int		main(void)
 {
-	DG("hello ");
 	char	*str;
+
+	str = malloc(100);
+	strcpy(str, "hello world");
+	printf("[%s]", str);
+	return (0);
 }

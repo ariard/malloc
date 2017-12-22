@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libft_malloc_$HOSTTYPE.so
+NAME		=	libmalloc.so
 CC		=	gcc
 AR		=	ar -rc
 MKDIR		=	mkdir -p
@@ -31,8 +31,8 @@ bin_add.c\
 bin_check.c\
 bin_pack.c\
 bin_init.c\
-chunk_add.c\
 chunk_check.c\
+chunk_init.c\
 malloc_init.c\
 malloc.c
 
@@ -43,31 +43,27 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(uname -m)_$(uname -s)
 endif
 
-all: 
-	gcc -Wall -Wextra -Werror -I includes/ -c src/malloc.c src/malloc_init.c\
-		src/bin_add.c src/bin_check.c src/bin_pack.c src/bin_init.c\
-		src/chunk_init.c src/chunk_check.c
-	gcc -shared -o $(NAME) ./malloc.o malloc_init.o bin_add.o bin_check.o\
-		bin_pack.o bin_init.o chunk_init.o chunk_check.o
-	gcc -I includes/malloc.h main.c libft_malloc_$HOSTTYPE.so libft/libft.a
-	rm *.o
 
-$(NAME): $(OBJ_DIR) $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
-	@ranlib $(NAME)
-	
+all: 	
+	gcc -c -Wall -Werror -I includes/ -fPIC $(SRCS)
+	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
+	gcc -L/home/user/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
+	export LD_LIBRARY_PATH=/home/user/Projects/malloc
+
+
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $(OBJS))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJR_DIR)
 	$(CC) $(FLAGS) -c $< -o $@\
 		-I $(INC_DIR)
 	
-$(OBJ_DIR):
-	@$(MKDIR) $(OBJ_DIR)
-	@$(MKDIR) $(dir $(OBJS))
 clean:
-	@$(RM) $(OBJ_DIR)
+	@rm *.o
 
 fclean: clean
 	@$(RM) $(NAME)

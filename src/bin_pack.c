@@ -17,22 +17,25 @@
 */
 
 void	*bin_pack(t_bin *bin, size_t size)
-{	
-	void		*freespace;
+{
 	t_chunk		*temp;
+	t_chunk		*prev;
 	
+	DBG(GREEN "BIN_PACK\n" RESET);
 	bin->size -= size;
-	freespace = bin->data;
 	if (!bin->first_chunk)
 		return ((bin->first_chunk = chunk_init(freespace, size, NULL))->data);
 	temp = bin->first_chunk;
-	while (temp->next)
+	while (temp)
 	{
 		if (chunk_check(temp, size))
 			return (temp->data);
-		freespace += (sizeof(t_chunk) + temp->size);
-		temp = temp->next;
+		prev = temp;
+		if (!(temp = temp->next))
+		{
+			temp = chunk_init(freespace, size, temp);
+			prev->next = temp;
+		}
 	}
-	temp->next = chunk_init(freespace, size, temp);
-	return ((temp->next)->data);
+	return (NULL);
 }
