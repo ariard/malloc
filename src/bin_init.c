@@ -15,7 +15,6 @@
 void		bin_init(t_bin *bin, size_t size)
 {
 	bin->next = NULL;
-	bin->first_chunk = NULL;
-	bin->size = size;
 	bin->freespace = size;
+	bin->free_list = bin + sizeof(t_bin) + 1;
 }

@@ -12,9 +12,9 @@
 
 #include "malloc.h"
 
-int		bin_check(t_bin *temp, size_t size)
+int		bin_check(t_bin *bin, size_t size)
 {
-	if (temp->freespace > size)
+	if (bin->freespace > (size + 2 * sizeof(int)))
 		return (1);
 	return (0);
 }

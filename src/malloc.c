@@ -15,26 +15,26 @@
 
 t_bin		*first_bin = NULL;
 
-void		*malloc(size_t size)
+void		*malloc(request_t request)
 {
 	static t_config		config;
 	t_bin			*temp;
 	t_bin			*prev;
 
 	DBG(GREEN "MALLOC\n" RESET);
-	if (!config.page_size)
+	if (!config.page_request)
 		malloc_init(&config);
 	if (!first_bin)
-		first_bin = bin_add(&config, size);
+		first_bin = bin_add(&config, request);
 	temp = first_bin;
 	while (temp)
 	{
-		if (bin_check(temp, size))
-			return (bin_pack(temp, size));
+		if (bin_check(temp, request))
+			return (bin_pack(temp, request, &config));
 		prev = temp;
 		if (!(temp = temp->next))
 		{
-			temp = bin_add(&config, size);
+			temp = bin_add(&config, request);
 			prev->next = temp;
 		}
 	}

@@ -12,30 +12,20 @@
 
 #include "malloc.h"
 
-/*
-** Pack the request in a new chunk from the bin
-*/
 
-void	*bin_pack(t_bin *bin, size_t size)
+void	*bin_pack(t_bin *bin, size_t req, t_cfg *cfg)
 {
-	t_chunk		*temp;
-	t_chunk		*prev;
-	
-	DBG(GREEN "BIN_PACK\n" RESET);
-	bin->size -= size;
-	if (!bin->first_chunk)
-		return ((bin->first_chunk = chunk_init(freespace, size, NULL))->data);
-	temp = bin->first_chunk;
+	char	*temp;	
+	char	*prev;
+
+	temp = bin->free_list;
+	prev = NULL;
 	while (temp)
 	{
-		if (chunk_check(temp, size))
-			return (temp->data);
+		if (chunk_check(temp, request))
+			return (chunk_pack(prev, temp, request));
 		prev = temp;
-		if (!(temp = temp->next))
-		{
-			temp = chunk_init(freespace, size, temp);
-			prev->next = temp;
-		}
+		temp = temp->next;			
 	}
-	return (NULL);
+	return (NULL)
 }

@@ -1,11 +1,6 @@
-=> algo de liste
-=>free, si zone free, alors libre memoire
-=>realloc, plus grande zone memoire
-=>fastbin
-=>calloc
-=>second_chance_bin
-=>refragmentation
-=>macro debug
-=>log malloc
-=>thread safe
-=>liste de tests
+=> bi-coalescing
+=> variable d'env
+=> multi-thread
+=> best fit ?
+
+algo ok + free proto

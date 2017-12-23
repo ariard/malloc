@@ -8,3 +8,5 @@ int	chunk_check(t_chunk *chunk, size_t size)
 {
 	return (chunk->status == FREED && chunk->size > size);
 }
+
+//fragmentation + 10 min

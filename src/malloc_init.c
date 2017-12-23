@@ -15,9 +15,9 @@
 void		malloc_init(t_config *config)
 {
 	config->page_size = getpagesize();
-	config->tiny_area = config->page_size * 1;
-	config->small_area = config->page_size * 4;
-	config->limit_tiny = config->tiny_area;
-	config->limit_small = config->small_area;
+	config->tiny_area = config->page_size * 512;
+	config->small_area = config->page_size * 4096;
+	config->l_tiny = config->tiny_area / 2114;
+	config->l_small = config->small_area / 16;
 	return ;
 }
