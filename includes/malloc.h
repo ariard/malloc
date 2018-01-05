@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 21:56:38 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/05 23:35:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ struct	s_bin
 	struct s_bin		*next;
 	void				*first;
 	size_t				freespace;
+};
+
+struct s_chunk
+{
+	struct s_chunk		*next;
+	struct s_chunk		*prev;
 };
 
 extern	struct s_bin	*first_bin;

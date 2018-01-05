@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 21:59:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/05 23:51:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	*chunk_init(t_config *config, t_bin *bin, size_t request)
 //	DBG(GREEN "diff %ld\n", bin->first - temp);
 	*(size_t *)temp = request;
 	*(size_t *)(bin->first - 1) = request;
+	bin->freespace -= (bin->first - temp) * sizeof(bin->first);
 	return (temp + 1);
 }

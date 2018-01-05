@@ -6,12 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 20:58:05 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/05 22:20:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <stdio.h>
+#include <sys/time.h>
 
 t_bin		*first_bin = NULL;
 

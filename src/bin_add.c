@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 20:40:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/05 22:21:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_bin	*bin_add(t_config *config, size_t request)
 	bin->next = NULL;
 	bin->freespace = size;
 	bin->first = bin + 1;
+//	bin->freespace -= sizeof(t_bin) * 2;
 	return (bin);
 }
