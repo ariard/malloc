@@ -6,14 +6,16 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2017/03/12 15:40:04 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/05 20:59:52 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libmalloc.so
+
+OS		:= $(shell uname) 
+NAME	=	libmalloc.so
 CC		=	gcc
 AR		=	ar -rc
-MKDIR		=	mkdir -p
+MKDIR	=	mkdir -p
 RM		=	/bin/rm -rf
 
 FLAGS		=	-Wall -Wextra -Werror
@@ -39,16 +41,19 @@ malloc.c
 SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
 
-ifeq ($(HOSTTYPE),)
-	HOSTTYPE := $(uname -m)_$(uname -s)
-endif
-
-
 all: 	
+ifeq ($(OS), Linux)
 	gcc -c -Wall -Werror -I includes/ -fPIC $(SRCS)
 	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
 	gcc -L/home/user/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 	export LD_LIBRARY_PATH=/home/user/Projects/malloc
+else
+	gcc -c -Wall -Werror -I includes/ $(SRCS)
+	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
+	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
+endif
+
+test: all
 
 
 $(LIBFT_LIB):

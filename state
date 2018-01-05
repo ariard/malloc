@@ -1,11 +1,10 @@
-=> algo de liste
-=>free, si zone free, alors libre memoire
-=>realloc, plus grande zone memoire
-=>fastbin
-=>calloc
-=>second_chance_bin
-=>refragmentation
-=>macro debug
-=>log malloc
-=>thread safe
-=>liste de tests
+DESIGN
+
+GOALS :
+	- best-fit with best coalescing list
+	- multi-threaded area (top-down list)
+	- variables d'env
+	- calloc, realloc, show_memory
+
+TEST :
+	- performance vs ressources

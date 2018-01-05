@@ -1,2 +1,1 @@
-
 void	inside(void);

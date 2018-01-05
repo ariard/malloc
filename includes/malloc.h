@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/12 16:45:17 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/05 21:56:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);	
 
+
+# define TINY(x, y)		(x / (config->tiny_area / 131072) + 1) * ((config->tiny_area / 131072) / sizeof(y)) + 2
+# define SMALL(x, y)	(x / (config->small_area / 32768) + 1) * ((config->small_area / 32768) / sizeof(y)) + 2
+
 struct	s_config
 {
 	int	page_size;
@@ -42,32 +46,37 @@ enum	e_status
 	FREED,
 };
 
-struct	s_chunk
-{
-	struct	s_chunk		*next;
-	struct 	s_chunk		*previous;
-	int			status;
-	size_t			size;
-	char			data[1];
-};
+//struct	s_chunk
+//{
+//	struct	s_chunk		*next;
+//	struct 	s_chunk		*previous;
+//	int			status;
+//	size_t			size;
+//	char			data[1];
+//};
 
+//struct	s_bin
+//{
+//	struct s_bin		*next;
+//	struct s_chunk		*first_chunk;
+//	size_t			size;
+//	size_t			freespace;
+//	char			data[1];
+//};
+//
 struct	s_bin
 {
 	struct s_bin		*next;
-	struct s_chunk		*first_chunk;
-	size_t			size;
-	size_t			freespace;
-	char			data[1];
+	void				*first;
+	size_t				freespace;
 };
-	
+
 extern	struct s_bin	*first_bin;
 
 void		malloc_init(t_config *config);
-void		bin_init(t_bin *bin, size_t size);
-t_bin		*bin_add(t_config *config, size_t size);
-int		bin_check(t_bin *temp, size_t size);
-void		*bin_pack(t_bin *bin, size_t size);
-int		chunk_check(t_chunk *chunk, size_t size);
-t_chunk		*chunk_init(void *freespace, size_t size, t_chunk *previous);
+t_bin		*bin_add(t_config *config, size_t request);
+void		*bin_pack(t_config *config, t_bin *bin, size_t request);
+void		*chunk_init(t_config *config, t_bin *bin, size_t request);
+
 
 #endif
