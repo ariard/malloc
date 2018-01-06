@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/06 20:31:30 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/06 20:35:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,3 @@ void	*bin_pack(t_config *config, t_bin *bin, size_t request)
 		(best->next)->prev = best->prev;
 	return (chunk_init(config, bin, best, request));
 }
-
-// not special case but split vs stock
-//
-// 1. clean stock :
-// 		bd tags then listptr on next, bd on it
-// 2 list :
-// 		cross and if fit same technics than 1
-//
-// 	policy "filler manage next free buddy"

@@ -1,7 +1,7 @@
 - finish free list + proto-free 
+- (read_free_list)
 - fusion check and pack bin
 - super struct for three area
-- 
 
 DESIGN
 
@@ -15,7 +15,11 @@ TEST :
 	- prouve defragmentation, allocate wawe 5small - 5big, free 5big, allocate again, allocate imposible pattern, coaelesce  x 2 (tiny, small)
 
 	- debug_read_bin_freelist + maintest
+	- modify pagesize
+	- break mmap
 
 NOTES :
 	- coalescing at malloc if not candidate available
 	- free : check if freespace = zone and put candidate in free list
+
+	- lazy coalescing, only if needed, fit-coalescing

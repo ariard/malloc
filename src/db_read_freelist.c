@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_init.c                                         :+:      :+:    :+:   */
+/*   db_read_freelist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/11 23:24:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 20:15:46 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/06 20:48:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "malloc.h"
 
-void		bin_init(t_bin *bin, size_t size)
+void	read_freelist(void)
 {
-	bin->next = NULL;
-	bin->freespace = size;
+	t_chunk	*tmp;
+	int		i;
+
+	tmp = first_bin->first;
+	i = 0;
+	printf("\n");
+	while (tmp)
+	{
+		printf("[chunk %d] size %zu %p\n", i++, *(size_t *)((void *)tmp - sizeof(size_t)), tmp);
+		tmp = tmp->next;
+	}
 }

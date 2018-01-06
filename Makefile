@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/05 20:59:52 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/06 22:03:42 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,12 @@ OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
 bin_add.c\
-bin_check.c\
 bin_pack.c\
-bin_init.c\
-chunk_check.c\
 chunk_init.c\
 malloc_init.c\
-malloc.c
+malloc.c\
+free.c\
+db_read_freelist.c\
 
 SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

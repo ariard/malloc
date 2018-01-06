@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/06 20:24:01 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/06 20:48:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ void		malloc_init(t_config *config);
 t_bin		*bin_add(t_config *config, size_t request);
 void		*bin_pack(t_config *config, t_bin *bin, size_t request);
 void		*chunk_init(t_config *config, t_bin *bin, t_chunk *chunk, size_t request);
+
+/* Debug */
+
+void		read_freelist(void);
 
 #endif
