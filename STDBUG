@@ -1,4 +1,11 @@
 [32mMALLOC
-[0m[32mBIN_ADD
-[0m[32mfirst chunk of bin
+[0m[31mBIN_ADD
+[0m[31mBIN PACK
+[0m[31mCHUNK INIT
+[0m[32mMALLOC
+[0m[31mBIN PACK
+[0m[31mCHUNK INIT
+[0m[32mMALLOC
+[0m[31mBIN PACK
+[0m[31mCHUNK INIT
 [0m

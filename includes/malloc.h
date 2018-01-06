@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 23:35:26 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/06 20:24:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);	
 
 
-# define TINY(x, y)		(x / (config->tiny_area / 131072) + 1) * ((config->tiny_area / 131072) / sizeof(y)) + 2
-# define SMALL(x, y)	(x / (config->small_area / 32768) + 1) * ((config->small_area / 32768) / sizeof(y)) + 2
+# define TINY(x)		(x + 2) + (16 - (x + 2) % 16)
+# define SMALL(x)		(x + 2) + (512 - (x + 2) % 512)
 
 struct	s_config
 {
@@ -82,7 +82,6 @@ extern	struct s_bin	*first_bin;
 void		malloc_init(t_config *config);
 t_bin		*bin_add(t_config *config, size_t request);
 void		*bin_pack(t_config *config, t_bin *bin, size_t request);
-void		*chunk_init(t_config *config, t_bin *bin, size_t request);
-
+void		*chunk_init(t_config *config, t_bin *bin, t_chunk *chunk, size_t request);
 
 #endif

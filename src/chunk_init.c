@@ -6,40 +6,22 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/05 23:51:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/06 20:29:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-//t_chunk	*chunk_init(void *freespace, size_t size, t_chunk *previous)
-//{
-//	t_chunk	*new;
-//
-//	new = freespace;
-//	new->next = NULL;		
-//	new->previous = previous;
-//	new->status = FULL;
-//	new->size = size;
-//	return (new);
-//}	
-
-void	*chunk_init(t_config *config, t_bin *bin, size_t request)
+void	*chunk_init(t_config *config, t_bin *bin, t_chunk *chunk, size_t request)
 {
-	void	*temp;
-
-//	DBG(GREEN "CHUNCK_INIT\n" RESET);
-//	DBG(GREEN "size of bin %lu\n" RESET, sizeof(t_bin));
-//	DBG(GREEN "size of first %lu\n" RESET, sizeof(bin->first));
-	temp = bin->first;
+	DBG(RED "CHUNK INIT\n" RESET);
 	if (request < config->limit_small)
-		bin->first = (request < config->limit_tiny) ? (bin->first + TINY(request, bin->first)) \
-			: (bin->first + SMALL(request, bin->first));
-//	DBG(GREEN "new chunk is %p\n", temp);
-//	DBG(GREEN "first %p\n", bin->first);
-//	DBG(GREEN "diff %ld\n", bin->first - temp);
-	*(size_t *)temp = request;
-	*(size_t *)(bin->first - 1) = request;
-	bin->freespace -= (bin->first - temp) * sizeof(bin->first);
-	return (temp + 1);
+		bin->first = (request < config->limit_tiny) ? (bin->first + TINY(request)) \
+			: (bin->first + SMALL(request));	
+	*(size_t *)((void *)chunk - sizeof(size_t)) = request;
+	*(size_t *)(bin->first - (2 * sizeof(size_t))) = request;
+	bin->freespace -= (request < config->limit_tiny) ? TINY(request) \
+			: SMALL(request);
+	*(size_t *)(bin->first - sizeof(size_t)) = bin->freespace;
+	return (chunk);
 }
