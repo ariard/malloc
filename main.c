@@ -46,25 +46,59 @@
 //	free(a);
 //	return (0);
 //}
-//
+
 
 // TEST free list
 
-int			main(void)
-{	
-	char	*a;
-	char	*b;
-	char	*c;
-	char	*d;
+//int			main(void)
+//{	
+//	char	*a;
+//	char	*b;
+//	char	*c;
+//	char	*d;
+//
+//	a = malloc(20);
+//	b = malloc(30);
+//	c = malloc(40);
+//	d = malloc(50);
+//
+//	free(a);
+//	free(b);
+//	free(c);
+//
+//	read_freelist();
+//}
 
-	a = malloc(20);
-	b = malloc(30);
-	c = malloc(40);
-	d = malloc(50);
+int		main(void)
+{
+	char	*a[20000];					
+	char	*b[10001];
+	int		i;
+	int		j;
 
-	free(a);
-	free(b);
-	free(c);
-
+	i = -1;
+	j = 0;
+	while (++i < 10000)
+	{
+		if (!(a[j++] = malloc(52)))
+			return (printf("error little %d\n", j - 1));
+		read_freelist();
+		if (!(a[j++] = malloc(52)))
+			return (printf("error little %d\n", j - 1));
+		read_freelist();
+		if (!(b[i] = malloc(104)))
+			return (printf("error big %d\n", i));
+		printf("[ROT] %d", i);
+		read_freelist();
+	}
 	read_freelist();
+	j = -1;
+	printf("\n");
+//	while (++j < 10000)
+//	{
+//		write(1, "0", 1);
+//		free(a[j]);
+//	}
+
+	return (0);
 }

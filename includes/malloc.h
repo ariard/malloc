@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/06 20:48:01 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/06 23:34:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);	
 
 
-# define TINY(x)		(x + 2) + (16 - (x + 2) % 16)
-# define SMALL(x)		(x + 2) + (512 - (x + 2) % 512)
+# define TINY(x)		(x + 16) + (16 - (x + 16) % 16)
+# define SMALL(x)		(x + 16) + (512 - (x + 16) % 512)
 
 struct	s_config
 {
