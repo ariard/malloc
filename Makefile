@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/07 19:12:53 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/07 23:09:43 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_BASE	=	\
 bin_add.c\
 bin_pack.c\
 chunk_init.c\
+chunk_coalesce.c\
 malloc_init.c\
 malloc.c\
 free.c\

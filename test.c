@@ -1,28 +1,15 @@
 #include <stdio.h>
-#include <unistd.h>
 
-struct 		s_my 
+int		main(void)
 {
-	char	*a;
-	char	*b;
-} typedef	t_my;
+	int		a;
 
-t_my		*my = NULL;
-
-t_my		*my_gen(void)
-{
-	t_my	*my;
-
-	my->a = "hello";
-	my->b = "world";
-	return (my);
-}
-
-int			main(void)
-{
-	char	*c;
-
-	my = my_gen();
-	c = my->a;
-	return (0);
+	a = -10;
+	printf("a %d\n", a);
+	a = 1 >> (a << 1);
+	printf("a %d\n", a);
+	a = 10;
+	printf("a %d\n", a);
+	a = (a << 1);
+	printf("a %d\n", a);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 20:18:15 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 23:07:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@
 # define SMALL(x)		(x + 16) + (512 - (x + 16) % 512)
 
 # define BT(x)			*(size_t *)((void *)x - sizeof(size_t))
+
+# define AGG_F(x)			16 * cand.backward.nb + cand.backward.size	
+# define AGG_B(x)		-16 * x + y
+
+# define FREE(x)		1
+# define PREV(x)		x - (*(size_t *)(void *)x - sizeof(size_t)) - 16	
+# define NEXT(x)		x + (*(size_t *)(void *)x - sizeof(size_t)) + 16
 
 struct	s_config
 {
@@ -69,12 +76,36 @@ struct s_area
 	t_config			*cfg;
 };
 
+struct s_agg
+{
+	int					nb;
+	size_t				size;
+};
+
+struct s_cand
+{
+	size_t				size;
+	t_agg				backward;
+	t_agg				forward;
+	t_chunk				*chunk;
+};
+
+struct s_wp
+{
+	size_t				sum;
+	int					lvl;
+	t_bin				*bin;
+};
+
 extern t_area			area;
 
 t_config	*malloc_init(t_config *config);
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_bin *bin, size_t request);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
+void		*chunk_coalesce(t_bin *bin, t_chunk *list, size_t request);
+t_agg		wrapper_check(t_chunk *list, size_t request, t_wrapper wp);
+t_agg		chunk_check(t_chunk *list, size_t request, t_wrapper wp);
 
 /* Debug */
 

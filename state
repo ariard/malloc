@@ -25,3 +25,7 @@ NOTES :
 	- free : check if freespace = zone and put candidate in free list
 
 	- lazy coalescing, only if needed, fit-coalescing
+
+
+test simple
+	test with breakpoints
