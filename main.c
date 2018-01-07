@@ -69,36 +69,56 @@
 //	read_freelist();
 //}
 
-int		main(void)
-{
-	char	*a[20000];					
-	char	*b[10001];
-	int		i;
-	int		j;
+/*	TEST	coalescing */
 
-	i = -1;
-	j = 0;
-	while (++i < 10000)
-	{
-		if (!(a[j++] = malloc(52)))
-			return (printf("error little %d\n", j - 1));
-		read_freelist();
-		if (!(a[j++] = malloc(52)))
-			return (printf("error little %d\n", j - 1));
-		read_freelist();
-		if (!(b[i] = malloc(104)))
-			return (printf("error big %d\n", i));
-		printf("[ROT] %d", i);
-		read_freelist();
-	}
-	read_freelist();
-	j = -1;
-	printf("\n");
+//int		main(void)
+//{
+//	char	*a[20000];					
+//	char	*b[10001];
+//	int		i;
+//	int		j;
+//
+//	i = -1;
+//	j = 0;
+//	while (++i < 10000)
+//	{
+//		if (!(a[j++] = malloc(52)))
+//			return (printf("error little %d\n", j - 1));
+//		read_freelist();
+//		if (!(a[j++] = malloc(52)))
+//			return (printf("error little %d\n", j - 1));
+//		read_freelist();
+//		if (!(b[i] = malloc(104)))
+//			return (printf("error big %d\n", i));
+//		printf("[ROT] %d", i);
+//		read_freelist();
+//	}
+//	read_freelist();
+//	j = -1;
+//	printf("\n");
 //	while (++j < 10000)
 //	{
 //		write(1, "0", 1);
 //		free(a[j]);
 //	}
+//
+//	return (0);
+//}
 
+// 		TEST		one of each size
+
+int		main(void)
+{
+	char	*a;
+	char	*b;
+	char	*c;
+
+	a = malloc(10);
+	b = malloc(1100);
+	c = malloc(130000);
+
+	free(a);
+	free(b);
+	free(c);
 	return (0);
 }

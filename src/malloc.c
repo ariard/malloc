@@ -6,32 +6,32 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/06 21:17:27 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 20:04:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <sys/time.h>
 
-t_bin		*first_bin = NULL;
+t_area	area = { NULL, NULL, NULL, NULL };
 
-void	*malloc(size_t request)
+void			*malloc(size_t request)
 {
-	static t_config		config;
+	t_config			config;
 	t_bin				*temp;
 	
 	DBG(GREEN "MALLOC\n" RESET);
-	if (!config.page_size)
-		malloc_init(&config);
-	if (!first_bin)
-		first_bin = bin_add(&config, request);
-	temp = first_bin;
+	area.cfg = (!area.cfg) ? malloc_init(&config) : area.cfg;
+	area.tiny = (!area.tiny && request <= config.limit_tiny) ? bin_add(request) : area.tiny;
+	area.small = (!area.small && request <= config.limit_small) ? bin_add(request) : area.small;
+	area.large = (!area.large && request > config.limit_small) ? bin_add(request) : area.large;
+	temp = (request > config.limit_tiny) ? area.small : area.tiny;
+	temp = (request > config.limit_small) ? area.large : temp;
 	while (temp)
 	{
 		if (temp->freespace > request)
-			return (bin_pack(&config, temp, request));
-		if (!temp->next)
-			temp->next = bin_add(&config, request);
+			return (bin_pack(temp, request));
+		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/06 23:34:03 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 20:18:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define TINY(x)		(x + 16) + (16 - (x + 16) % 16)
 # define SMALL(x)		(x + 16) + (512 - (x + 16) % 512)
 
+# define BT(x)			*(size_t *)((void *)x - sizeof(size_t))
+
 struct	s_config
 {
 	int	page_size;
@@ -46,24 +48,6 @@ enum	e_status
 	FREED,
 };
 
-//struct	s_chunk
-//{
-//	struct	s_chunk		*next;
-//	struct 	s_chunk		*previous;
-//	int			status;
-//	size_t			size;
-//	char			data[1];
-//};
-
-//struct	s_bin
-//{
-//	struct s_bin		*next;
-//	struct s_chunk		*first_chunk;
-//	size_t			size;
-//	size_t			freespace;
-//	char			data[1];
-//};
-//
 struct	s_bin
 {
 	struct s_bin		*next;
@@ -77,15 +61,24 @@ struct s_chunk
 	struct s_chunk		*prev;
 };
 
-extern	struct s_bin	*first_bin;
+struct s_area
+{
+	t_bin				*tiny;
+	t_bin				*small;
+	t_bin	 			*large;
+	t_config			*cfg;
+};
 
-void		malloc_init(t_config *config);
-t_bin		*bin_add(t_config *config, size_t request);
-void		*bin_pack(t_config *config, t_bin *bin, size_t request);
-void		*chunk_init(t_config *config, t_bin *bin, t_chunk *chunk, size_t request);
+extern t_area			area;
+
+t_config	*malloc_init(t_config *config);
+t_bin		*bin_add(size_t request);
+void		*bin_pack(t_bin *bin, size_t request);
+void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 
 /* Debug */
 
 void		read_freelist(void);
+void		whereiam(size_t request);
 
 #endif

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_init.c                                      :+:      :+:    :+:   */
+/*   db_whereiam.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 19:27:44 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/07 19:10:58 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/07 19:14:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_config	 *malloc_init(t_config *config)
+void	whereiam(size_t request)
 {
-	config->page_size = getpagesize();
-	config->tiny_area = config->page_size * 512;
-	config->small_area = config->page_size * 4096;
-	config->limit_tiny = config->tiny_area / 2114;
-	config->limit_small = config->small_area / 132;
-	DBG("SMALL at %zu\n", config->limit_tiny);
-	DBG("LARGE at %zu\n", config->limit_small);
-	return (config);
+	if (request <= area.cfg->limit_tiny)
+		DBG("TINY AREA\n")
+	else if (request <= area.cfg->limit_small)
+		DBG("SMALL AREA\n")
+	else 
+		DBG("LARGE AREA\n")
 }

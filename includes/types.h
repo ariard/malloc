@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:03:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 23:43:32 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 18:24:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct	s_config	t_config;
 typedef struct	s_bin		t_bin;
+typedef struct	s_area		t_area;
 typedef struct	s_chunk		t_chunk;
 typedef enum	e_status	t_status;
 

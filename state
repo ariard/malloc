@@ -1,7 +1,8 @@
-- finish free list + proto-free 
-- (read_free_list)
+- algo coalescing
 - fusion check and pack bin
-- super struct for three area
+- realloc
+- multi-threaded area
+- variables d'env
 
 DESIGN
 
@@ -9,7 +10,7 @@ GOALS :
 	- best-fit with mono-coalescing list
 	- multi-threaded area (top-down list)
 	- variables d'env
-	- calloc, realloc, show_memory
+	- realloc, show_memory
 
 TEST :
 	- prouve defragmentation, allocate wawe 5small - 5big, free 5big, allocate again, allocate imposible pattern, coaelesce  x 2 (tiny, small)
@@ -17,6 +18,7 @@ TEST :
 	- debug_read_bin_freelist + maintest
 	- modify pagesize
 	- break mmap
+	- break free with boundary tags
 
 NOTES :
 	- coalescing at malloc if not candidate available
