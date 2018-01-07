@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 22:50:09 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 23:42:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*bin_pack(t_bin *bin, size_t request)
 		size = (BT(tmp) < size) ? BT(tmp) : size;
 		tmp = tmp->next;
 	}
-	if (size == bin->freespace && !(best = chunk_coalesce(bin, bin->first, request)))
-		return (NULL);
+	//if (size == bin->freespace && !(best = chunk_coalesce(bin, bin->first, request))
+	//	return (NULL);
 	if (best->prev)
 		(best->prev)->next = best->next;
 	if (best->next)

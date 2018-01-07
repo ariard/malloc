@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 22:10:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 23:58:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void		bin_inspect(t_bin *list, void *ptr, size_t max, size_t sizeptr)
 	DBG(GREEN "BIN INSPECT\n" RESET);
 	while (list)
 	{
+		// MACRO HERE
 		if (((char *)list - (char *)ptr) < 0 \
 			&& ((char *)list + max - (char *)ptr) > 0)
 		{
@@ -30,6 +31,7 @@ static void		bin_inspect(t_bin *list, void *ptr, size_t max, size_t sizeptr)
 				freechunk->next = ptr;
 				list->freespace += (max >= area.cfg->limit_tiny) ? \
 					TINY(sizeptr) : SMALL(sizeptr);
+				// clean boundary there
 			}
 			if (list->freespace == max || max > area.cfg->limit_small)
 			{
@@ -59,4 +61,6 @@ void			free(void *ptr)
 	list_bin = (max > area.cfg->tiny_area) ? area.small : area.tiny;
 	list_bin = (max > area.cfg->small_area) ? area.large : list_bin;
 	bin_inspect(list_bin, ptr, max, BT(ptr));
+	BT(ptr) = SET_FREE(BT(ptr));
+	BT_FINAL(ptr) = SET_FREE(BT(ptr));
 }

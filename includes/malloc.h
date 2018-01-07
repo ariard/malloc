@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 23:07:36 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/07 23:53:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 # define TINY(x)		(x + 16) + (16 - (x + 16) % 16)
 # define SMALL(x)		(x + 16) + (512 - (x + 16) % 512)
 
-# define BT(x)			*(size_t *)((void *)x - sizeof(size_t))
+# define BT(x)			*(size_t *)((void *)x - sizeof(size_t)) 
 
-# define AGG_F(x)			16 * cand.backward.nb + cand.backward.size	
-# define AGG_B(x)		-16 * x + y
+# define FREE(x)		!x & 0
+# define SET_BUSY(x)	x | (1 << 1)
+# define SET_FREE(x)	x & ~(1 << y)
 
-# define FREE(x)		1
 # define PREV(x)		x - (*(size_t *)(void *)x - sizeof(size_t)) - 16	
 # define NEXT(x)		x + (*(size_t *)(void *)x - sizeof(size_t)) + 16
 

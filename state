@@ -2,7 +2,7 @@
 - fusion check and pack bin
 - realloc
 - multi-threaded area
-- variables d'env
+- petites fonctions de debug
 
 DESIGN
 
@@ -21,11 +21,15 @@ TEST :
 	- break free with boundary tags
 
 NOTES :
-	- coalescing at malloc if not candidate available
-	- free : check if freespace = zone and put candidate in free list
-
-	- lazy coalescing, only if needed, fit-coalescing
+	- BT_VALUE and BT`
 
 
 test simple
 	test with breakpoints
+
+
+demain : compression free + debug coalescing + fusion check and pack + realloc
+	then make test pdf + my own
+
+avoir fini pour mardi
+	se renseigner sur les variables d'env
