@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 20:29:26 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:59:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_config	 malloc_init(void)
 {
 	t_config	config;
-	DBG("MALLOC INIT\n");
 	config.page_size = getpagesize();
 	config.tiny_area = config.page_size * 512;
 	config.small_area = config.page_size * 4096;

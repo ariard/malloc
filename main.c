@@ -48,26 +48,27 @@
 //}
 
 
-// TEST free list
+/*  TEST free list */
 
-//int			main(void)
-//{	
-//	char	*a;
-//	char	*b;
-//	char	*c;
-//	char	*d;
-//
-//	a = malloc(20);
-//	b = malloc(30);
-//	c = malloc(40);
-//	d = malloc(50);
-//
-//	free(a);
-//	free(b);
-//	free(c);
-//
-//	read_freelist();
-//}
+int			main(void)
+{	
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
+
+	a = malloc(20);
+	b = malloc(30);
+	c = malloc(40);
+	d = malloc(50);
+
+
+	free(a);
+	free(b);
+	free(c);
+
+	show_free_chunk();
+}
 
 /*	TEST	coalescing */
 
@@ -126,26 +127,26 @@
 
 //		TEST		show_allow_mem
 
-int			main(void)
-{
-	int		i;	
-	char	*a[20];
-	char	*b[20];
-	char	*c[20];
-
-	i = 0;
-	while (i < 5)
-		a[i++] = malloc(128);
-
-	i = 0;
-	while (i < 5)
-		b[i++] = malloc(1024);
-
-	i = 0;
-	while (i < 5)
-		c[i++] = malloc(130000);
-
-	DBG("gonna use show_allow_mem...\n");
-	show_alloc_mem();
-	return (0);
-}
+//int			main(void)
+//{
+//	int		i;	
+//	char	*a[20];
+//	char	*b[20];
+//	char	*c[20];
+//
+//	i = 0;
+//	while (i < 5)
+//		a[i++] = malloc(128);
+//
+//	i = 0;
+//	while (i < 5)
+//		b[i++] = malloc(1024);
+//
+//	i = 0;
+//	while (i < 5)
+//		c[i++] = malloc(130000);
+//
+//	DBG("gonna use show_allow_mem...\n");
+//	show_alloc_mem();
+//	return (0);
+//}

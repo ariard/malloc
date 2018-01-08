@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 22:20:02 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:50:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void		print_area(t_bin *bin, int a)	
+void		print_area(t_bin *bin, int a)	
 {
 	char		*ar;
 
@@ -28,31 +28,41 @@ static int		range(void *bt, int a)
 	return ((a == 1) ? area.cfg.small_area : area.cfg.tiny_area);
 }
 
+static int		print_mem(t_bin *bin, int a, size_t *total)
+{
+	size_t		sizebt;
+	void		*bt;
+
+	bt = (void *)bin + sizeof(t_bin);
+	while (1)
+	{
+		sizebt = SET_FREE(*(size_t *)bt);
+		if ((_BUSY(*(size_t *)bt) || a == 2) && (*total += sizebt))
+			DBG("%p - %p : %zu octets \n", bt, (char *)bt + sizebt, sizebt);
+		if ((char *)bt + sizebt >= (char *)bin + range(bt, a))
+			break;
+		bt = (char *)bt + sizebt;
+	}
+	return (0);
+}
+
 void			show_alloc_mem(void)
 {
 	t_bin		*bin;
-	void		*bt;
-	size_t		sizebt;
-	int		a;
+	int			a;
+	size_t		total;
 
 	a = -1;
-	while (++a != 3 && !(bin = area.list[a]));
+	total = 0;
+	while (++a != 3 && !(bin = area.list[a]))
+		;
 	while (bin)
 	{
 		print_area(bin, a);	
-		bt = (void *)bin + sizeof(t_bin);
-		while (1)
-		{
-			//DBG("test business of chunk %zu \n", SET_FREE(*(size_t *)bt));
-			sizebt = SET_FREE(*(size_t *)bt);
-			if (_BUSY(*(size_t *)bt) || a == 2)
-				DBG("%p - %p : %zu\n", bt, (char *)bt + sizebt, sizebt);
-			//DBG("bt %p : %p a  %d range %d \n", (char *)bt + sizebt, (char *)bin + range(bt, a), a, range(bt, a));
-			if ((char *)bt + sizebt >= (char *)bin + range(bt, a))
-				break;
-			bt = (char *)bt + sizebt;
-		}
+		print_mem(bin, a, &total);
 		if (!(bin = bin->next))
-			while (++a != 3 && !(bin = area.list[a]));	
+			while (++a != 3 && !(bin = area.list[a]))
+				;
 	}
+	DBG("Total : %zu octets\n", total);
 }

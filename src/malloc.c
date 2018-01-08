@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 22:18:46 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:58:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void			*malloc(size_t request)
 	temp = (request > area.cfg.limit_small) ? area.list[2] : temp;
 	while (temp)
 	{
-		DBG("f %zu req %zu\n", temp->freespace, request);
 		if (temp->freespace > request)
 			return (bin_pack(temp, request));
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;

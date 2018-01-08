@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 21:47:03 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:55:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,12 @@ void		*chunk_coalesce(t_bin *bin, t_chunk *list, size_t request);
 int			align(int x, int f);
 t_agg		wrapper_check(t_chunk *list, size_t request, t_wrapper wp);
 t_agg		chunk_check(t_chunk *list, size_t request, t_wrapper wp);
+void		print_area(t_bin *bin, int a);
 
 /* Debug */
 
 void		show_alloc_mem(void);	
-//			show_free_mem(void);
+void		show_free_chunk(void);
 //			show_coal_cand(void);	
 void		read_freelist(void);
 void		whereiam(size_t request);

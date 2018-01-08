@@ -1,123 +1,29 @@
 [32mMALLOC
-[0mMALLOC INIT
-[31mBIN_ADD
-[0mbin freespace 2097128
-f 2097128 req 128
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 144
-chunk at 0x10d3e3020 size 145
-[32mMALLOC
-[0mf 2096984 req 128
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 144
-chunk at 0x10d3e30b0 size 145
-[32mMALLOC
-[0mf 2096840 req 128
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 144
-chunk at 0x10d3e3140 size 145
-[32mMALLOC
-[0mf 2096696 req 128
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 144
-chunk at 0x10d3e31d0 size 145
-[32mMALLOC
-[0mf 2096552 req 128
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 144
-chunk at 0x10d3e3260 size 145
-[32mMALLOC
 [0m[31mBIN_ADD
-[0mbin freespace 16777192
-f 16777192 req 1024
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 1040
-chunk at 0x10d5e3020 size 1041
-[32mMALLOC
-[0mf 16776152 req 1024
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 1040
-chunk at 0x10d5e3430 size 1041
-[32mMALLOC
-[0mf 16775112 req 1024
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 1040
-chunk at 0x10d5e3840 size 1041
-[32mMALLOC
-[0mf 16774072 req 1024
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 1040
-chunk at 0x10d5e3c50 size 1041
-[32mMALLOC
-[0mf 16773032 req 1024
-[31mBIN PACK
-[0m[31mCHUNK INIT
-[0malig req 1040
-chunk at 0x10d5e4060 size 1041
-[32mMALLOC
-[0m[31mBIN_ADD
-[0mbin freespace 130008
-f 130008 req 130000
-[31mBIN PACK
+[0m[31mBIN PACK
 [0m[32mMALLOC
-[0mf 8 req 130000
-[31mBIN_ADD
-[0mbin freespace 130008
-f 130008 req 130000
-[31mBIN PACK
+[0m[31mBIN PACK
 [0m[32mMALLOC
-[0mf 8 req 130000
-f 8 req 130000
-[31mBIN_ADD
-[0mbin freespace 130008
-f 130008 req 130000
-[31mBIN PACK
+[0m[31mBIN PACK
 [0m[32mMALLOC
-[0mf 8 req 130000
-f 8 req 130000
-f 8 req 130000
-[31mBIN_ADD
-[0mbin freespace 130008
-f 130008 req 130000
-[31mBIN PACK
-[0m[32mMALLOC
-[0mf 8 req 130000
-f 8 req 130000
-f 8 req 130000
-f 8 req 130000
-[31mBIN_ADD
-[0mbin freespace 130008
-f 130008 req 130000
-[31mBIN PACK
-[0mgonna use show_allow_mem...
-[TINY] : 0x10d3e3000
-0x10d3e3018 - 0x10d3e30a8 : 144
-0x10d3e30a8 - 0x10d3e3138 : 144
-0x10d3e3138 - 0x10d3e31c8 : 144
-0x10d3e31c8 - 0x10d3e3258 : 144
-0x10d3e3258 - 0x10d3e32e8 : 144
-[SMALL] : 0x10d5e3000
-0x10d5e3018 - 0x10d5e3428 : 1040
-0x10d5e3428 - 0x10d5e3838 : 1040
-0x10d5e3838 - 0x10d5e3c48 : 1040
-0x10d5e3c48 - 0x10d5e4058 : 1040
-0x10d5e4058 - 0x10d5e4468 : 1040
-[LARGE] : 0x10e5e3000
-0x10e5e3018 - 0x10e602bf0 : 130008
-[LARGE] : 0x10e603000
-0x10e603018 - 0x10e622bf0 : 130008
-[LARGE] : 0x10e623000
-0x10e623018 - 0x10e642bf0 : 130008
-[LARGE] : 0x10e643000
-0x10e643018 - 0x10e662bf0 : 130008
-[LARGE] : 0x10e663000
-0x10e663018 - 0x10e682bf0 : 130008
+[0m[31mBIN PACK
+[0m[32mFREE
+[0msize ptr is 49
+[32mBIN INSPECT
+[0m2096968 vs 2097152ptr 0x10917f020 : 49
+ptr 0x10917f020 : 48
+[32mFREE
+[0msize ptr is 49
+[32mBIN INSPECT
+[0m2097048 vs 2097152ptr 0x10917f050 : 49
+ptr 0x10917f050 : 48
+[32mFREE
+[0msize ptr is 65
+[32mBIN INSPECT
+[0m2097144 vs 2097152ptr 0x10917f080 : 65
+ptr 0x10917f080 : 64
+[TINY] : 0x10917f000
+0x10917f110 - 0x10937f008 : 2096888
+0x10917f020 - 0x10917f050 : 48
+0x10917f050 - 0x10917f080 : 48
+0x10917f080 - 0x10917f0c0 : 64

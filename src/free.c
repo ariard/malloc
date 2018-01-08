@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 21:52:19 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 23:11:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ static void		bin_inspect(t_bin *list, void *ptr, size_t max, size_t sizeptr)
 		{
 			list->freespace += (max >= area.cfg.limit_tiny) ? \
 				align(sizeptr, 16) : align(sizeptr, 512);
-			if (list->freespace == max || max > area.cfg.limit_small)
+			if (list->freespace == max || max > area.cfg.small_area)
 			{
-				DBG("clean bin");
 				prev->next = list->next;
 				munmap(list, max);
 				break;
 			}
 			freechunk = list->first;
-			while (freechunk->next && (freechunk = freechunk->next));
+			while (freechunk->next && (freechunk = freechunk->next))
+				;
+			((t_chunk*)ptr)->next = NULL;
 			freechunk->next = ptr;
 			BT(ptr) = SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t)));
 			BT_FINAL(ptr) = BT(ptr);

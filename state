@@ -1,10 +1,11 @@
 tate
-- show_memory
--  algo coalescing
+- framework test + realloc
+- debug algo coalescing
 - fusion check and pack bin
 - realloc
 - multi-threaded area
-- petites fonctions de debug
+- my print
+- petites fonctions de debug (?)
 
 DESIGN
 

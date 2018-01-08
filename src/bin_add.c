@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 22:13:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:56:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_bin	*bin_add(size_t request)
 	bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	bin->next = NULL;
 	bin->freespace = size - sizeof(t_bin);
-	DBG("bin freespace %zu\n", bin->freespace);
 	bin->first = bin + 1;
 	*(size_t *)(bin->first) = bin->freespace;
 	bin->first = bin->first + sizeof(size_t);
