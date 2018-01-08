@@ -22,6 +22,7 @@ TEST :
 	- modify pagesize
 	- break mmap
 	- break free with boundary tags
+	- give free an unknown address
 
 NOTES :
 	- BT_VALUE and BT`
@@ -47,4 +48,5 @@ LESSONS :
 	- design order : data structure, intern services, exterior services 
 	- debug tools : inspect intern archi
 	- performance tools
+	- control flow is bad!
 
