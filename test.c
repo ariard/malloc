@@ -1,4 +1,5 @@
-#include <stdio.h>
+t.c
+ w e <stdio.h>
 
 # define FREE(x)				x & 1
 # define SET_VALUE_FREE(x, y)	x | (1 << y)

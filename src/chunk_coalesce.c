@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 20:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 23:51:49 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 20:33:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ t_agg		wrapper_check(t_chunk *list, size_t request, t_wrapper wp)
 {
 	size_t	i;
 
-	i = (request > area.cfg->limit_tiny) ? area.cfg->small_area \
-		: area.cfg->tiny_area;
+	i = (request > area.cfg.limit_tiny) ? area.cfg.small_area \
+		: area.cfg.tiny_area;
 	if ((wp.lvl < 0 \
 		&& (char *)list - sizeof(t_bin) - sizeof(size_t) - (char *)wp.bin <= 0)
 		|| (wp.lvl > 0 \
-		&& (char *)wp.bin + i - (char *)list + BT(list) + sizeof(size_t) <= 0))
+		&& (char *)wp.bin + i - ((char *)list + BT(list) + sizeof(size_t)) <= 0))
 		return (chunk_check(list, request, wp));
 	return ((struct s_agg){ wp.lvl, BT(list) + 16 + wp.sum });
 }
@@ -31,7 +31,7 @@ t_agg		chunk_check(t_chunk *list, size_t request, t_wrapper wp)
 	t_chunk		*chunk;
 
 	chunk = (wp.lvl < 0) ? PREV(list) : NEXT(list);
-	if (FREE(chunk))
+	if (BUSY(chunk))
 	{
 		if (BT(chunk) + 16 + wp.sum > request)
 			return ((struct s_agg){ wp.lvl, BT(chunk) + 16 + wp.sum });

@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/07 23:09:43 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/08 18:30:01 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ malloc_init.c\
 malloc.c\
 free.c\
 db_read_freelist.c\
+db_show_allow_mem.c\
 db_whereiam.c
 
 SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_BASE))

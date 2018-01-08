@@ -107,18 +107,45 @@
 
 // 		TEST		one of each size
 
-int		main(void)
+//int		main(void)
+//{
+//	char	*a;
+//	char	*b;
+//	char	*c;
+//
+//	a = malloc(10);
+//	b = malloc(1100);
+//	c = malloc(130000);
+//
+//	free(a);
+//	free(b);
+//	free(c);
+//	return (0);
+//}
+//
+
+//		TEST		show_allow_mem
+
+int			main(void)
 {
-	char	*a;
-	char	*b;
-	char	*c;
+	int		i;	
+	char	*a[20];
+	char	*b[20];
+	char	*c[20];
 
-	a = malloc(10);
-	b = malloc(1100);
-	c = malloc(130000);
+	i = 0;
+	while (i < 5)
+		a[i++] = malloc(128);
 
-	free(a);
-	free(b);
-	free(c);
+	i = 0;
+	while (i < 5)
+		b[i++] = malloc(1024);
+
+	i = 0;
+	while (i < 5)
+		c[i++] = malloc(130000);
+
+	DBG("gonna use show_allow_mem...\n");
+	show_alloc_mem();
 	return (0);
 }

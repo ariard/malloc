@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 23:42:17 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:14:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	*bin_pack(t_bin *bin, size_t request)
 	size_t	size;
 
 	DBG(RED "BIN PACK\n" RESET);
-	if (request > area.cfg->limit_small)
+	if (request > area.cfg.limit_small)
+	{
+		bin->freespace -= request;
 		return (bin->first);
+	}
 	tmp = bin->first;
 	best = bin->first;
 	size = bin->freespace;

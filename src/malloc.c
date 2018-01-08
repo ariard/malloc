@@ -6,29 +6,32 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 20:24:49 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 22:18:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <sys/time.h>
 
-t_area	area = { NULL, NULL, NULL, NULL };
+t_area	area = { {NULL, NULL, NULL}, {0, 0, 0, 0, 0} };
 
 void			*malloc(size_t request)
 {
-	t_config			config;
 	t_bin				*temp;
 	
 	DBG(GREEN "MALLOC\n" RESET);
-	area.cfg = (!area.cfg) ? malloc_init(&config) : area.cfg;
-	area.tiny = (!area.tiny && request <= config.limit_tiny) ? bin_add(request) : area.tiny;
-	area.small = (!area.small && request <= config.limit_small) ? bin_add(request) : area.small;
-	area.large = (!area.large && request > config.limit_small) ? bin_add(request) : area.large;
-	temp = (request > config.limit_tiny) ? area.small : area.tiny;
-	temp = (request > config.limit_small) ? area.large : temp;
+	area.cfg = (area.cfg.page_size == 0) ? malloc_init() : area.cfg;
+	area.list[0] = (!area.list[0] && request <= area.cfg.limit_tiny)
+		? bin_add(request) : area.list[0];
+	area.list[1] = (!area.list[1] && request <= area.cfg.limit_small \
+		&& request > area.cfg.limit_tiny) ? bin_add(request) : area.list[1];
+	area.list[2] = (!area.list[2] && request > area.cfg.limit_small) 
+		? bin_add(request) : area.list[2];
+	temp = (request > area.cfg.limit_tiny) ? area.list[1] : area.list[0];
+	temp = (request > area.cfg.limit_small) ? area.list[2] : temp;
 	while (temp)
 	{
+		DBG("f %zu req %zu\n", temp->freespace, request);
 		if (temp->freespace > request)
 			return (bin_pack(temp, request));
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
@@ -36,3 +39,5 @@ void			*malloc(size_t request)
 	}
 	return (NULL);
 }
+
+// change fucking area structure into a[i]

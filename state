@@ -1,4 +1,6 @@
-- algo coalescing
+tate
+- show_memory
+-  algo coalescing
 - fusion check and pack bin
 - realloc
 - multi-threaded area
@@ -26,6 +28,7 @@ NOTES :
 
 test simple
 	test with breakpoints
+	control with var d 'env
 
 
 demain : compression free + debug coalescing + fusion check and pack + realloc
@@ -33,3 +36,14 @@ demain : compression free + debug coalescing + fusion check and pack + realloc
 
 avoir fini pour mardi
 	se renseigner sur les variables d'env
+
+inquiry on memory corruptions
+
+
+
+LESSONS : 
+	- intern services are crucials
+	- design order : data structure, intern services, exterior services 
+	- debug tools : inspect intern archi
+	- performance tools
+

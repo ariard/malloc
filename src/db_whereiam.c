@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 19:10:58 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/07 19:14:35 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/08 20:35:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	whereiam(size_t request)
 {
-	if (request <= area.cfg->limit_tiny)
+	if (request <= area.cfg.limit_tiny)
 		DBG("TINY AREA\n")
-	else if (request <= area.cfg->limit_small)
+	else if (request <= area.cfg.limit_small)
 		DBG("SMALL AREA\n")
 	else 
 		DBG("LARGE AREA\n")
