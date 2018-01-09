@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 18:24:58 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 23:26:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void			free(void *ptr)
 			bs.prev = bs.bin->next;
 		munmap(bs.bin, a_size);
 	}
-	freechunk = bs.bin->first;	
-	while (freechunk->next && (freechunk = freechunk->next))
-		;
+	freechunk = bs.bin->first;
+	while (freechunk->next)
+		freechunk = freechunk->next;
 	((t_chunk*)ptr)->next = NULL;
 	freechunk->next = ptr;
 	BT(ptr) = SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t)));

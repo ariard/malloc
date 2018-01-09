@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 21:18:55 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 23:25:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);
 
 # define BT(x)			*(size_t *)((void *)x - sizeof(size_t)) 
-# define BT_FINAL(x)	*(size_t *)(x + *(size_t *)((void *)x - sizeof(size_t)))
+# define BT_FINAL(x)	*(size_t *)(x + *(size_t *)((void *)x - sizeof(size_t)) - 2 * sizeof(size_t))
 # define BT_PREV(x)		*(size_t *)((void *)x - 2 * sizeof(size_t))
 
-# define _BUSY(x)		x & 1
 # define FREE(x)		x & 0
 # define SET_BUSY(x)	x | (1 << 0)
 # define SET_FREE(x)	x & ~(1 << 0)
@@ -107,7 +106,8 @@ t_bins		chunk_find(void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
 
 int			align(int x, int f);
-void		print_area(t_bin *bin, int a);
+
+void		area_print(t_bin *bin, int a);
 
 /* Debug */
 

@@ -6,50 +6,33 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 18:40:14 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 23:23:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		print_area(t_bin *bin, int a)	
+static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 {
-	char		*ar;
+	size_t		s_clean;
 
-	ar = (a == 0) ? "TINY" : "SMALL";
-	ar = (a == 2) ? "LARGE" : ar;
-	DBG("[%s] : %p\n", ar, bin);
-}
-	
-static int		range(void *bt, int a)
-{
-	if (a == 2)
-		return (*(size_t *)bt);
-	return ((a == 1) ? area.cfg.small_area : area.cfg.tiny_area);
-}
-
-static int		print_mem(t_bin *bin, int a, size_t *total)
-{
-	size_t		sizebt;
-	void		*bt;
-
-	bt = (void *)bin + sizeof(t_bin);
-	while (1)
+	while (bin_checkin(bin, ptr, (char)a, 1))
 	{
-		sizebt = SET_FREE(*(size_t *)bt);
-		if ((_BUSY(*(size_t *)bt) || a == 2) && (*total += sizebt))
-			DBG("%p - %p : %zu octets \n", bt, (char *)bt + sizebt, sizebt);
-		if ((char *)bt + sizebt >= (char *)bin + range(bt, a))
-			break;
-		bt = (char *)bt + sizebt;
+		s_clean = BT(ptr) & ~(1 << 0);
+		if (s_clean == 0)
+			return;
+		if (BT(ptr) & 1)
+			DBG("%p - %p : %zu octets\n", ptr, (char *)ptr + s_clean, s_clean);
+		*total += s_clean;
+		ptr = (char *)ptr + s_clean;
 	}
-	return (0);
 }
 
 void			show_alloc_mem(void)
 {
 	t_bin		*bin;
 	int			a;
+	void		*ptr;
 	size_t		total;
 
 	a = -1;
@@ -58,8 +41,14 @@ void			show_alloc_mem(void)
 		;
 	while (bin)
 	{
-		print_area(bin, a);	
-		print_mem(bin, a, &total);
+		area_print(bin, a);
+		ptr = (void *)bin + sizeof(t_bin) + sizeof(size_t);
+		if (a == 2)
+		{
+			DBG("%p - %p : %zu octets \n", ptr, (char *)ptr + BT(ptr) - 1, BT(ptr) -1);
+			total += SET_FREE(*(size_t *)ptr);
+		}
+		mem_print(bin, ptr, a, &total);
 		if (!(bin = bin->next))
 			while (++a != 3 && !(bin = area.list[a]))
 				;

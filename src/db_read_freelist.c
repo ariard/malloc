@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 20:50:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 22:31:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			show_free_chunk(void)
 		;
 	while (bin)
 	{
-		print_area(bin, a);
+		area_print(bin, a);
 		chunk = bin->first;
 		while (chunk)
 		{

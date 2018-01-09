@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/09 20:37:19 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/09 22:31:00 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ chunk_search.c\
 chunk_find.c\
 chunk_merge.c\
 malloc_init.c\
+area_print.c\
 malloc.c\
 free.c\
 realloc.c\

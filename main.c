@@ -156,10 +156,20 @@
 int			main(void)
 {
 	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
 
 	a = malloc(100);
+	b = malloc(20);
+	c = malloc(80);
+	d = malloc(140);
+
+	free(b);
+	free(c);
+	free(d);
 	show_alloc_mem();
 	show_free_chunk();
-	a = realloc(a, 50);	
+	a = realloc(a, 120);	
 	return (0);
 }

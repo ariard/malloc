@@ -1,19 +1,12 @@
-tate
-- framework test + realloc
+- framework test
 - debug algo coalescing
 - fusion check and pack bin
-- realloc
 - multi-threaded area
 - my print
-- petites fonctions de debug (?)
 
 !!!
-	- compile
-	- show_cand_merge()
-	- realloc test
+	- realloc 2nd part
 	- coalesce test
-
-DESIGN
 
 GOALS :
 	- best-fit with mono-coalescing list
