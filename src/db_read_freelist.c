@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 23:56:07 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 20:50:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void			show_free_chunk(void)
 		chunk = bin->first;
 		while (chunk)
 		{
-			DBG("%p - %p : %zu\n", chunk, (char *)chunk + BT(chunk), BT(chunk));
+			DBG("%p - %p : %zu octets\n", chunk, (char *)chunk + BT(chunk), BT(chunk));
+			total += BT(chunk);
 			chunk = chunk->next;
 		}
 		if (!(bin = bin->next))
 			while (++a != 2 && !(bin = area.list[a]))
 				;
 	}
+	DBG("Total : %zu octets\n", total);
 }

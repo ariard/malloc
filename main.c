@@ -48,27 +48,27 @@
 //}
 
 
-/*  TEST free list */
-
-int			main(void)
-{	
-	char	*a;
-	char	*b;
-	char	*c;
-	char	*d;
-
-	a = malloc(20);
-	b = malloc(30);
-	c = malloc(40);
-	d = malloc(50);
-
-
-	free(a);
-	free(b);
-	free(c);
-
-	show_free_chunk();
-}
+///*  TEST free list */
+//
+//int			main(void)
+//{	
+//	char	*a;
+//	char	*b;
+//	char	*c;
+//	char	*d;
+//
+//	a = malloc(20);
+//	b = malloc(30);
+//	c = malloc(40);
+//	d = malloc(50);
+//
+//
+//	free(a);
+//	free(b);
+//	free(c);
+//
+//	show_free_chunk();
+//}
 
 /*	TEST	coalescing */
 
@@ -150,3 +150,16 @@ int			main(void)
 //	show_alloc_mem();
 //	return (0);
 //}
+
+/*	TEST		aggregation forward aka realloc */
+
+int			main(void)
+{
+	char	*a;
+
+	a = malloc(100);
+	show_alloc_mem();
+	show_free_chunk();
+	a = realloc(a, 50);	
+	return (0);
+}

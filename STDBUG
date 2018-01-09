@@ -1,17 +1,13 @@
 [32mMALLOC
 [0m[31mBIN_ADD
 [0m[31mBIN PACK
-[0m[32mMALLOC
-[0m[31mBIN PACK
-[0m[32mMALLOC
-[0m[31mBIN PACK
-[0m[32mMALLOC
-[0m[31mBIN PACK
-[0m[32mFREE
-[0m[32mFREE
-[0m[32mFREE
-[0m[TINY] : 0x10f4ee000
-0x10f4ee110 - 0x10f6ee008 : 2096888
-0x10f4ee020 - 0x10f4ee050 : 48
-0x10f4ee050 - 0x10f4ee080 : 48
-0x10f4ee080 - 0x10f4ee0c0 : 64
+[0m[TINY] : 0x10cba9000
+0x10cba9018 - 0x10cba9098 : 128 octets 
+Total : 128 octets
+[TINY] : 0x10cba9000
+0x10cba90a0 - 0x10cda9008 : 2097000 octets
+Total : 2097000 octets
+chunk  0x10cba9020 size 128 pos 1 
+tmp now 0x10cba90a0 size 2097000 
+cand forward 2097128
+cand : 0x10cba9020 low : 0x10cba9020 high : 0x10cda9008

@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/09 19:55:15 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/09 20:37:19 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ free.c\
 realloc.c\
 db_read_freelist.c\
 db_show_allow_mem.c\
-db_whereiam.c
+db_show_cand_merge.c
 
 SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

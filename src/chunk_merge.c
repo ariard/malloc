@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 19:54:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 20:16:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void	*junc_freelist(t_chunk *tmp)
+static void	junc_freelist(t_chunk *tmp)
 {
 	if (tmp->next)
 		(tmp->next)->prev = tmp->prev;

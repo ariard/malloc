@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 19:55:02 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 21:18:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@
 # define BT_PREV(x)		*(size_t *)((void *)x - 2 * sizeof(size_t))
 
 # define _BUSY(x)		x & 1
+# define FREE(x)		x & 0
 # define SET_BUSY(x)	x | (1 << 0)
 # define SET_FREE(x)	x & ~(1 << 0)
 
-# define PREV(x)		x - (*(size_t *)(void *)x - sizeof(size_t)) - 16
-# define NEXT(x)		x + (*(size_t *)(void *)x - sizeof(size_t)) + 16
+# define NEXT(x)		(*(size_t *)(void *)x - sizeof(size_t) & ~(1 << 0)) 
+# define PREV(x)		(*(size_t *)(void *)x - sizeof(size_t) & ~(1 << 0)) 
 
 struct	s_config
 {
@@ -83,14 +84,13 @@ struct s_cand
 	size_t				size;
 	size_t				backward;
 	size_t				forward;
-	t_chunk				*chunk;
 };
 
 struct s_ctrl
 {
 	size_t				sum;
 	char				pos;
-}
+};
 
 extern t_area			area;
 
@@ -101,7 +101,7 @@ void		*bin_pack(t_bin *bin, size_t request);
 int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
 
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
-void		*chunk_coalesce(t_bin *bin, t_chunk *list, size_t request);
+void		*chunk_coalesce(t_chunk *list, size_t request);
 int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
@@ -111,9 +111,8 @@ void		print_area(t_bin *bin, int a);
 
 /* Debug */
 
-void		show_alloc_mem(void);	
+void		show_alloc_mem(void);
 void		show_free_chunk(void);
-//			show_coal_cand(void);	
-void		read_freelist(void);
+void		show_cand_merge(void *ptr, t_cand cand);
 
 #endif
