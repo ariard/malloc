@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/08 18:30:01 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/09 19:55:15 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,16 @@ OBJ_DIR		=	objs/
 SRC_BASE	=	\
 bin_add.c\
 bin_pack.c\
+bin_checkin.c\
 chunk_init.c\
 chunk_coalesce.c\
+chunk_search.c\
+chunk_find.c\
+chunk_merge.c\
 malloc_init.c\
 malloc.c\
 free.c\
+realloc.c\
 db_read_freelist.c\
 db_show_allow_mem.c\
 db_whereiam.c

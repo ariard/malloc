@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 22:58:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 18:01:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ void			*malloc(size_t request)
 	}
 	return (NULL);
 }
-
-// change fucking area structure into a[i]

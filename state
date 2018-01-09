@@ -7,6 +7,12 @@ tate
 - my print
 - petites fonctions de debug (?)
 
+!!!
+	- compile
+	- show_cand_merge()
+	- realloc test
+	- coalesce test
+
 DESIGN
 
 GOALS :
@@ -23,6 +29,8 @@ TEST :
 	- break mmap
 	- break free with boundary tags
 	- give free an unknown address
+	- cas speciaux with large chunk
+	- take nearly-all, then take dust
 
 NOTES :
 	- BT_VALUE and BT`

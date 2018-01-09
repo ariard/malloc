@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   db_whereiam.c                                      :+:      :+:    :+:   */
+/*   chunk_search.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/07 19:10:58 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 20:35:56 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/09 18:59:18 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/09 19:35:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void	whereiam(size_t request)
+int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 {
-	if (request <= area.cfg.limit_tiny)
-		DBG("TINY AREA\n")
-	else if (request <= area.cfg.limit_small)
-		DBG("SMALL AREA\n")
-	else 
-		DBG("LARGE AREA\n")
+
+	void	*tmp;
+
+	tmp = (ctrl.pos < 0) ? PREV(list) : NEXT(list);
+	if (_BUSY(*(size_t *)(chunk - sizeof(size_t))))
+	{
+		if (BT(tmp) + ctrl.sum > request)
+			return (BT(tmp) + ctrl.sum);
+		if (bin_checkin(bs.bin, tmp, bs.a, ctrl.pos))
+			return (chunk_search(bs, tmp, request, 
+				(t_ctrl){ ctrl.sum + BT(tmp), ctrl.pos }));
+	}
+	return (ctrl.sum);
 }

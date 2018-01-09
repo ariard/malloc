@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 23:40:37 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/09 19:55:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 # define BT(x)			*(size_t *)((void *)x - sizeof(size_t)) 
 # define BT_FINAL(x)	*(size_t *)(x + *(size_t *)((void *)x - sizeof(size_t)))
+# define BT_PREV(x)		*(size_t *)((void *)x - 2 * sizeof(size_t))
 
-# define BUSY(x)		(*(size_t *)((void *)x - sizeof(size_t))) & 1
 # define _BUSY(x)		x & 1
 # define SET_BUSY(x)	x | (1 << 0)
 # define SET_FREE(x)	x & ~(1 << 0)
@@ -64,7 +64,7 @@ struct	s_bins
 	t_bin				*bin;
 	t_bin				*prev;
 	char				a;
-}
+};
 
 struct s_chunk
 {
@@ -78,38 +78,35 @@ struct s_area
 	t_config			cfg;
 };
 
-struct s_agg
-{
-	int					nb;
-	size_t				size;
-};
-
 struct s_cand
 {
 	size_t				size;
-	t_agg				backward;
-	t_agg				forward;
+	size_t				backward;
+	size_t				forward;
 	t_chunk				*chunk;
 };
 
-struct s_wp
+struct s_ctrl
 {
 	size_t				sum;
-	int					lvl;
-	t_bin				*bin;
-};
+	char				pos;
+}
 
 extern t_area			area;
 
 t_config	malloc_init(void);
+
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_bin *bin, size_t request);
+int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_bin *bin, t_chunk *list, size_t request);
+int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+t_bins		chunk_find(void *ptr);
+void		*chunk_merge(void *ptr, size_t forward, size_t backward);
 
 int			align(int x, int f);
-t_agg		wrapper_check(t_chunk *list, size_t request, t_wrapper wp);
-t_agg		chunk_check(t_chunk *list, size_t request, t_wrapper wp);
 void		print_area(t_bin *bin, int a);
 
 /* Debug */
@@ -118,6 +115,5 @@ void		show_alloc_mem(void);
 void		show_free_chunk(void);
 //			show_coal_cand(void);	
 void		read_freelist(void);
-void		whereiam(size_t request);
 
 #endif
