@@ -26,8 +26,8 @@ void		*realloc(void *ptr, size_t size)
 			(t_ctrl) { (BT(ptr) & ~(1 << 0)), 1 });
 	new = NULL;
 	show_cand_merge(ptr, cand);
-//	if (bs.a != 2 && cand.forward > BT(ptr) + size)
-//		return (chunk_merge(free, cand.forward, 0));
+	if (bs.a != 2 && cand.forward > BT(ptr) + size)
+		return (chunk_merge(ptr, cand.forward, 0));
 //	new = malloc(BT(ptr) + size);
 //	ft_strncpy(new, ptr, BT(ptr));
 //	free(ptr);

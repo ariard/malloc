@@ -63,6 +63,10 @@ endif
 
 test: all
 
+home:
+	gcc -c -Wall -Werror -I includes/ $(SRCS)
+	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
+	gcc -L/Users/antoineriard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)

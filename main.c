@@ -153,23 +153,44 @@
 
 /*	TEST		aggregation forward aka realloc */
 
-int			main(void)
+//int			main(void)
+//{
+//	char	*a;
+//	char	*b;
+//	char	*c;
+//	char	*d;
+//
+//	a = malloc(100);
+//	b = malloc(20);
+//	c = malloc(80);
+//	d = malloc(140);
+//
+//	free(b);
+//	free(c);
+//	free(d);
+//	show_alloc_mem();
+//	show_free_chunk();
+//	a = realloc(a, 120);	
+//	show_alloc_mem();
+//	return (0);
+//}
+
+int		main(void)
 {
-	char	*a;
+	char	*a[5000];
 	char	*b;
-	char	*c;
-	char	*d;
+	int	i;
 
-	a = malloc(100);
-	b = malloc(20);
-	c = malloc(80);
-	d = malloc(140);
-
-	free(b);
-	free(c);
-	free(d);
-	show_alloc_mem();
+	i = -1;
+	while (++i < 4095)
+		a[i] = malloc(496);
+	show_alloc_mem();	
+	
+	i = -1;
+	while (++i < 4095)
+		free(a[i]);
 	show_free_chunk();
-	a = realloc(a, 120);	
+	//b = malloc(744);
+	show_alloc_mem();
 	return (0);
 }

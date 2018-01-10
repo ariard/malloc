@@ -33,7 +33,7 @@ void	*bin_pack(t_bin *bin, size_t request)
 		size = (BT(tmp) < size) ? BT(tmp) : size;
 		tmp = tmp->next;
 	}
-	//if (size == bin->freespace && !(best = chunk_coalesce(bin, bin->first, request))
+	//if (size == bin->freespace && !(best = chunk_coalesce(bin->first, request)))
 	//	return (NULL);
 	if (best->prev)
 		(best->prev)->next = best->next;

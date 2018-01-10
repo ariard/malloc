@@ -18,9 +18,9 @@ int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 	size_t	size;
 
 	size = (ctrl.pos < 0) ? BT_PREV(chunk) & ~(1 << 0) : BT(chunk)  & ~(1 << 0);
-	DBG("chunk  %p size %zu pos %d \n", chunk, size, (int)ctrl.pos);
+//	DBG("chunk  %p size %zu pos %d \n", chunk, size, (int)ctrl.pos);
 	tmp = (ctrl.pos < 0) ? chunk - size : chunk + size;
-	DBG("tmp now %p size %zu \n", tmp, BT(tmp));
+//	DBG("tmp now %p size %zu \n", tmp, BT(tmp));
 	if (!(FREE(*(size_t *)(tmp - sizeof(size_t)))))
 	{
 		if (BT(tmp) + ctrl.sum - 2 * sizeof(size_t) > request)
