@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 18:25:36 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 19:22:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			*malloc(size_t request)
 	t_bin				*temp;
 	void				*chunk;
 	
-	//DBG(GREEN "MALLOC\n" RESET);
+	DBG(GREEN "MALLOC\n" RESET);
 	area.cfg = (area.cfg.page_size == 0) ? malloc_init() : area.cfg;
 	area.list[0] = (!area.list[0] && request <= area.cfg.limit_tiny)
 		? bin_add(request) : area.list[0];

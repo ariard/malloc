@@ -175,28 +175,30 @@
 //	return (0);
 //}
 
+
+// 7709 256, create 744 hole before, after
+
 int		main(void)
 {
-	char	*a[5000];
+	char	*a[10000];
 	char	*b;
 	int	i;
 
 	i = -1;
-	while (++i < 4095)
-		a[i] = malloc(496);
+	while (++i < 7709)
+		a[i] = malloc(256);
 	DBG(RED);
-	show_alloc_mem();	
+	//show_alloc_mem();	
 	
 	i = -1;
-	while (++i < 4095)
+	while (++i < 7709)
 		free(a[i]);
 	DBG(GREEN);
 	show_free_chunk();
 	b = malloc(744);
-	DBG(RED);
-	show_alloc_mem();
-	dprintf(3, "free chunk");
-	DBG(GREEN);
+//	DBG(RED);
+//	DBG(GREEN);
 	show_free_chunk();
+	show_alloc_mem();
 	return (0);
 }

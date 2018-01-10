@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 18:22:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 20:21:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 		if (s_clean == 0)
 			return;
 		if (BT(ptr) & 1)
+		{
 			DBG("%p - %p : %zu octets\n", ptr, (char *)ptr + s_clean, s_clean);
-		*total += s_clean;
+			*total += s_clean;
+		}
 		ptr = (char *)ptr + s_clean;
 	}
 }

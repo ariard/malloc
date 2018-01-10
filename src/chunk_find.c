@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:21:43 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 22:23:57 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 19:20:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ t_bins		chunk_find(void *ptr)
 	size_t	max;
 	char	a;
 
+	//DBG("chunk find\n");
+	if (!ptr)
+		return ((t_bins) { NULL, NULL, -1});
 	max = (BT(ptr) > area.cfg.limit_tiny) ? area.cfg.small_area \
 		: area.cfg.tiny_area;
 	max = (BT(ptr) > area.cfg.limit_small) ? BT(ptr) : max;

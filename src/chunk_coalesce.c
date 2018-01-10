@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 20:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 18:26:18 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 20:15:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ void		*chunk_coalesce(t_chunk *free, size_t req)
 	t_cand		cand;
 	t_bins		bs;
 
-	//DBG("chunk coalesce\n");
+	DBG("CHUNK COALESCE\n");
 	best.size = 0;
-	if ((!(bs = chunk_find((void *)free)).bin))
+	bs = chunk_find((void *)free);
+	if (!bs.bin)
 		return (NULL);
 	while (free)
 	{
-		cand.chunk = free;
+		cand = (t_cand) { free, 0, 0, 0 };
 		if (bin_checkin(bs.bin, (void *)free, bs.a, -1))
-			cand.backward = chunk_search(bs, (void *)free, req,
-				(t_ctrl){ BT(free), -1 });
+			cand.backward = chunk_search(bs, (void *)free, req - BT(free),
+				(t_ctrl){ 0, -1 });
 		if (bin_checkin(bs.bin, (void *)free, bs.a, 1))
-			cand.forward = chunk_search(bs, (void *)free, req,
-				(t_ctrl){ cand.backward, 1 });
+			cand.forward = chunk_search(bs, (void *)free, req - BT(free),
+				(t_ctrl){ 0, 1 }) + BT(free);
+		cand.backward = (cand.forward > req) ? 0 : cand.backward;
 		cand.size = cand.forward + cand.backward;
 		if ((cand.size > req) && (cand.size < best.size || best.size == 0))
 			best = cand;

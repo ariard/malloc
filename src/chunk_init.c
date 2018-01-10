@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 18:29:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 21:33:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 	size_t	next_bt;
 	t_chunk	*tmp;
 
-	//DBG(RED "CHUNK INIT\n" RESET);
+	DBG(RED "CHUNK INIT\n" RESET);
 	tmp = NULL;
 	a_req = (request <= area.cfg.limit_tiny) ? align(request, 16) :
 		align(request, 512);
@@ -33,14 +33,17 @@ void	*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 	if ((int)(bin->freespace - a_req) < 0)
 		return (NULL);
 	bin->freespace -= a_req;
+	//DBG("bin %p - %p, %p - %p, a_req %zu\n", bin, (char *)bin + area.cfg.tiny_area,
+	//	chunk, (char *)chunk + a_req, a_req); 
 	BT(chunk) = SET_BUSY(a_req);
 	BT_FINAL(chunk) = SET_BUSY(a_req);
 	if (bin_checkin(bin, chunk, (request <= area.cfg.limit_tiny) ? 0 : 1, 1))
 	{
-		if (bin->first && ((t_chunk *)bin->first)->next)
-			tmp = ((t_chunk *)bin->first)->next;
+		if (bin->first && !(BT(bin->first) & 1))
+			tmp = (t_chunk *)bin->first;
 		bin->first = (void *)chunk + a_req;
-		((t_chunk *)bin->first)->next = tmp;
+		if ((((t_chunk *)bin->first)->next = tmp))
+			tmp->prev = ((t_chunk *)bin->first);
 		BT(bin->first) = next_bt;
 		BT_FINAL(bin->first) = next_bt;
 	}

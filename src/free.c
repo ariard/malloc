@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 16:58:42 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 21:10:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			free(void *ptr)
 	t_chunk		*freechunk;
 	size_t		a_size;
 
-	DBG(GREEN "FREE\n" RESET);
+	//DBG(GREEN "FREE\n" RESET);
 	if (!ptr || !((bs = chunk_find(ptr)).bin))
 		return;
 	bs.bin->freespace += (BT(ptr) & ~(1 << 0));
@@ -34,6 +34,7 @@ void			free(void *ptr)
 	while (freechunk->next)
 		freechunk = freechunk->next;
 	((t_chunk*)ptr)->next = NULL;
+	((t_chunk*)ptr)->prev = freechunk;
 	freechunk->next = ptr;
 	BT(ptr) = SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t)));
 	BT_FINAL(ptr) = BT(ptr);

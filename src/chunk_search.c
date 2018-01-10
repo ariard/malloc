@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:59:18 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 17:52:39 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 19:50:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 			return (chunk_search(bs, tmp, request, 
 				(t_ctrl){ ctrl.sum + BT(tmp), ctrl.pos }));
 	}
-	return ((ctrl.pos == 1) ? 0 : ctrl.sum);
+	return (ctrl.sum);
 }
