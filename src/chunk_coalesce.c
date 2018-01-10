@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 20:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 20:15:13 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 22:16:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		*chunk_coalesce(t_chunk *free, size_t req)
 	t_cand		cand;
 	t_bins		bs;
 
-	DBG("CHUNK COALESCE\n");
 	best.size = 0;
 	bs = chunk_find((void *)free);
 	if (!bs.bin)
@@ -31,14 +30,14 @@ void		*chunk_coalesce(t_chunk *free, size_t req)
 				(t_ctrl){ 0, -1 });
 		if (bin_checkin(bs.bin, (void *)free, bs.a, 1))
 			cand.forward = chunk_search(bs, (void *)free, req - BT(free),
-				(t_ctrl){ 0, 1 }) + BT(free);
-		cand.backward = (cand.forward > req) ? 0 : cand.backward;
-		cand.size = cand.forward + cand.backward;
+				(t_ctrl){ 0, 1 });
+		cand.backward = (cand.forward + BT(free) > req) ? 0 : cand.backward;
+		cand.size = cand.forward + BT(free) + cand.backward;
 		if ((cand.size > req) && (cand.size < best.size || best.size == 0))
 			best = cand;
 		free = free->next;
 	}
 	if (best.size)
-		return (chunk_merge(best.chunk, best.forward, best.backward));
+		return (chunk_merge(best.chunk, best.forward + BT(best.chunk), best.backward));
 	return (NULL);
 }

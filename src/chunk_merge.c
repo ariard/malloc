@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 21:27:09 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 22:15:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		*chunk_merge(void *chunk, size_t forward, size_t backward)
 	t_chunk		*tmp;
 	size_t		new_size;
 
-	DBG(GREEN "chunk merge %zu %zu \n" RESET, forward, backward);
 	new_size = forward + backward;
 	tmp = (t_chunk *)chunk;
 	while (forward)

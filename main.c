@@ -202,3 +202,5 @@ int		main(void)
 	show_alloc_mem();
 	return (0);
 }
+
+// found a case of backward coalescing
