@@ -1,12 +1,8 @@
-- framework test
 - debug algo coalescing
 - fusion check and pack bin
-- multi-threaded area
+- framework test
 - my print
-
-!!!
-	- realloc 2nd part
-	- coalesce test
+- multi-threaded area
 
 GOALS :
 	- best-fit with mono-coalescing list

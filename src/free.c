@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 23:26:04 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 16:58:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			free(void *ptr)
 	DBG(GREEN "FREE\n" RESET);
 	if (!ptr || !((bs = chunk_find(ptr)).bin))
 		return;
-	bs.bin->freespace += (bs.a == 0) ? align(BT(ptr), 16) : align(BT(ptr), 512);
+	bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 	a_size = (bs.a == 0) ? area.cfg.tiny_area : area.cfg.small_area;
 	a_size = (bs.a == 2) ? BT(ptr) + sizeof(t_bin) : a_size;
 	if (bs.a == 2 || bs.bin->freespace == a_size)

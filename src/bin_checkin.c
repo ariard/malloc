@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 23:21:20 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 18:18:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
 	if (a == 2)
 		return (0);
 	max = (a == 0) ? area.cfg.tiny_area : area.cfg.small_area;
-	if (pos < 0 && (char *)ptr - BT_PREV(ptr) > (char *)bin)
+	if (pos < 0 && (char *)ptr - (BT_PREV(ptr) & ~(1 << 0)) > (char *)bin)
 		return (1);
-	if (pos > 0 && (char *)ptr + BT(ptr) < (char *)bin + max)
+	if (pos > 0 && (char *)ptr + (BT(ptr) & ~(1 << 0)) < (char *)bin + max)
 		return (1);
 	return (0);
 }

@@ -184,13 +184,19 @@ int		main(void)
 	i = -1;
 	while (++i < 4095)
 		a[i] = malloc(496);
+	DBG(RED);
 	show_alloc_mem();	
 	
 	i = -1;
 	while (++i < 4095)
 		free(a[i]);
+	DBG(GREEN);
 	show_free_chunk();
-	//b = malloc(744);
+	b = malloc(744);
+	DBG(RED);
 	show_alloc_mem();
+	dprintf(3, "free chunk");
+	DBG(GREEN);
+	show_free_chunk();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:59:18 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 23:26:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 17:52:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 	size_t	size;
 
 	size = (ctrl.pos < 0) ? BT_PREV(chunk) & ~(1 << 0) : BT(chunk)  & ~(1 << 0);
-//	DBG("chunk  %p size %zu pos %d \n", chunk, size, (int)ctrl.pos);
 	tmp = (ctrl.pos < 0) ? chunk - size : chunk + size;
-//	DBG("tmp now %p size %zu \n", tmp, BT(tmp));
-	if (!(FREE(*(size_t *)(tmp - sizeof(size_t)))))
+	if (!(FREE(*(size_t *)(tmp - sizeof(size_t)))) && ctrl.sum < request)
 	{
 		if (BT(tmp) + ctrl.sum - 2 * sizeof(size_t) > request)
 			return (BT(tmp) + ctrl.sum);
@@ -29,5 +27,5 @@ int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 			return (chunk_search(bs, tmp, request, 
 				(t_ctrl){ ctrl.sum + BT(tmp), ctrl.pos }));
 	}
-	return (ctrl.sum);
+	return ((ctrl.pos == 1) ? 0 : ctrl.sum);
 }

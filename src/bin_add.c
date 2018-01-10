@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/08 22:56:38 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 18:25:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bin	*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-	DBG(RED "BIN_ADD\n" RESET);
+	//DBG(RED "BIN_ADD\n" RESET);
 	size = (request <= area.cfg.limit_tiny) ? area.cfg.tiny_area \
 		: area.cfg.small_area;
 	size = (request > area.cfg.limit_small) ? request \

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/09 23:25:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/10 18:23:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);
 
 # define BT(x)		*(size_t *)((void *)x - sizeof(size_t)) 
-// beware flag
 # define BT_FINAL(x)	*(size_t *)((void *)x + (*(size_t *)((void *)x - sizeof(size_t)) & ~(1 << 0)) - 2 * sizeof(size_t))
 # define BT_PREV(x)	*(size_t *)((void *)x - 2 * sizeof(size_t))
 
@@ -81,6 +80,7 @@ struct s_area
 
 struct s_cand
 {
+	void				*chunk;
 	size_t				size;
 	size_t				backward;
 	size_t				forward;
