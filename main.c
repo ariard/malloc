@@ -178,6 +178,16 @@
 
 // 7709 256, create 744 hole before, after
 
+// melting pot, multi-bin, cross-bin free
+// free + realloc + malloc
+// change getpagsize + hack mmap
+// compile with my-42sh
+// no crash on memory corruption
+// false adress free and realloc
+// dust pattern
+// proof of coalescing forward
+// proof of coalescing backward
+
 int		main(void)
 {
 	char	*a[10000];

@@ -21,23 +21,11 @@ TEST :
 	- cas speciaux with large chunk
 	- take nearly-all, then take dust
 
-NOTES :
-	- BT_VALUE and BT`
 
 
 test simple
 	test with breakpoints
 	control with var d 'env
-
-
-demain : compression free + debug coalescing + fusion check and pack + realloc
-	then make test pdf + my own
-
-avoir fini pour mardi
-	se renseigner sur les variables d'env
-
-inquiry on memory corruptions
-
 
 
 LESSONS : 
@@ -47,3 +35,4 @@ LESSONS :
 	- performance tools
 	- control flow is bad!
 
+	- framework test functionnel + unit

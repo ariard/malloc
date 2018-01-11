@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:35:38 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/11 19:33:30 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/11 21:30:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void		test_launch(char *path, char *env)
 
 static void		test_analyze(char *test, int status, int *ret)
 {
-	if (status == 0)
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
 		ft_printf("[%s] :" GREEN" SUCCESS\n"RESET, test);
 
-	if (status > 0)
+	if (WIFEXITED(status) && WEXITSTATUS(status) > 0)
 		ft_printf("[%s] :" RED" FAILURE\n"RESET, test);
-	*ret = (0 == status) ? *ret + 1 : *ret;
+	*ret = (WIFEXITED(status) && WEXITSTATUS(status) == 0) ? *ret + 1 : *ret;
 }
 
 static t_list	*test_load(void)
@@ -71,8 +71,7 @@ int		main(void)
 			test_launch(ft_strjoin(DIR_TEST, t), env);
 		waitpid(pid, &status, WCONTINUED);
 
-		if (WIFEXITED(status))
-			test_analyze(t, WEXITSTATUS(status), &ret);
+		test_analyze(t, status, &ret);
 	}
 	ft_printf("TESTS : %d/%d\n", ret, nbr);
 }

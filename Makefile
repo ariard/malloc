@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/09 22:31:00 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/11 22:10:27 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ FLAGS		=	-Wall -Wextra -Werror
 LIBFT_DIR   	= libft/
 LIBFT_LIB	= $(LIBFT_DIR)libft.a
 LIBFT_INC	= $(LIBFT_DIR)includes/
+
+TEST_DIR	=	source_test/
 
 SRC_DIR		= 	src/
 INC_DIR		=	includes/
@@ -46,6 +48,8 @@ db_read_freelist.c\
 db_show_allow_mem.c\
 db_show_cand_merge.c
 
+TEST_BASE	= \
+
 SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
 
@@ -61,7 +65,8 @@ else
 	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 endif
 
-test: all
+test:
+	@make -C $(TEST_DIR)
 
 home:
 	gcc -c -Wall -Werror -I includes/ $(SRCS)
@@ -84,9 +89,6 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-
-maintest: all
-	gcc -I includes/malloc.h main.c libft_malloc_OSTTYPE.so libft/libft.a
 
 re: fclean all
 
