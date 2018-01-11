@@ -1,8 +1,8 @@
-- debug algo coalescing
-- fusion check and pack bin
 - framework test
 - my print
 - multi-threaded area
+
+framework test ; goal = 40 + 5 threads;
 
 GOALS :
 	- best-fit with mono-coalescing list

@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_checkin.c                                      :+:      :+:    :+:   */
+/*   test_launch.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 22:18:58 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/11 18:47:08 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/11 18:58:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "test.h"
 
-int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
+void		test_launch(char *path, char *env)
 {
-	size_t		max;	
-
-	if (a == 2)
-		return (0);
-	max = (a == 0) ? area.cfg.tiny_area : area.cfg.small_area;
-	if (pos < 0 && (char *)ptr - (BT_PREV(ptr) & ~(1 << 0)) > (char *)bin)
-		return (1);
-	if (pos > 0 && (char *)ptr + (BT(ptr) & ~(1 << 0)) < (char *)bin + max)
-		return (1);
-	return (0);
+	execve(path, (char *[]) { NULL }, (char *[]) { env, NULL });
 }
+

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_checkin.c                                      :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 22:18:58 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/11 18:09:54 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/11 19:32:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
 
-int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
-{
-	size_t		max;	
+#ifndef TEST_H
+# define TEST_H
 
-	if (a == 2)
-		return (0);
-	max = (a == 0) ? area.cfg.tiny_area : area.cfg.small_area;
-	if (pos < 0 && (char *)ptr - (BT_PREV(ptr) & ~(1 << 0)) > (char *)bin)
-		return (1);
-	if (pos > 0 && (char *)ptr + (BT(ptr) & ~(1 << 0)) < (char *)bin + max)
-		return (1);
-	return (0);
-}
+# include <unistd.h>
+# include <dirent.h>
+# include "../libft/includes/libft.h"
+
+#define		EXIT(x)		{ ft_dprintf(2, "%s\n", x) ; exit(1); }
+#define		P(x)			ft_dprintf(1, "%s\n", x);
+
+#define		DIR_TEST	"./test/"
+
+#define GREEN	"\x1b[32m"
+#define RED		"\x1b[31m"
+#define RESET	"\x1b[0m"
+
+#endif
