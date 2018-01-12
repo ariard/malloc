@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/11 22:10:27 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/12 18:49:21 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LIBFT_LIB	= $(LIBFT_DIR)libft.a
 LIBFT_INC	= $(LIBFT_DIR)includes/
 
 TEST_DIR	=	source_test/
+MOULI_DIR	=	moulitest/
 
 SRC_DIR		= 	src/
 INC_DIR		=	includes/
@@ -65,8 +66,18 @@ else
 	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 endif
 
-test:
-	@make -C $(TEST_DIR)
+build-test:
+	@$(MAKE) -C $(TEST_DIR)
+
+clean-test:
+	@$(MAKE) fclean -C $(TEST_DIR)
+
+build-mouli:
+	@$(MAKE)-C $(MOULI_DIR)
+
+clean-mouli:
+	@$(MAKE) fclean -C $(MOULI_DIR)
+
 
 home:
 	gcc -c -Wall -Werror -I includes/ $(SRCS)
