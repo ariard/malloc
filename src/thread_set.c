@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_checkin.c                                      :+:      :+:    :+:   */
+/*   thread_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 20:44:58 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/13 19:17:14 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/13 21:19:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
+t_area		*thread_set(void)
 {
-	size_t		max;	
+	void	*value;
+	int		i;
 
-	if (a == 2)
-		return (0);
-	max = (a == 0) ? cfg.tiny_area : cfg.small_area;
-	if (pos < 0 && (char *)ptr - (BT_PREV(ptr) & ~(1 << 0)) > (char *)bin)
-		return (1);
-	if (pos > 0 && (char *)ptr + (BT(ptr) & ~(1 << 0)) < (char *)bin + max)
-		return (1);
-	return (0);
+	i = -1;
+	if (!(value = pthread_getspecific(cfg.key)))
+	{
+		while (++i < 4 && pthread_mutex_trylock(&cfg.areas[i].mutex)) 
+			;
+		if (i == 4)
+		{
+			i = rand() % 4;
+			if (pthread_mutex_lock(&cfg.areas[i].mutex))
+				exit(1);
+		}
+		pthread_setspecific(cfg.key, (void *)&cfg.areas[i]);
+		return (&cfg.areas[i]);
+	}
+	return (&cfg.areas[i]);
 }

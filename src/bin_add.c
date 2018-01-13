@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 17:48:17 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 20:34:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_bin	*bin_add(size_t request)
 	size_t			size;
 
 	DBG(RED "BIN_ADD\n" RESET);
-	size = (request <= area.cfg.limit_tiny) ? area.cfg.tiny_area \
-		: area.cfg.small_area;
-	size = (request > area.cfg.limit_small) ? request \
+	size = (request <= cfg.limit_tiny) ? cfg.tiny_area \
+		: cfg.small_area;
+	size = (request > cfg.limit_small) ? request \
 		+ sizeof(t_bin) + sizeof(size_t) : size;
 	// warning if mmap send trash
 	bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);

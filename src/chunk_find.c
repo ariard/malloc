@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:21:43 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 19:20:36 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 21:14:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_bins		chunk_find(void *ptr)
+t_bins		chunk_find(t_area *ar, void *ptr)
 {	
 	t_bin	*bin;
 	t_bin	*prev;
@@ -22,14 +22,14 @@ t_bins		chunk_find(void *ptr)
 	//DBG("chunk find\n");
 	if (!ptr)
 		return ((t_bins) { NULL, NULL, -1});
-	max = (BT(ptr) > area.cfg.limit_tiny) ? area.cfg.small_area \
-		: area.cfg.tiny_area;
-	max = (BT(ptr) > area.cfg.limit_small) ? BT(ptr) : max;
-	bin = (max > area.cfg.tiny_area) ? area.list[1] : area.list[0];
-	bin = (max > area.cfg.small_area) ? area.list[2] : bin;
+	max = (BT(ptr) > cfg.limit_tiny) ? cfg.small_area \
+		: cfg.tiny_area;
+	max = (BT(ptr) > cfg.limit_small) ? BT(ptr) : max;
+	bin = (max > cfg.tiny_area) ? ar->list[1] : ar->list[0];
+	bin = (max > cfg.small_area) ? ar->list[2] : bin;
 	prev = NULL;
-	a = (BT(ptr) > area.cfg.limit_tiny) ? 1 : 0;
-	a = (BT(ptr) > area.cfg.limit_small) ? 2: a;
+	a = (BT(ptr) > cfg.limit_tiny) ? 1 : 0;
+	a = (BT(ptr) > cfg.limit_small) ? 2: a;
 	while (bin)
 	{
 		if (((char *)bin - (char *)ptr) < 0 \

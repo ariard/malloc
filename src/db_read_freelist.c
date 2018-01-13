@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 21:27:18 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 21:07:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void			show_free_chunk(void)
 	t_chunk		*chunk;
 	size_t		total;
 	int			a;
+	t_area		*ar;
 
 	a = -1;
 	total = 0;
-	while (++a != 2 && !(bin = area.list[a]))
+	ar = thread_set();
+	while (++a != 2 && !(bin = ar->list[a]))
 		;
 	while (bin)
 	{
@@ -35,8 +37,9 @@ void			show_free_chunk(void)
 			chunk = chunk->next;
 		}
 		if (!(bin = bin->next))
-			while (++a != 2 && !(bin = area.list[a]))
+			while (++a != 2 && !(bin = ar->list[a]))
 				;
 	}
 	DBG("Total : %zu octets\n", total);
+	thread_unset(&ar->mutex, NULL);
 }

@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 17:52:01 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 20:38:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void	*bin_pack(t_bin *bin, size_t req)
+void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
 {
 	t_chunk	*best;
 	t_chunk	*tmp;
@@ -20,19 +20,19 @@ void	*bin_pack(t_bin *bin, size_t req)
 	size_t	a_req;
 
 	DBG(RED "BIN PACK\n" RESET);
-	if (req > area.cfg.limit_small)
+	if (req > cfg.limit_small)
 		return (bin->first);
 	tmp = bin->first;
 	best = NULL;
 	size = bin->freespace;
-	a_req = (req <= area.cfg.limit_tiny) ? align(req, 16) : align(req, 512);
+	a_req = (req <= cfg.limit_tiny) ? align(req, 16) : align(req, 512);
 	while (tmp)
 	{
 		best = (BT(tmp) <= size && BT(tmp) >= a_req) ? tmp : best;
 		size = (BT(tmp) <= size && BT(tmp) >= a_req) ? BT(tmp) : size;
 		tmp = tmp->next;
 	}
-	if (best == NULL && !(best = chunk_coalesce(bin->first, a_req)))
+	if (best == NULL && !(best = chunk_coalesce(ar, bin->first, a_req)))
 		return (NULL);
 	if (best->prev)
 		(best->prev)->next = best->next;

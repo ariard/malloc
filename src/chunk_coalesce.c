@@ -6,18 +6,18 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 20:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 17:56:37 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 20:43:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		*chunk_coalesce(t_chunk *free, size_t req)
+void		*chunk_coalesce(t_area *ar, t_chunk *free, size_t req)
 {
 	t_cand		cand;
 	t_bins		bs;
 
-	bs = chunk_find((void *)free);
+	bs = chunk_find(ar, (void *)free);
 	if (!bs.bin)
 		return (NULL);
 	while (free)

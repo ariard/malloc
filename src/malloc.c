@@ -6,37 +6,38 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/12 19:15:25 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 21:15:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <sys/time.h>
 
-t_area	area = { {NULL, NULL, NULL}, {0, 0, 0, 0, 0} };
+t_config		cfg;
 
 void			*malloc(size_t request)
 {
 	t_bin				*temp;
 	void				*chunk;
+	t_area				*ar;
 	
 	DBG(GREEN "MALLOC\n" RESET);
-	area.cfg = (area.cfg.page_size == 0) ? malloc_init() : area.cfg;
-	area.list[0] = (!area.list[0] && request <= area.cfg.limit_tiny)
-		? bin_add(request) : area.list[0];
-	area.list[1] = (!area.list[1] && request <= area.cfg.limit_small \
-		&& request > area.cfg.limit_tiny) ? bin_add(request) : area.list[1];
-	area.list[2] = (!area.list[2] && request > area.cfg.limit_small) 
-		? bin_add(request) : area.list[2];
-	temp = (request > area.cfg.limit_tiny) ? area.list[1] : area.list[0];
-	temp = (request > area.cfg.limit_small) ? area.list[2] : temp;
+	cfg = (cfg.page_size == 0) ? malloc_init() : cfg;
+	ar = thread_set();
+	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
+		? bin_add(request) : ar->list[0];
+	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \
+		&& request > cfg.limit_tiny) ? bin_add(request) : ar->list[1];
+	ar->list[2] = (!ar->list[2] && request > cfg.limit_small) 
+		? bin_add(request) : ar->list[2];
+	temp = (request > cfg.limit_tiny) ? ar->list[1] : ar->list[0];
+	temp = (request > cfg.limit_small) ? ar->list[2] : temp;
 	while (temp)
 	{
 		if (temp->freespace > request)
-			if ((chunk = bin_pack(temp, request)))
-				return (chunk);
+			if ((chunk = bin_pack(ar, temp, request)))
+				return (thread_unset(&ar->mutex, chunk));
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}
-	return (NULL);
+	return (thread_unset(&ar->mutex, NULL));
 }

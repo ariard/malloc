@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   thread_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 20:03:21 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 21:12:34 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/13 20:49:39 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/13 20:59:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "malloc.h"
 
-# include <sys/types.h>
-
-typedef struct	s_config	t_config;
-typedef struct	s_bin		t_bin;
-typedef struct	s_area		t_area;
-typedef struct	s_chunk		t_chunk;
-typedef enum	e_status	t_status;
-typedef struct 	s_cand		t_cand;
-typedef struct	s_bins		t_bins;
-typedef struct	s_ctrl		t_ctrl;
-
-#endif
+void		*thread_unset(pthread_mutex_t *mutex, void *ptr)
+{
+	pthread_mutex_unlock(mutex);
+	return (ptr);
+}

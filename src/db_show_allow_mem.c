@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 20:21:08 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 21:13:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ void			show_alloc_mem(void)
 	int			a;
 	void		*ptr;
 	size_t		total;
+	t_area		*ar;
 
 	a = -1;
 	total = 0;
-	while (++a != 3 && !(bin = area.list[a]))
+	ar = thread_set();
+	while (++a != 3 && !(bin = ar->list[a]))
 		;
 	while (bin)
 	{
@@ -52,8 +54,9 @@ void			show_alloc_mem(void)
 		}
 		mem_print(bin, ptr, a, &total);
 		if (!(bin = bin->next))
-			while (++a != 3 && !(bin = area.list[a]))
+			while (++a != 3 && !(bin = ar->list[a]))
 				;
 	}
 	DBG("Total : %zu octets\n", total);
+	thread_unset(&ar->mutex, NULL);
 }
