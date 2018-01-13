@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/10 21:10:12 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/13 17:52:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			free(void *ptr)
 	t_chunk		*freechunk;
 	size_t		a_size;
 
-	//DBG(GREEN "FREE\n" RESET);
+	DBG(GREEN "FREE\n" RESET);
 	if (!ptr || !((bs = chunk_find(ptr)).bin))
 		return;
 	bs.bin->freespace += (BT(ptr) & ~(1 << 0));

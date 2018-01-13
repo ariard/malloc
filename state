@@ -1,7 +1,7 @@
 - framework test + finir test
 - modifier coalescing best-fit to first-fit
-- change to my print
 - implement multi-threaded area
+- change to my print
 
 framework test ; goal = 40 + 5 threads;
 

@@ -188,29 +188,37 @@
 // proof of coalescing forward
 // proof of coalescing backward
 
+//int		main(void)
+//{
+//	char	*a[10000];
+//	char	*b;
+//	int	i;
+//
+//	i = -1;
+//	while (++i < 7709)
+//		a[i] = malloc(256);
+//	DBG(RED);
+//	//show_alloc_mem();	
+//	
+//	i = -1;
+//	while (++i < 7709)
+//		free(a[i]);
+//	DBG(GREEN);
+//	show_free_chunk();
+//	b = malloc(744);
+////	DBG(RED);
+////	DBG(GREEN);
+//	show_free_chunk();
+//	show_alloc_mem();
+//	return (0);
+//}
+
 int		main(void)
 {
-	char	*a[10000];
-	char	*b;
-	int	i;
+	char	*a;
 
-	i = -1;
-	while (++i < 7709)
-		a[i] = malloc(256);
-	DBG(RED);
-	//show_alloc_mem();	
-	
-	i = -1;
-	while (++i < 7709)
-		free(a[i]);
-	DBG(GREEN);
-	show_free_chunk();
-	b = malloc(744);
-//	DBG(RED);
-//	DBG(GREEN);
-	show_free_chunk();
-	show_alloc_mem();
-	return (0);
+	a = malloc(150000);
+	free(a);
 }
 
 // found a case of backward coalescing
