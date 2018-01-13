@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/12 18:49:33 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/12 19:19:09 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM			=	/bin/rm -rf
 FLAGS		=	-Wall -Wextra -Werror
 
 BIN_DIR		=	../test/
+PATH_LIB	=	-L/Users/ariard/Projects/malloc		
 
 SRC_BASE	= \
 00_malloc.c\
@@ -45,7 +46,7 @@ $(BIN_DIR):
 	@mkdir -p $(dir $(BIN))
 
 $(BIN_DIR)%: %.c
-	@$(CC) $(FLAGS) -o $@ $<
+	@$(CC) $(PATH_LIB) $(FLAGS) -o $@ $< -lmalloc
 
 	
 fclean:

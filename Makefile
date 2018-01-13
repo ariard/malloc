@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/12 18:49:21 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/12 19:30:02 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,14 +69,20 @@ endif
 build-test:
 	@$(MAKE) -C $(TEST_DIR)
 
-clean-test:
+fclean-test:
 	@$(MAKE) fclean -C $(TEST_DIR)
 
+re-test:
+	@$(MAKE) re -C $(TEST_DIR)
+
 build-mouli:
-	@$(MAKE)-C $(MOULI_DIR)
+	@$(MAKE) -C $(MOULI_DIR)
 
 clean-mouli:
 	@$(MAKE) fclean -C $(MOULI_DIR)
+
+re-mouli:
+	@$(MAKE) re -C $(MOULI_DIR)
 
 
 home:

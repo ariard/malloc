@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 18:09:54 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/11 22:06:33 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/12 19:29:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define		EXIT(x)		{ ft_dprintf(2, "%s\n", x) ; exit(1); }
 # define		P(x)			ft_dprintf(1, "%s\n", x);
 
-# define		DIR_TEST	"../test/"
+# define		DIR_TEST	"/Users/ariard/Projects/malloc/test/"
 
 # define GREEN		"\x1b[32m"
 # define RED		"\x1b[31m"

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:35:38 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/11 21:30:02 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/12 20:17:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ static void		test_launch(char *path, char *env)
 
 static void		test_analyze(char *test, int status, int *ret)
 {
+	ft_printf("status eval %d, %d\n", WIFEXITED(status), WEXITSTATUS(status));
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
 		ft_printf("[%s] :" GREEN" SUCCESS\n"RESET, test);
-
-	if (WIFEXITED(status) && WEXITSTATUS(status) > 0)
+	else  if (WIFEXITED(status) && WEXITSTATUS(status) > 0)
 		ft_printf("[%s] :" RED" FAILURE\n"RESET, test);
+	else
+		ft_printf("[%s] :" YELLOW" TIMEOUT\n"RESET, test);
 	*ret = (WIFEXITED(status) && WEXITSTATUS(status) == 0) ? *ret + 1 : *ret;
 }
 
@@ -55,6 +57,7 @@ int		main(void)
 	int					nbr;
 	int					ret;
 	char				*t;
+	int					i;
 
 	env = getenv("TEST_OPTS");
 
@@ -69,7 +72,16 @@ int		main(void)
 
 		if (pid == 0)
 			test_launch(ft_strjoin(DIR_TEST, t), env);
-		waitpid(pid, &status, WCONTINUED);
+
+		i = 5;
+		while (waitpid(pid, &status, WNOHANG) == 0)
+			if (i--)
+				sleep(1);
+			else
+			{
+				ft_printf(RED "problem %s\n" RESET, t);
+				break;
+			}
 
 		test_analyze(t, status, &ret);
 	}

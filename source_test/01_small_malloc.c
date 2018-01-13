@@ -14,5 +14,5 @@ int		main(void)
 	ptr = malloc(strlen(a) + 1);
 	strcpy(ptr, a);
 //	INTERN(show_alloc_mem())
-	exit(0);
+	exit(1);
 }
