@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/13 21:16:05 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/13 22:43:52 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ chunk_find.c\
 chunk_merge.c\
 thread_set.c\
 thread_unset.c\
+thread_create.c\
 malloc_init.c\
 malloc.c\
 free.c\

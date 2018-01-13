@@ -1,5 +1,7 @@
 [32mMALLOC
-[0m[31mBIN_ADD
-[0m[31mBIN PACK
-[0m[32mFREE
-[0m
+[0maddr 0x104867248
+malloc init A
+malloc init B
+malloc init [A]
+addr 0x963a2cc238380074
+thread set A
