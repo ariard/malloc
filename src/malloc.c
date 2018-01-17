@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 23:12:01 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 00:04:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_config		cfg = { .once_control = PTHREAD_ONCE_INIT };
+t_config		cfg = { .once = PTHREAD_ONCE_INIT };
 
 void			*malloc(size_t request)
 {
@@ -20,12 +20,9 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 	
-	DBG(GREEN "MALLOC\n" RESET);
-	cfg = (cfg.page_size == 0) ? malloc_init() : cfg;
+//	DBG(GREEN "MALLOC %d\n" RESET, (int)pthread_self());
+	pthread_once(&cfg.once, malloc_init);
 	ar = thread_set();
-	if (ar->list[0])
-		DBG("list tiny bin alive\n"); 
-	DBG("[A]\n");
 	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
 	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \

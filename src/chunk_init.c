@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 20:35:24 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 00:04:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 	size_t	next_bt;
 	t_chunk	*tmp;
 
-	DBG(RED "CHUNK INIT\n" RESET);
+//	DBG(RED "CHUNK INIT %d\n" RESET, (int)pthread_self());
 	tmp = NULL;
 	a_req = (request <= cfg.limit_tiny) ? align(request, 16) :
 		align(request, 512);

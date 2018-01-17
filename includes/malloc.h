@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 23:51:37 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/17 22:48:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ struct	s_config
 	size_t			limit_tiny;
 	size_t			limit_small;
 	t_area			areas[4];
-	pthread_key_t	*key;
-	pthread_once_t	once_control;
+	pthread_key_t	key;
+	pthread_once_t	once;
 };
 
 enum	e_status
@@ -103,7 +103,7 @@ struct s_ctrl
 
 extern t_config			cfg;
 
-t_config	malloc_init(void);
+void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
@@ -116,7 +116,6 @@ t_bins		chunk_find(t_area *area, void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
 t_area		*thread_set(void);
 void		*thread_unset(pthread_mutex_t *mutex, void *ptr);
-void		thread_create(void);
 
 int			align(int x, int f);
 void		area_print(t_bin *bin, int a);
