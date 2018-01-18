@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/17 22:48:47 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 19:38:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <sys/mman.h>
 # include <pthread.h>
 # include <stdlib.h>
-# include <time.h>
+# include <sys/time.h>
+# include <errno.h>
 # include <unistd.h>
 # include "../libft/includes/libft.h"
 # include "types.h"

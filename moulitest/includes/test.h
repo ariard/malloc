@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 18:09:54 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/12 19:29:17 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 21:21:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 # include <unistd.h>
 # include <dirent.h>
+# include <signal.h>
+# include <errno.h>
+# include <stdio.h>
 # include "../libft/includes/libft.h"
 
 # define		EXIT(x)		{ ft_dprintf(2, "%s\n", x) ; exit(1); }

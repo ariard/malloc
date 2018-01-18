@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:35:38 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/12 20:17:15 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 21:21:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ static void		test_launch(char *path, char *env)
 
 static void		test_analyze(char *test, int status, int *ret)
 {
-	ft_printf("status eval %d, %d\n", WIFEXITED(status), WEXITSTATUS(status));
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+	if (WIFEXITED(status))
 		ft_printf("[%s] :" GREEN" SUCCESS\n"RESET, test);
-	else  if (WIFEXITED(status) && WEXITSTATUS(status) > 0)
+	else  if (WIFSIGNALED(status)  && WTERMSIG(status) != 9)
 		ft_printf("[%s] :" RED" FAILURE\n"RESET, test);
-	else
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
 		ft_printf("[%s] :" YELLOW" TIMEOUT\n"RESET, test);
-	*ret = (WIFEXITED(status) && WEXITSTATUS(status) == 0) ? *ret + 1 : *ret;
+	*ret = (WIFEXITED(status)) ? *ret + 1 : *ret;
 }
 
 static t_list	*test_load(void)
@@ -79,7 +78,8 @@ int		main(void)
 				sleep(1);
 			else
 			{
-				ft_printf(RED "problem %s\n" RESET, t);
+				kill(pid, 9);
+				waitpid(pid, &status, WUNTRACED);
 				break;
 			}
 

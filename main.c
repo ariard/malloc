@@ -179,15 +179,9 @@
 
 // 7709 256, create 744 hole before, after
 
-// melting pot, multi-bin, cross-bin free
-// free + realloc + malloc
-// change getpagsize + hack mmap
-// compile with my-42sh
-// no crash on memory corruption
-// false adress free and realloc
-// dust pattern
-// proof of coalescing forward
 // proof of coalescing backward
+// proof of coalescing forward
+// proof of multi-thread
 
 //int		main(void)
 //{
@@ -238,13 +232,9 @@ void	*thr_func(void *arg)
 	int		i;
 	
 	i = -1;
-	DBG("thread : %d\n", (int)pthread_self());
-	pthread_setspecific(thrfd, arg);
-	TBG((int)pthread_getspecific(thrfd), "\n\n");
-	while (++i < 10)
+	while (++i < 100)
 		a[i] = malloc(100);
 	//lshow_alloc_mem();
-	TBG((int)pthread_getspecific(thrfd), "thread %d is done\n", (int)pthread_self());
 	return (0);
 }
 
@@ -253,39 +243,39 @@ int		main(void)
 
 	DBG("\n\n");
 	pthread_key_create(&thrfd, NULL);
-	pthread_create(&ntid1, NULL, thr_func, (void *)4);
-	pthread_create(&ntid2, NULL, thr_func, (void *)5);
-	pthread_create(&ntid3, NULL, thr_func, (void *)6);
-	pthread_create(&ntid4, NULL, thr_func, (void *)7);
-//	pthread_create(&ntid5, NULL, thr_func, (void *)8);
-//	pthread_create(&ntid6, NULL, thr_func, NULL);
-//	pthread_create(&ntid7, NULL, thr_func, NULL);
-//	pthread_create(&ntid8, NULL, thr_func, NULL);
-//	pthread_create(&ntid9, NULL, thr_func, NULL);
-//	pthread_create(&ntid10, NULL, thr_func, NULL);
-//	pthread_create(&ntid11, NULL, thr_func, NULL);
-//	pthread_create(&ntid12, NULL, thr_func, NULL);
-//	pthread_create(&ntid13, NULL, thr_func, NULL);
-//	pthread_create(&ntid14, NULL, thr_func, NULL);
-//	pthread_create(&ntid15, NULL, thr_func, NULL);
-//	pthread_create(&ntid16, NULL, thr_func, NULL);
+	pthread_create(&ntid1, NULL, thr_func, NULL);
+	pthread_create(&ntid2, NULL, thr_func, NULL);
+	pthread_create(&ntid3, NULL, thr_func, NULL);
+	pthread_create(&ntid4, NULL, thr_func, NULL);
+	pthread_create(&ntid5, NULL, thr_func, NULL);
+	pthread_create(&ntid6, NULL, thr_func, NULL);
+	pthread_create(&ntid7, NULL, thr_func, NULL);
+	pthread_create(&ntid8, NULL, thr_func, NULL);
+	pthread_create(&ntid9, NULL, thr_func, NULL);
+	pthread_create(&ntid10, NULL, thr_func, NULL);
+	pthread_create(&ntid11, NULL, thr_func, NULL);
+	pthread_create(&ntid12, NULL, thr_func, NULL);
+	pthread_create(&ntid13, NULL, thr_func, NULL);
+	pthread_create(&ntid14, NULL, thr_func, NULL);
+	pthread_create(&ntid15, NULL, thr_func, NULL);
+	pthread_create(&ntid16, NULL, thr_func, NULL);
 	
 	pthread_join(ntid1, NULL);
 	pthread_join(ntid2, NULL);
 	pthread_join(ntid3, NULL);
 	pthread_join(ntid4, NULL);
-//	pthread_join(ntid5, NULL);
-//	pthread_join(ntid6, NULL);
-//	pthread_join(ntid7, NULL);
-//	pthread_join(ntid8, NULL);
-//	pthread_join(ntid9, NULL);
-//	pthread_join(ntid10, NULL);
-//	pthread_join(ntid11, NULL);
-//	pthread_join(ntid12, NULL);
-//	pthread_join(ntid13, NULL);
-//	pthread_join(ntid14, NULL);
-//	pthread_join(ntid15, NULL);
-//	pthread_join(ntid16, NULL);
+	pthread_join(ntid5, NULL);
+	pthread_join(ntid6, NULL);
+	pthread_join(ntid7, NULL);
+	pthread_join(ntid8, NULL);
+	pthread_join(ntid9, NULL);
+	pthread_join(ntid10, NULL);
+	pthread_join(ntid11, NULL);
+	pthread_join(ntid12, NULL);
+	pthread_join(ntid13, NULL);
+	pthread_join(ntid14, NULL);
+	pthread_join(ntid15, NULL);
+	pthread_join(ntid16, NULL);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/18 00:04:39 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/18 22:00:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ t_bin	*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-	TBG((int)pthread_getspecific(thrfd), RED "BIN_ADD %d\n" RESET, (int)pthread_self());
 //	DBG(RED "BIN ADD\n" RESET);
 	size = (request <= cfg.limit_tiny) ? cfg.tiny_area \
 		: cfg.small_area;
 	size = (request > cfg.limit_small) ? request \
 		+ sizeof(t_bin) + sizeof(size_t) : size;
 	// warning if mmap send trash
-	bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON 
+		| MAP_PRIVATE, -1, 0)) == MAP_FAILED)
+		return (NULL);
 	bin->next = NULL;
 	bin->freespace = size - sizeof(t_bin);
 	bin->first = bin + 1;
