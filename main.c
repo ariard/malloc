@@ -231,16 +231,20 @@ pthread_t		ntid14;
 pthread_t		ntid15;
 pthread_t		ntid16;
 
+
 void	*thr_func(void *arg)
 {
 	char	*a[150];
 	int		i;
 	
 	i = -1;
-	while (++i < 100)
+	DBG("thread : %d\n", (int)pthread_self());
+	pthread_setspecific(thrfd, arg);
+	TBG((int)pthread_getspecific(thrfd), "\n\n");
+	while (++i < 10)
 		a[i] = malloc(100);
 	//lshow_alloc_mem();
-	dprintf(4, "thread %d is done\n", (int)pthread_self());
+	TBG((int)pthread_getspecific(thrfd), "thread %d is done\n", (int)pthread_self());
 	return (0);
 }
 
@@ -248,11 +252,12 @@ int		main(void)
 {
 
 	DBG("\n\n");
-	pthread_create(&ntid1, NULL, thr_func, NULL);
-	pthread_create(&ntid2, NULL, thr_func, NULL);
-	pthread_create(&ntid3, NULL, thr_func, NULL);
-	pthread_create(&ntid4, NULL, thr_func, NULL);
-	pthread_create(&ntid5, NULL, thr_func, NULL);
+	pthread_key_create(&thrfd, NULL);
+	pthread_create(&ntid1, NULL, thr_func, (void *)4);
+	pthread_create(&ntid2, NULL, thr_func, (void *)5);
+	pthread_create(&ntid3, NULL, thr_func, (void *)6);
+	pthread_create(&ntid4, NULL, thr_func, (void *)7);
+//	pthread_create(&ntid5, NULL, thr_func, (void *)8);
 //	pthread_create(&ntid6, NULL, thr_func, NULL);
 //	pthread_create(&ntid7, NULL, thr_func, NULL);
 //	pthread_create(&ntid8, NULL, thr_func, NULL);
@@ -269,7 +274,7 @@ int		main(void)
 	pthread_join(ntid2, NULL);
 	pthread_join(ntid3, NULL);
 	pthread_join(ntid4, NULL);
-	pthread_join(ntid5, NULL);
+//	pthread_join(ntid5, NULL);
 //	pthread_join(ntid6, NULL);
 //	pthread_join(ntid7, NULL);
 //	pthread_join(ntid8, NULL);

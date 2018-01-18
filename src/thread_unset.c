@@ -14,7 +14,7 @@
 
 void		*thread_unset(pthread_mutex_t *mutex, void *ptr)
 {
-	DBG("thread %d unlock mutex %p\n", (int)pthread_self(), mutex);
+	TBG((int)pthread_getspecific(thrfd), "thread %d unlock mutex %p\n", (int)pthread_self(), mutex);
 	pthread_mutex_unlock(mutex);
 	return (ptr);
 }

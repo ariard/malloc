@@ -12,10 +12,12 @@
 
 #include "malloc.h"
 
+pthread_key_t	thrfd;
+
 t_area		*thread_set(void)
 {
 	void	*value;
-	int		i;
+	int	i;
 
 	i = -1;
 	if (!(value = pthread_getspecific(cfg.key)))
@@ -29,11 +31,11 @@ t_area		*thread_set(void)
 				exit(1);
 		}
 		pthread_setspecific(cfg.key, (void *)&cfg.areas[i]);
-		//DBG("thread %d has area %p\n", (int)pthread_self(), (void *)&cfg.areas[i]);
+		TBG((int)pthread_getspecific(thrfd), "thread %d has mutex %p\n", (int)pthread_self(), &((t_area *)(void *)&cfg.areas[i])->mutex);
 		return (&cfg.areas[i]);
 	}
-	//DBG("thread %d gonna wait for mutex %p\n", (int)pthread_self(), (void *)&cfg.areas[i]);
+	TBG((int)pthread_getspecific(thrfd), "thread %d gonna wait for mutex %p\n", (int)pthread_self(), &((t_area *)value)->mutex);
 	pthread_mutex_lock(value);
-	//DBG("thread %d has its mutex %p\n", (int)pthread_self(), (void *)&cfg.areas[i]);
+	TBG((int)pthread_getspecific(thrfd), "thread %d has its mutex %p\n", (int)pthread_self(), &((t_area *)value)->mutex);
 	return (value);
 }

@@ -23,6 +23,7 @@ void			*malloc(size_t request)
 //	DBG(GREEN "MALLOC %d\n" RESET, (int)pthread_self());
 	pthread_once(&cfg.once, malloc_init);
 	ar = thread_set();
+	TBG((int)pthread_getspecific(thrfd), "mutex %p\n", &ar->mutex);
 	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
 	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \

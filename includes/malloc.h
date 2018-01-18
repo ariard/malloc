@@ -29,6 +29,8 @@
 
 # define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);
 
+# define TBG(x, s, ...)	dprintf(x, s, ##__VA_ARGS__);
+
 # define BT(x)		*(size_t *)((void *)x - sizeof(size_t)) 
 # define BT_FINAL(x)	*(size_t *)((void *)x + (*(size_t *)((void *)x - sizeof(size_t)) & ~(1 << 0)) - 2 * sizeof(size_t))
 # define BT_PREV(x)	*(size_t *)((void *)x - 2 * sizeof(size_t))
@@ -50,17 +52,17 @@ struct	s_bin
 struct s_area
 {
 	t_bin				*list[3];
-	pthread_mutex_t		mutex;
+	pthread_mutex_t			mutex;
 };
 
 struct	s_config
 {
-	int				page_size;
-	int				tiny_area;
-	int				small_area;
-	size_t			limit_tiny;
-	size_t			limit_small;
-	t_area			areas[4];
+	int		page_size;
+	int		tiny_area;
+	int		small_area;
+	size_t		limit_tiny;
+	size_t		limit_small;
+	t_area		areas[4];
 	pthread_key_t	key;
 	pthread_once_t	once;
 };
@@ -102,6 +104,8 @@ struct s_ctrl
 };
 
 extern t_config			cfg;
+
+extern pthread_key_t		thrfd;
 
 void		malloc_init(void);
 

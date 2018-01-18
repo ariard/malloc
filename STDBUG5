@@ -1,0 +1,63 @@
+
+
+thread 2138112 has mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN_ADD 2138112
+[0m[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 gonna wait for mutex 0x10b16b188
+thread 2138112 has its mutex 0x10b16b188
+mutex 0x10b16b188
+[31mBIN PACK 2138112
+[0m[32minfinite loop
+[0mthread 2138112 unlock mutex 0x10b16b188
+thread 2138112 is done

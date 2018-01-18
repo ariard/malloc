@@ -17,7 +17,8 @@ t_bin	*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-//	DBG(RED "BIN_ADD %d\n" RESET, (int)pthread_self());
+	TBG((int)pthread_getspecific(thrfd), RED "BIN_ADD %d\n" RESET, (int)pthread_self());
+//	DBG(RED "BIN ADD\n" RESET);
 	size = (request <= cfg.limit_tiny) ? cfg.tiny_area \
 		: cfg.small_area;
 	size = (request > cfg.limit_small) ? request \
