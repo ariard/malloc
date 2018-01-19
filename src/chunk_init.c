@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 19:37:01 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/20 00:09:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		fuck_norme1(size_t a_req, t_chunk *chunk)
 static void		fuck_norme2(size_t next_bt, void *first)
 {
 	BT(first) = next_bt;
-	*(size_t *)((void *)first + (*(size_t *)((void *)chunk - sizeof(size_t))
+	*(size_t *)((void *)first + (*(size_t *)((void *)first - sizeof(size_t))
 		& ~(1 << 0)) - 2 * sizeof(size_t)) = next_bt;
 }
 

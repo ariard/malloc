@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 19:52:11 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 23:30:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
 # include "types.h"
+
+# define GREEN			"\x1b[32m"
+# define RESET			"\x1b[0m"
+# define RED			"\x1b[31m"
+
+# define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);
 
 # define BT(x)			*(size_t *)((void *)x - sizeof(size_t))
 # define BT_PREV(x)		*(size_t *)((void *)x - 2 * sizeof(size_t))
@@ -46,8 +52,8 @@ struct		s_area
 struct		s_config
 {
 	int					page_size;
-	int					tiny_area;
-	int					small_area;
+	size_t				tiny_area;
+	size_t				small_area;
 	size_t				limit_tiny;
 	size_t				limit_small;
 	t_area				areas[4];
@@ -96,6 +102,7 @@ void		malloc_init(void);
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
 int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+char		bin_range(t_area *ar, void *ptr);
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request);
@@ -115,5 +122,6 @@ void		area_print(t_bin *bin, int a);
 void		show_alloc_mem(void);
 void		show_free_chunk(void);
 void		show_cand_merge(void *ptr, t_cand cand);
+void		print_addr(void *ptr);
 
 #endif

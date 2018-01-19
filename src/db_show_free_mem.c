@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 18:38:37 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 21:40:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void			show_free_chunk(void)
 	t_chunk		*chunk;
 	size_t		total;
 	int			a;
+	t_area		*ar;
 
 	a = -1;
 	total = 0;
+	ar = thread_set();
 	while (++a != 2 && !(bin = ar->list[a]))
 		;
 	while (bin)
@@ -40,4 +42,5 @@ void			show_free_chunk(void)
 				;
 	}
 	ft_printf("Total : %zu octets\n", total);
+	thread_unset2(&ar->mutex);
 }

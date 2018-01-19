@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 19:37:29 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/20 00:08:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			free(void *ptr)
 
 	ar = thread_set();
 	if (!ptr || !((bs = chunk_find(ar, ptr)).bin))
-		return (thread_unset2(&ar->mutex, NULL));
+		return (thread_unset2(&ar->mutex));
 	bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 	a_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
 	a_size = (bs.a == 2) ? BT(ptr) + sizeof(t_bin) : a_size;

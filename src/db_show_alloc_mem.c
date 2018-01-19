@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 18:46:28 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 23:31:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void			show_alloc_mem(void)
 	int			a;
 	void		*ptr;
 	size_t		total;
+	t_area		*ar;
 
 	a = -1;
 	total = 0;
+	ar = thread_set();
 	while (++a != 3 && !(bin = ar->list[a]))
 		;
 	while (bin)
@@ -58,4 +60,5 @@ void			show_alloc_mem(void)
 				;
 	}
 	ft_printf("Total : %zu octets\n", total);
+	thread_unset2(&ar->mutex);
 }
