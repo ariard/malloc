@@ -64,7 +64,7 @@ ifeq ($(OS), Linux)
 	export LD_LIBRARY_PATH=/home/user/Projects/malloc
 else
 	gcc -c -Wall -Werror -I includes/ $(SRCS)
-	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
+	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o) libft.a
 	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 endif
 
@@ -89,7 +89,7 @@ re-mouli:
 
 home:
 	gcc -c -Wall -Werror -I includes/ $(SRCS)
-	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o)
+	gcc -shared -o $(NAME) $(SRC_BASE:.c=.o) libft.a
 	gcc -L/Users/antoineriard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
 
 $(LIBFT_LIB):

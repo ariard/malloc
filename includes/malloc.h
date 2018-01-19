@@ -112,17 +112,20 @@ void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
-int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+int		bin_checkin(t_bin *bin, void *ptr, char area, char pos);
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request);
-int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
 t_area		*thread_set(void);
 void		*thread_unset(pthread_mutex_t *mutex, void *ptr);
 
-int			align(int x, int f);
+void		*_malloc(size_t request);
+void		_free(void *ptr);
+
+int		align(int x, int f);
 void		area_print(t_bin *bin, int a);
 
 /* Debug */

@@ -18,10 +18,6 @@ TEST :
 
 
 
-test simple
-	test with breakpoints
-	control with var d 'env
-
 
 LESSONS : 
 	- intern services are crucials

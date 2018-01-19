@@ -20,7 +20,7 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 	
-//	DBG(GREEN "MALLOC %d\n" RESET, (int)pthread_self());
+	DBG(GREEN "MALLOC %d\n" RESET, (int)pthread_self());
 	pthread_once(&cfg.once, malloc_init);
 	ar = thread_set();
 	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
@@ -40,4 +40,29 @@ void			*malloc(size_t request)
 		temp = temp->next;
 	}
 	return (thread_unset(&ar->mutex, NULL));
+}
+
+
+void			*_malloc(size_t request)
+{
+	t_bin				*temp;
+	t_area				*ar;
+	
+	ar = pthread_getspecific(cfg.key);
+	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
+		? bin_add(request) : ar->list[0];
+	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \
+		&& request > cfg.limit_tiny) ? bin_add(request) : ar->list[1];
+	ar->list[2] = (!ar->list[2] && request > cfg.limit_small) 
+		? bin_add(request) : ar->list[2];
+	temp = (request > cfg.limit_tiny) ? ar->list[1] : ar->list[0];
+	temp = (request > cfg.limit_small) ? ar->list[2] : temp;
+	while (temp)
+	{
+		if (temp->freespace > request)
+			return (bin_pack(ar, temp, request));
+		temp->next = (!temp->next) ? bin_add(request) : temp->next;
+		temp = temp->next;
+	}
+	return (NULL);
 }

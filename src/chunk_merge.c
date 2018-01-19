@@ -27,6 +27,7 @@ void		*chunk_merge(void *chunk, size_t forward, size_t backward)
 	t_chunk		*tmp;
 	size_t		new_size;
 
+	DBG("chunk merge\n");
 	new_size = forward + backward;
 	tmp = (t_chunk *)chunk;
 	while (forward)

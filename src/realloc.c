@@ -19,6 +19,7 @@ void		*realloc(void *ptr, size_t size)
 	void		*new;
 	t_area		*ar;
 
+	DBG(RED "REALLOC\n" RESET);
 	ar = thread_set();
 	if (!ptr || !((bs = chunk_find(ar, ptr)).bin))
 		return (thread_unset(&ar->mutex, NULL));
@@ -26,15 +27,17 @@ void		*realloc(void *ptr, size_t size)
 	if (bs.a != 2 && bin_checkin(bs.bin, ptr, bs.a, 1))
 		cand.forward = chunk_search(bs, ptr, BT(ptr) + size, 
 			(t_ctrl) { (BT(ptr) & ~(1 << 0)), 1 });
+	DBG("chunk found\n");
 	new = NULL;
 //	show_cand_merge(ptr, cand);
 	if (bs.a != 2 && cand.forward > BT(ptr) + size)
 	{
-		thread_unset(&ar->mutex, NULL);
-		return (chunk_merge(ptr, cand.forward, 0));
+		DBG("inside\n"); 
+		new = chunk_merge(ptr, cand.forward, 0);
+		return (thread_unset(&ar->mutex, new));
 	}
-//	new = malloc(BT(ptr) + size);
-//	ft_memcpy(new, ptr, BT(ptr));
-//	free(ptr);
+	new = _malloc(BT(ptr) + size);
+	ft_memcpy(new, ptr, BT(ptr) - 2 * sizeof(size_t));
+	_free(ptr);
 	return (thread_unset(&ar->mutex, new));
 }

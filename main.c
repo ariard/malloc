@@ -181,7 +181,6 @@
 
 // proof of coalescing backward
 // proof of coalescing forward
-// proof of multi-thread
 
 //int		main(void)
 //{
@@ -225,58 +224,77 @@ pthread_t		ntid14;
 pthread_t		ntid15;
 pthread_t		ntid16;
 
+/*	THREAD */
 
-void	*thr_func(void *arg)
+//void	*thr_func(void *arg)
+//{
+//	char	*a[150];
+//	int		i;
+//	
+//	i = -1;
+//	while (++i < 100)
+//		a[i] = malloc(100);
+//	//lshow_alloc_mem();
+//	return (0);
+//}
+//
+//int		main(void)
+//{
+//
+//	DBG("\n\n");
+//	pthread_key_create(&thrfd, NULL);
+//	pthread_create(&ntid1, NULL, thr_func, NULL);
+//	pthread_create(&ntid2, NULL, thr_func, NULL);
+//	pthread_create(&ntid3, NULL, thr_func, NULL);
+//	pthread_create(&ntid4, NULL, thr_func, NULL);
+//	pthread_create(&ntid5, NULL, thr_func, NULL);
+//	pthread_create(&ntid6, NULL, thr_func, NULL);
+//	pthread_create(&ntid7, NULL, thr_func, NULL);
+//	pthread_create(&ntid8, NULL, thr_func, NULL);
+//	pthread_create(&ntid9, NULL, thr_func, NULL);
+//	pthread_create(&ntid10, NULL, thr_func, NULL);
+//	pthread_create(&ntid11, NULL, thr_func, NULL);
+//	pthread_create(&ntid12, NULL, thr_func, NULL);
+//	pthread_create(&ntid13, NULL, thr_func, NULL);
+//	pthread_create(&ntid14, NULL, thr_func, NULL);
+//	pthread_create(&ntid15, NULL, thr_func, NULL);
+//	pthread_create(&ntid16, NULL, thr_func, NULL);
+//	
+//	pthread_join(ntid1, NULL);
+//	pthread_join(ntid2, NULL);
+//	pthread_join(ntid3, NULL);
+//	pthread_join(ntid4, NULL);
+//	pthread_join(ntid5, NULL);
+//	pthread_join(ntid6, NULL);
+//	pthread_join(ntid7, NULL);
+//	pthread_join(ntid8, NULL);
+//	pthread_join(ntid9, NULL);
+//	pthread_join(ntid10, NULL);
+//	pthread_join(ntid11, NULL);
+//	pthread_join(ntid12, NULL);
+//	pthread_join(ntid13, NULL);
+//	pthread_join(ntid14, NULL);
+//	pthread_join(ntid15, NULL);
+//	pthread_join(ntid16, NULL);
+//	return (0);
+//}
+
+int	main(void)
 {
-	char	*a[150];
-	int		i;
-	
-	i = -1;
-	while (++i < 100)
-		a[i] = malloc(100);
-	//lshow_alloc_mem();
+	char	*ptr[8000];
+	char	*b;
+	char	*c;;
+	int	nbr;
+
+	b = "hello world";
+
+	nbr = -1;	
+	while (++nbr < 7709)
+		ptr[nbr] = malloc(256);
+		
+	strcpy(ptr[--nbr], b);
+	printf("str %s\n", ptr[nbr]);
+	c = realloc(ptr[nbr], 500);
+	printf("str2 %s\n", c);
 	return (0);
 }
-
-int		main(void)
-{
-
-	DBG("\n\n");
-	pthread_key_create(&thrfd, NULL);
-	pthread_create(&ntid1, NULL, thr_func, NULL);
-	pthread_create(&ntid2, NULL, thr_func, NULL);
-	pthread_create(&ntid3, NULL, thr_func, NULL);
-	pthread_create(&ntid4, NULL, thr_func, NULL);
-	pthread_create(&ntid5, NULL, thr_func, NULL);
-	pthread_create(&ntid6, NULL, thr_func, NULL);
-	pthread_create(&ntid7, NULL, thr_func, NULL);
-	pthread_create(&ntid8, NULL, thr_func, NULL);
-	pthread_create(&ntid9, NULL, thr_func, NULL);
-	pthread_create(&ntid10, NULL, thr_func, NULL);
-	pthread_create(&ntid11, NULL, thr_func, NULL);
-	pthread_create(&ntid12, NULL, thr_func, NULL);
-	pthread_create(&ntid13, NULL, thr_func, NULL);
-	pthread_create(&ntid14, NULL, thr_func, NULL);
-	pthread_create(&ntid15, NULL, thr_func, NULL);
-	pthread_create(&ntid16, NULL, thr_func, NULL);
-	
-	pthread_join(ntid1, NULL);
-	pthread_join(ntid2, NULL);
-	pthread_join(ntid3, NULL);
-	pthread_join(ntid4, NULL);
-	pthread_join(ntid5, NULL);
-	pthread_join(ntid6, NULL);
-	pthread_join(ntid7, NULL);
-	pthread_join(ntid8, NULL);
-	pthread_join(ntid9, NULL);
-	pthread_join(ntid10, NULL);
-	pthread_join(ntid11, NULL);
-	pthread_join(ntid12, NULL);
-	pthread_join(ntid13, NULL);
-	pthread_join(ntid14, NULL);
-	pthread_join(ntid15, NULL);
-	pthread_join(ntid16, NULL);
-	return (0);
-}
-
-// found a case of backward coalescing
