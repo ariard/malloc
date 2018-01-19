@@ -6,31 +6,30 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/18 21:59:53 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 18:58:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_config		cfg = { .once = PTHREAD_ONCE_INIT };
+t_config		g_cfg = { .once = PTHREAD_ONCE_INIT };
 
 void			*malloc(size_t request)
 {
 	t_bin				*temp;
 	void				*chunk;
 	t_area				*ar;
-	
-	DBG(GREEN "MALLOC %d\n" RESET, (int)pthread_self());
-	pthread_once(&cfg.once, malloc_init);
+
+	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
-	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
+	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
-	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \
-		&& request > cfg.limit_tiny) ? bin_add(request) : ar->list[1];
-	ar->list[2] = (!ar->list[2] && request > cfg.limit_small) 
+	ar->list[1] = (!ar->list[1] && request <= g_cfg.limit_small \
+		&& request > g_cfg.limit_tiny) ? bin_add(request) : ar->list[1];
+	ar->list[2] = (!ar->list[2] && request > g_cfg.limit_small)
 		? bin_add(request) : ar->list[2];
-	temp = (request > cfg.limit_tiny) ? ar->list[1] : ar->list[0];
-	temp = (request > cfg.limit_small) ? ar->list[2] : temp;
+	temp = (request > g_cfg.limit_tiny) ? ar->list[1] : ar->list[0];
+	temp = (request > g_cfg.limit_small) ? ar->list[2] : temp;
 	while (temp)
 	{
 		if (temp->freespace > request)
@@ -42,21 +41,20 @@ void			*malloc(size_t request)
 	return (thread_unset(&ar->mutex, NULL));
 }
 
-
-void			*_malloc(size_t request)
+void			*p_malloc(size_t request)
 {
 	t_bin				*temp;
 	t_area				*ar;
-	
-	ar = pthread_getspecific(cfg.key);
-	ar->list[0] = (!ar->list[0] && request <= cfg.limit_tiny)
+
+	ar = pthread_getspecific(g_cfg.key);
+	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
-	ar->list[1] = (!ar->list[1] && request <= cfg.limit_small \
-		&& request > cfg.limit_tiny) ? bin_add(request) : ar->list[1];
-	ar->list[2] = (!ar->list[2] && request > cfg.limit_small) 
+	ar->list[1] = (!ar->list[1] && request <= g_cfg.limit_small \
+		&& request > g_cfg.limit_tiny) ? bin_add(request) : ar->list[1];
+	ar->list[2] = (!ar->list[2] && request > g_cfg.limit_small)
 		? bin_add(request) : ar->list[2];
-	temp = (request > cfg.limit_tiny) ? ar->list[1] : ar->list[0];
-	temp = (request > cfg.limit_small) ? ar->list[2] : temp;
+	temp = (request > g_cfg.limit_tiny) ? ar->list[1] : ar->list[0];
+	temp = (request > g_cfg.limit_small) ? ar->list[2] : temp;
 	while (temp)
 	{
 		if (temp->freespace > request)

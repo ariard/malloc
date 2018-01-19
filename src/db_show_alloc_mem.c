@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 22:01:21 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 18:46:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 	{
 		s_clean = BT(ptr) & ~(1 << 0);
 		if (s_clean == 0)
-			return;
+			return ;
 		if (BT(ptr) & 1)
 		{
-			DBG("%p - %p : %zu octets\n", ptr, (char *)ptr + s_clean, s_clean);
+			ft_printf("%p - %p : %zu octets\n", ptr, (char *)ptr
+				+ s_clean, s_clean);
 			*total += s_clean;
 		}
 		ptr = (char *)ptr + s_clean;
@@ -36,11 +37,9 @@ void			show_alloc_mem(void)
 	int			a;
 	void		*ptr;
 	size_t		total;
-	t_area		*ar;
 
 	a = -1;
 	total = 0;
-	ar = thread_set();
 	while (++a != 3 && !(bin = ar->list[a]))
 		;
 	while (bin)
@@ -49,7 +48,8 @@ void			show_alloc_mem(void)
 		ptr = (void *)bin + sizeof(t_bin) + sizeof(size_t);
 		if (a == 2)
 		{
-			DBG("%p - %p : %zu octets \n", ptr, (char *)ptr + BT(ptr) - 1, BT(ptr) -1);
+			ft_printf("%p - %p : %zu octets \n", ptr, (char *)ptr
+				+ BT(ptr) - 1, BT(ptr) - 1);
 			total += SET_FREE(*(size_t *)ptr);
 		}
 		mem_print(bin, ptr, a, &total);
@@ -57,6 +57,5 @@ void			show_alloc_mem(void)
 			while (++a != 3 && !(bin = ar->list[a]))
 				;
 	}
-	DBG("Total : %zu octets\n", total);
-	thread_unset(&ar->mutex, NULL);
+	ft_printf("Total : %zu octets\n", total);
 }

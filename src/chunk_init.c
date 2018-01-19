@@ -6,44 +6,55 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/18 00:04:56 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 19:37:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int		align(int x, int f)
+int				align(int x, int f)
 {
 	if ((x + 16) % 16 != 0)
 		return ((x + 16) + (f - (x + 16) % f));
 	return (x + 16);
 }
 
-void	*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
+static void		fuck_norme1(size_t a_req, t_chunk *chunk)
+{
+	BT(chunk) = SET_BUSY(a_req);
+	*(size_t *)((void *)chunk + (*(size_t *)((void *)chunk - sizeof(size_t))
+		& ~(1 << 0)) - 2 * sizeof(size_t)) = SET_BUSY(a_req);
+}
+
+static void		fuck_norme2(size_t next_bt, void *first)
+{
+	BT(first) = next_bt;
+	*(size_t *)((void *)first + (*(size_t *)((void *)chunk - sizeof(size_t))
+		& ~(1 << 0)) - 2 * sizeof(size_t)) = next_bt;
+}
+
+void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 {
 	size_t	a_req;
 	size_t	next_bt;
 	t_chunk	*tmp;
 
-	DBG(RED "CHUNK INIT\n" RESET);
 	tmp = NULL;
-	a_req = (request <= cfg.limit_tiny) ? align(request, 16) :
+	a_req = (request <= g_cfg.limit_tiny) ? align(request, 16) :
 		align(request, 512);
 	next_bt = (BT(chunk) & ~(1 << 0)) - a_req;
 	if ((int)(bin->freespace - a_req) < 0)
 		return (NULL);
 	bin->freespace -= a_req;
-	BT(chunk) = SET_BUSY(a_req);
-	BT_FINAL(chunk) = SET_BUSY(a_req);
-	if (bin_checkin(bin, chunk, (request <= cfg.limit_tiny) ? 0 : 1, 1))
+	fuck_norme1(a_req, chunk);
+	if (bin_checkin(bin, chunk, (request <= g_cfg.limit_tiny) ? 0 : 1, 1))
 	{
 		if (bin->first && !(BT(bin->first) & 1))
 			tmp = (t_chunk *)bin->first;
 		bin->first = (void *)chunk + a_req;
 		if ((((t_chunk *)bin->first)->next = tmp))
 			tmp->prev = ((t_chunk *)bin->first);
-		BT(bin->first) = next_bt;
-		BT_FINAL(bin->first) = next_bt;
+		fuck_norme2(next_bt, bin->first);
 	}
 	return (chunk);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/18 19:30:57 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 18:55:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
 	size_t	size;
 	size_t	a_req;
 
-//	DBG(RED "BIN PACK\n" RESET);
-	if (req > cfg.limit_small)
+	if (req > g_cfg.limit_small)
 		return (bin->first);
 	tmp = bin->first;
 	best = NULL;
 	size = bin->freespace;
-	a_req = (req <= cfg.limit_tiny) ? align(req, 16) : align(req, 512);
+	a_req = (req <= g_cfg.limit_tiny) ? align(req, 16) : align(req, 512);
 	while (tmp)
 	{
 		best = (BT(tmp) <= size && BT(tmp) >= a_req) ? tmp : best;

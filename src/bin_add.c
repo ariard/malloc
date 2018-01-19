@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/18 22:00:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 18:54:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ t_bin	*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-//	DBG(RED "BIN ADD\n" RESET);
-	size = (request <= cfg.limit_tiny) ? cfg.tiny_area \
-		: cfg.small_area;
-	size = (request > cfg.limit_small) ? request \
+	size = (request <= g_cfg.limit_tiny) ? g_cfg.tiny_area \
+		: g_cfg.small_area;
+	size = (request > g_cfg.limit_small) ? request \
 		+ sizeof(t_bin) + sizeof(size_t) : size;
-	// warning if mmap send trash
-	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON 
+	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON
 		| MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	bin->next = NULL;

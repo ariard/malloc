@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/13 20:45:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/19 19:39:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,24 @@ static void	junc_freelist(t_chunk *tmp)
 	tmp->prev = NULL;
 }
 
+static void	fuck_norme(size_t new_size, t_chunk *tmp)
+{
+	*(size_t *)((void *)tmp + (*(size_t *)((void *)tmp - sizeof(size_t))
+		& ~(1 << 0)) - 2 * sizeof(size_t)) = SET_BUSY(new_size);
+}
+
 void		*chunk_merge(void *chunk, size_t forward, size_t backward)
 {
 	t_chunk		*tmp;
 	size_t		new_size;
 
-	DBG("chunk merge\n");
 	new_size = forward + backward;
 	tmp = (t_chunk *)chunk;
 	while (forward)
 	{
 		junc_freelist(tmp);
 		if ((forward -= (BT(tmp) & ~(1 << 0))) == 0)
-			BT_FINAL(tmp) = SET_BUSY(new_size);
+			fuck_norme(new_size, tmp);
 		else
 			tmp = (t_chunk *)((void *)tmp + (BT(tmp) & ~(1 << 0)));
 	}

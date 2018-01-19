@@ -1,1 +1,0 @@
-void	inside(void);
