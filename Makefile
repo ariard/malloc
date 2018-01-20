@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/19 23:30:53 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/20 00:53:03 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ endif
 
 all: $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	$(CC) -shared -o $(NAME) $(OBJS) $(LIBFT_LIB)
-	rm $(SYM_NAME)
+	rm -f $(SYM_NAME)
 	ln -s $(NAME) $(SYM_NAME)
 	
 main:

@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/12 19:19:09 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/20 00:55:13 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,8 @@ $(BIN_DIR):
 	@mkdir -p $(dir $(BIN))
 
 $(BIN_DIR)%: %.c
-	@$(CC) $(PATH_LIB) $(FLAGS) -o $@ $< -lmalloc
+	@$(CC) $(FLAGS) -o $@ $<
 
-	
 fclean:
 	@$(RM) $(BIN)
 	@$(RM) $(BIN_DIR)
