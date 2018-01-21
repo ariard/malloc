@@ -1,5 +1,5 @@
-- framework test + finir test
-- change to my print
+- change to custom print
+- remettre a la norme, fonctionner test, cleaner repo, retest, lock
 
 framework test ; goal = 40 + 5 threads;
 

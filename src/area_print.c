@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 22:29:25 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 18:41:59 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 18:35:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void		area_print(t_bin *bin, int a)
 
 	ar = (a == 0) ? "TINY" : "SMALL";
 	ar = (a == 2) ? "LARGE" : ar;
-	ft_printf("[%s] : %p\n", ar, bin);
+	DBG("[%s] : %p\n", ar, bin);
 }

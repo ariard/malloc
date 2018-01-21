@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 23:22:29 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/20 00:28:08 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 19:21:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static char		bin_in(t_bin *bin, void *ptr, char a)
 		if ((char *)ptr > (char *)bin && (char *)ptr < (char *)bin + BT(bin))
 			return (1);
 	if (a == 1)
-		if ((char *)ptr > (char *)bin 
+		if ((char *)ptr > (char *)bin
 			&& (char *)ptr < (char *)bin + g_cfg.small_area)
 			return (1);
 	if (a == 0)
-		if ((char *)ptr > (char *)bin 
+		if ((char *)ptr > (char *)bin
 			&& (char *)ptr < (char *)bin + g_cfg.tiny_area)
 			return (1);
 	return (0);
@@ -30,11 +30,11 @@ static char		bin_in(t_bin *bin, void *ptr, char a)
 
 char			bin_range(t_area *ar, void *ptr)
 {
-	t_bin	*bin;	
+	t_bin	*bin;
 	int		a;
 
 	a = -1;
-	while(++a != 3 && !(bin = ar->list[a]))
+	while (++a != 3 && !(bin = ar->list[a]))
 		;
 	while (bin)
 	{

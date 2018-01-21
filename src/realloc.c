@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/20 00:13:36 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 19:19:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void		*realloc(void *ptr, size_t size)
 	if (ptr && bs.a != 2 && bin_checkin(bs.bin, ptr, bs.a, 1))
 		cand.forward = chunk_search(bs, ptr, BT(ptr) + size,
 			(t_ctrl) { (BT(ptr) & ~(1 << 0)), 1 });
-	new = NULL;
 	if (ptr && bs.a != 2 && cand.forward > BT(ptr) + size)
 	{
 		new = chunk_merge(ptr, cand.forward, 0);

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 22:56:27 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/20 00:10:33 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 19:23:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char		*ft_conv_hex(unsigned long long int i, char new[])
 {
-	char	s[1024];
-	char	*base;
-	int		index;
-	int		j;
+	char		s[1024];
+	char		*base;
+	int			index;
+	int			j;
 
 	ft_bzero(s, 1024);
 	ft_bzero(new, 1024);
@@ -38,9 +38,9 @@ static char		*ft_conv_hex(unsigned long long int i, char new[])
 	return (new);
 }
 
-void	print_addr(void *ptr)
+void			print_addr(void *ptr)
 {
-	char	str[1024];
+	char		str[1024];
 
 	ft_conv_hex((unsigned long long int)ptr, str);
 	write(3, "0x", 2);

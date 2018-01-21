@@ -279,22 +279,40 @@ pthread_t		ntid16;
 //	return (0);
 //}
 
-int	main(void)
-{
-	char	*ptr[8000];
-	char	*b;
-	char	*c;;
-	int	nbr;
+//int	main(void)
+//{
+//	char	*ptr[8000];
+//	char	*b;
+//	char	*c;;
+//	int	nbr;
+//
+//	b = "hello world";
+//
+//	nbr = -1;	
+//	while (++nbr < 7709)
+//		ptr[nbr] = malloc(256);
+//		
+//	strcpy(ptr[--nbr], b);
+//	printf("str %s\n", ptr[nbr]);
+//	c = realloc(ptr[nbr], 500);
+//	printf("str2 %s\n", c);
+//	return (0);
+//}
 
-	b = "hello world";
-
-	nbr = -1;	
-	while (++nbr < 7709)
-		ptr[nbr] = malloc(256);
-		
-	strcpy(ptr[--nbr], b);
-	printf("str %s\n", ptr[nbr]);
-	c = realloc(ptr[nbr], 500);
-	printf("str2 %s\n", c);
-	return (0);
-}
+//int		main(void)
+//{
+//	int		i;
+//	char	*addr;
+//
+//	i = 0;
+//	while (i < 2)
+//	{
+//		addr = (char *)malloc(1024);
+//		addr[0] = 42;
+//		show_free_chunk();
+//		free(addr);
+//		show_free_chunk();
+//		i++;
+//	}
+//	return (0);
+//}

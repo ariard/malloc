@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/20 01:00:42 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 19:22:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 		return (NULL);
 	bin->freespace -= a_req;
 	fuck_norme1(a_req, chunk);
-	if (bin_checkin(bin, chunk, (request <= g_cfg.limit_tiny) ? 0 : 1, 1))
+	if (next_bt)
 	{
 		if (bin->first && !(BT(bin->first) & 1))
 			tmp = (t_chunk *)bin->first;

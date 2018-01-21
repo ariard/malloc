@@ -6,12 +6,23 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 21:40:22 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/21 19:29:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "malloc.h"
+
+static void		fuck_norme(t_chunk *chunk, size_t *total)
+{
+	while (chunk)
+	{
+		DBG("%p - %p : %zu octets\n", chunk, (char *)chunk
+			+ BT(chunk), BT(chunk));
+		*total += BT(chunk);
+		chunk = chunk->next;
+	}
+}
 
 void			show_free_chunk(void)
 {
@@ -30,17 +41,11 @@ void			show_free_chunk(void)
 	{
 		area_print(bin, a);
 		chunk = bin->first;
-		while (chunk)
-		{
-			ft_printf("%p - %p : %zu octets\n", chunk, (char *)chunk
-				+ BT(chunk), BT(chunk));
-			total += BT(chunk);
-			chunk = chunk->next;
-		}
+		fuck_norme(chunk, &total);
 		if (!(bin = bin->next))
 			while (++a != 2 && !(bin = ar->list[a]))
 				;
 	}
-	ft_printf("Total : %zu octets\n", total);
+	DBG("Total : %zu octets\n", total);
 	thread_unset2(&ar->mutex);
 }

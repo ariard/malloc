@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/20 00:53:03 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/21 18:46:27 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,12 +62,17 @@ ifeq ($(HOSTTYPE), )
 endif
 
 all: $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
-	$(CC) -shared -o $(NAME) $(OBJS) $(LIBFT_LIB)
-	rm -f $(SYM_NAME)
-	ln -s $(NAME) $(SYM_NAME)
+	@$(CC) -shared -o $(NAME) $(OBJS) $(LIBFT_LIB)
+	@rm -f $(SYM_NAME)
+	@ln -s $(NAME) $(SYM_NAME)
 	
 main:
 	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
+
+main-clean:
+	rm -f main
+
+re-main: main-clean main
 
 build-test:
 	@$(MAKE) -C $(TEST_DIR)
@@ -92,6 +97,7 @@ $(LIBFT_LIB):
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $(OBJS))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJR_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@\
