@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 19:19:31 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 00:16:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		*realloc(void *ptr, size_t size)
 
 	if (!ptr && !size)
 		return (NULL);
+	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	if (ptr && !((bs = chunk_find(ar, ptr)).bin))
 		return (thread_unset(&ar->mutex, NULL));

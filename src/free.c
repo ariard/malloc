@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 19:15:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 00:21:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			free(void *ptr)
 	size_t		a_size;
 	t_area		*ar;
 
+	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	if (!ptr || !((bs = chunk_find(ar, ptr)).bin))
 		return (thread_unset2(&ar->mutex));
@@ -43,13 +44,15 @@ void			free(void *ptr)
 		if (bs.prev)
 			bs.prev = bs.bin->next;
 		munmap(bs.bin, a_size);
+		return ;
 	}
 	freechunk = bs.bin->first;
 	while (freechunk->next)
 		freechunk = freechunk->next;
 	((t_chunk*)ptr)->next = NULL;
 	((t_chunk*)ptr)->prev = freechunk;
-	freechunk->next = ptr;
+	if (freechunk)
+		freechunk->next = ptr;
 	fuck_norme1(ptr);
 	thread_unset(&ar->mutex, NULL);
 }
@@ -72,13 +75,15 @@ void			p_free(void *ptr)
 		if (bs.prev)
 			bs.prev = bs.bin->next;
 		munmap(bs.bin, a_size);
+		return ;
 	}
 	freechunk = bs.bin->first;
 	while (freechunk->next)
 		freechunk = freechunk->next;
 	((t_chunk*)ptr)->next = NULL;
 	((t_chunk*)ptr)->prev = freechunk;
-	freechunk->next = ptr;
+	if (freechunk)
+		freechunk->next = ptr;
 	BT(ptr) = SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t)));
 	fuck_norme2(ptr);
 }

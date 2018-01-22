@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 18:24:09 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 00:14:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ void		malloc_init(void)
 	g_cfg.limit_small = g_cfg.small_area / 132;
 	i = -1;
 	while (++i < 4)
+	{
+		g_cfg.areas[i].list[0] = NULL;
+		g_cfg.areas[i].list[1] = NULL;
+		g_cfg.areas[i].list[2] = NULL;
 		pthread_mutex_init(&g_cfg.areas[i].mutex, NULL);
+	}
 	pthread_key_create(&g_cfg.key, NULL);
 	srand(time(NULL));
 }

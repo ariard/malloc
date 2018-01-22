@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 19:22:31 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 00:21:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
 		bin->first = (void *)chunk + a_req;
 		if ((((t_chunk *)bin->first)->next = tmp))
 			tmp->prev = ((t_chunk *)bin->first);
+		((t_chunk *)bin->first)->prev = NULL;
 		fuck_norme2(next_bt, bin->first);
 	}
 	return (chunk);
