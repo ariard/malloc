@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 00:13:46 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 19:03:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request);
 int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
+char		chunk_verify(void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
 t_area		*thread_set(void);
 void		*thread_unset(pthread_mutex_t *mutex, void *ptr);
 void		thread_unset2(pthread_mutex_t *mutex);
 
-void		*p_malloc(size_t request);
-void		p_free(void *ptr);
+void		*p_malloc(t_area *ar, size_t request);
+void		p_free(t_area *ar, void *ptr);
 
 int			align(int x, int f);
 void		area_print(t_bin *bin, int a);

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 00:21:15 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 20:24:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void			free(void *ptr)
 	size_t		a_size;
 	t_area		*ar;
 
+	write(3, "free\n", 5);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	if (!ptr || !((bs = chunk_find(ar, ptr)).bin))
+		return (thread_unset2(&ar->mutex));
+	if (ptr && !chunk_verify(ptr))
 		return (thread_unset2(&ar->mutex));
 	bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 	a_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
@@ -44,7 +47,7 @@ void			free(void *ptr)
 		if (bs.prev)
 			bs.prev = bs.bin->next;
 		munmap(bs.bin, a_size);
-		return ;
+		return (thread_unset2(&ar->mutex));
 	}
 	freechunk = bs.bin->first;
 	while (freechunk->next)
@@ -57,14 +60,12 @@ void			free(void *ptr)
 	thread_unset(&ar->mutex, NULL);
 }
 
-void			p_free(void *ptr)
+void			p_free(t_area *ar, void *ptr)
 {
 	t_bins		bs;
 	t_chunk		*freechunk;
 	size_t		a_size;
-	t_area		*ar;
 
-	ar = pthread_getspecific(g_cfg.key);
 	if (!ptr || !((bs = chunk_find(ar, ptr)).bin))
 		return ;
 	bs.bin->freespace += (BT(ptr) & ~(1 << 0));

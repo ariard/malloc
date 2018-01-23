@@ -21,9 +21,10 @@ TEST :
 
 LESSONS : 
 	- intern services are crucials
-	- design order : data structure, intern services, exterior services 
+	- design order : bull chart, data structure, intern services, exterior services 
 	- debug tools : inspect intern archi
 	- performance tools
 	- control flow is bad!
+	- N-lang : template input for sanitize them
 
 	- framework test functionnel + unit

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 00:21:49 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/23 20:22:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 
+	write(3, "malloc\n", 8);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
@@ -41,12 +42,10 @@ void			*malloc(size_t request)
 	return (thread_unset(&ar->mutex, NULL));
 }
 
-void			*p_malloc(size_t request)
+void			*p_malloc(t_area *ar, size_t request)
 {
 	t_bin				*temp;
-	t_area				*ar;
 
-	ar = pthread_getspecific(g_cfg.key);
 	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
 	ar->list[1] = (!ar->list[1] && request <= g_cfg.limit_small \
