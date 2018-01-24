@@ -1,3 +1,81 @@
-[32mMALLOC
-[0m[32mFREE
-[0mflag free A
+malloc
+malloc
+bin_add
+0x0
+bin_pack
+0x1060a5024
+bp - flag A
+0x1060a5024
+0x1060a5024
+chk_init
+0x1060a5000
+0x1060a5024
+0x0
+ci - flag A
+ci - flag B
+ci - flag B
+0x0
+0x0
+m - flag A
+malloc
+bin_pack
+0x1060a5054
+bp - flag A
+0x1060a5054
+0x1060a5054
+chk_init
+0x1060a5000
+0x1060a5054
+0x0
+ci - flag A
+ci - flag B
+ci - flag B
+0x0
+0x0
+m - flag A
+free
+cc - flag D
+f - flag A
+f - flag B
+0x1060a5084
+0x1060a5024
+0x0
+49
+0x0
+0x0
+malloc
+bin_pack
+0x1060a5024
+bp - flag A
+0x1060a5024
+bp - flag A
+0x1060a5084
+0x1060a5024
+chk_init
+0x1060a5000
+0x1060a5024
+0x0
+ci - flag A
+ci - flag B
+ci - flag B
+0x0
+m - flag A
+free
+cc - flag D
+f - flag A
+f - flag B
+0x1060a5024
+0x1060a5054
+0x0
+49
+0x0
+0x0
+malloc
+bin_pack
+0x1060a5054
+bp - flag A
+0x1060a5054
+bp - flag A
+0x1060a5024
+bp - flag A
+0x100005b1b

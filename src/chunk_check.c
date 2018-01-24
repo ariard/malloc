@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   align.c                                            :+:      :+:    :+:   */
+/*   chunk_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 21:48:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:35:12 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/24 19:08:06 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/24 23:55:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int				align(int x, int f)
+char		chunk_check(t_area *ar, void *ptr)
 {
-	if ((x + 18) % 16 != 0)
-		return ((x + 18) + (f - (x + 18) % f));
-	return (x + 18);
+	if (!bin_range(ar, ptr))
+		return (1);
+	if (SUM(ptr) != checksum(BT(ptr)))
+		return (1);
+	write(3, "cc - flag D\n", 12);
+	return (0);
 }

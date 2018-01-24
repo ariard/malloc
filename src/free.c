@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:15:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/25 00:35:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@ static void		add_freechk(t_bins bins, void *ptr)
 {
 	t_chunk		*listfree;
 
-	listfree = bins.bin->first;
+	write(3, "f - flag B\n", 11);
+	print_addr(bins.bin->first);
+	print_addr(ptr);
+	listfree = (bins.bin->first) ? bins.bin->first : NULL;
 	((t_chunk *)ptr)->next = listfree;
-	listfree->prev = ptr;
+	((t_chunk *)ptr)->prev = NULL;
+	print_addr(((t_chunk *)ptr)->prev);
+	if (listfree)
+		listfree->prev = ptr;
 	bins.bin->first = ptr;
-	chunk_set(SET_FREE(((void *)ptr - sizeof(size_t))), (t_chunk *)ptr);
+	print_value(BT(ptr));
+	chunk_set(SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t))),
+		(t_chunk *)ptr);
+	print_addr(((t_chunk *)ptr)->prev);
 }
 
 void			free(void *ptr)
@@ -29,13 +38,15 @@ void			free(void *ptr)
 	t_bins		bs;
 	size_t		b_size;
 
+	write(3, "free\n", 5);
 	pthread_once(&g_cfg.once, malloc_init);	
 	ar = thread_set();
-	if (!((SUM(ptr) != checksum(BT(ptr))) ? 0 : 1))
+	if (chunk_check(ar, ptr))
 		chunk_error();
 	else if (ptr)
 	{
 		bs = chunk_find(ar, ptr);
+		write(3, "f - flag A\n", 11);
 		bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 		b_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
 		b_size = (bs.a == 2) ? BT(ptr) + sizeof(t_bin) : b_size;

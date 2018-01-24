@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:21:43 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 21:36:57 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 23:57:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_bins		chunk_find(t_area *ar, void *ptr)
 		prev = bin;
 		bin = bin->next;
 	}
+	write(3, "cf - flag A\n", 12);
 	return ((t_bins){ NULL, NULL, -1 });
 }

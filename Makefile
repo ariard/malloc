@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/24 22:13:35 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/24 23:53:37 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_BASE	=	\
 bin_add.c\
 bin_pack.c\
 bin_checkin.c\
+bin_range.c\
 chunk_init.c\
 chunk_coalesce.c\
 chunk_search.c\
@@ -41,16 +42,21 @@ chunk_find.c\
 chunk_merge.c\
 chunk_error.c\
 chunk_set.c\
+chunk_check.c\
 thread_set.c\
 thread_unset.c\
 malloc_init.c\
 malloc.c\
 free.c\
 realloc.c\
+align.c\
+checksum.c\
 area_print.c\
 db_show_free_mem.c\
 db_show_alloc_mem.c\
 db_level.c\
+db_print_addr.c\
+db_print_value.c\
 
 TEST_BASE	= \
 

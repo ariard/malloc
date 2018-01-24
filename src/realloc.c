@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:16:24 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/25 00:30:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		*realloc(void *ptr, size_t size)
 	void	*new;
 	t_area	*ar;
 
-	DBG(GREEN "REALLOC\n" RESET)
+	write(3, "realloc\n", 9);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	new = NULL;
@@ -25,7 +25,7 @@ void		*realloc(void *ptr, size_t size)
 		free(ptr);
 	if (size && !ptr)
 		new = malloc(size);
-	if (size && ptr && !((SUM(ptr) != checksum(BT(ptr))) ? 0 : 1))
+	if (size && ptr && chunk_check(ar, ptr))
 		new = chunk_error();
 	else if (size && ptr)
 	{

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:11:29 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 22:28:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward)
 		clean_chunk(tmp);
 		if ((backward -= BT(tmp) & ~(1 << 0)) == 0)
 			break;
-		tmp = ((void *)tmp - (BT_PREV((void *)tmp) & ~(1 << 0)));
+		tmp = ((void *)tmp - (LT_PREV((void *)tmp) & ~(1 << 0)));
 	}
 	chunk_set(new_size, tmp);
 	return (tmp);
