@@ -6,25 +6,25 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 19:29:22 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 20:10:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "malloc.h"
 
-static void		fuck_norme(t_chunk *chunk, size_t *total)
+static void		mem_print(t_chunk *chunk, size_t *total)
 {
 	while (chunk)
 	{
-		DBG("%p - %p : %zu octets\n", chunk, (char *)chunk
+		ft_dprintf(3, "%p - %p : %zu octets\n", chunk, (char *)chunk
 			+ BT(chunk), BT(chunk));
 		*total += BT(chunk);
 		chunk = chunk->next;
 	}
 }
 
-void			show_free_chunk(void)
+void			show_free_mem(void)
 {
 	t_bin		*bin;
 	t_chunk		*chunk;
@@ -41,11 +41,11 @@ void			show_free_chunk(void)
 	{
 		area_print(bin, a);
 		chunk = bin->first;
-		fuck_norme(chunk, &total);
+		mem_print(chunk, &total);
 		if (!(bin = bin->next))
 			while (++a != 2 && !(bin = ar->list[a]))
 				;
 	}
-	DBG("Total : %zu octets\n", total);
-	thread_unset2(&ar->mutex);
+	ft_dprintf(3, "Total : %zu octets\n", total);
+	thread_unset2(ar);
 }

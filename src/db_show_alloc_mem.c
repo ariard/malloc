@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/21 19:33:22 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 21:39:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 			return ;
 		if (BT(ptr) & 1)
 		{
-			DBG("%p - %p : %zu octets\n", ptr, (char *)ptr
+			ft_dprintf(3, "%p - %p : %zu octets\n", ptr, (char *)ptr
 				+ s_clean, s_clean);
 			*total += s_clean;
 		}
@@ -35,7 +35,7 @@ static void		mem_big_print(int a, void *ptr, size_t *total)
 {
 	if (a == 2)
 	{
-		DBG("%p - %p : %zu octets \n", ptr, (char *)ptr
+		ft_dprintf(3, "%p - %p : %zu octets \n", ptr, (char *)ptr
 			+ BT(ptr) - 1, BT(ptr) - 1);
 		total += SET_FREE(*(size_t *)ptr);
 	}
@@ -64,6 +64,6 @@ void			show_alloc_mem(void)
 			while (++a != 3 && !(bin = ar->list[a]))
 				;
 	}
-	DBG("Total : %zu octets\n", total);
-	thread_unset2(&ar->mutex);
+	ft_dprintf(3, "Total : %zu octets\n", total);
+	thread_unset2(ar);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 20:22:31 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 21:18:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 
-	write(3, "malloc\n", 8);
+	DBG(GREEN "MALLOC\n" RESET)
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
@@ -33,33 +33,11 @@ void			*malloc(size_t request)
 	temp = (request > g_cfg.limit_small) ? ar->list[2] : temp;
 	while (temp)
 	{
-		if (temp->freespace > request)
-			if ((chunk = bin_pack(ar, temp, request)))
-				return (thread_unset(&ar->mutex, chunk));
+		if ((chunk = bin_pack(ar, temp, request)))
+			break;
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}
-	return (thread_unset(&ar->mutex, NULL));
-}
-
-void			*p_malloc(t_area *ar, size_t request)
-{
-	t_bin				*temp;
-
-	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
-		? bin_add(request) : ar->list[0];
-	ar->list[1] = (!ar->list[1] && request <= g_cfg.limit_small \
-		&& request > g_cfg.limit_tiny) ? bin_add(request) : ar->list[1];
-	ar->list[2] = (!ar->list[2] && request > g_cfg.limit_small)
-		? bin_add(request) : ar->list[2];
-	temp = (request > g_cfg.limit_tiny) ? ar->list[1] : ar->list[0];
-	temp = (request > g_cfg.limit_small) ? ar->list[2] : temp;
-	while (temp)
-	{
-		if (temp->freespace > request)
-			return (bin_pack(ar, temp, request));
-		temp->next = (!temp->next) ? bin_add(request) : temp->next;
-		temp = temp->next;
-	}
-	return (NULL);
+	thread_unset2(ar);
+	return (chunk);
 }

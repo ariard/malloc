@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 19:03:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 21:41:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/mman.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <stdarg.h>
 # include "../libft/includes/libft.h"
 # include "types.h"
 
@@ -24,11 +25,16 @@
 # define RESET			"\x1b[0m"
 # define RED			"\x1b[31m"
 
-# define DBG(s, ...)	dprintf(3, s, ##__VA_ARGS__);
+# define DBG(s, ...)	level(3, s, ##__VA_ARGS__);
 
-# define BT(x)			*(size_t *)((void *)x - sizeof(size_t))
-# define BT_FINAL(x)	*(size_t *)((void *)x + (*(size_t *)((void *)x - sizeof(size_t)) & ~(1 << 0)) - 2 * sizeof(size_t))
-# define BT_PREV(x)		*(size_t *)((void *)x - 2 * sizeof(size_t))
+# define BT(x)		*(size_t *)((void *)x - sizeof(size_t))
+# define LT(x, s) 	*(size_t *)(x + s - 2 * sizeof(size_t) - 2 * sizeof(char))
+
+# define SUM(x)		*(char *)((void *)x - sizeof(size_t) - sizeof(char))
+# define LSUM(x, s)	*(char *)(x + s - 2 * sizeof(size_t) - sizeof(char))
+
+
+# define LT_PREV(x)	*(size_t *)(x - 2 * sizeof(size_t) - 2 * sizeof(char))
 
 # define FREE(x)		x & 0
 # define SET_BUSY(x)	x | (1 << 0)
@@ -48,6 +54,7 @@ struct		s_area
 {
 	t_bin				*list[3];
 	pthread_mutex_t		mutex;
+	char				reentrancy;
 };
 
 struct		s_config
@@ -103,27 +110,25 @@ void		malloc_init(void);
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
 int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
-char		bin_range(t_area *ar, void *ptr);
+
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
-void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request);
+void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
 int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
-char		chunk_verify(void *ptr);
 void		*chunk_merge(void *ptr, size_t forward, size_t backward);
-t_area		*thread_set(void);
-void		*thread_unset(pthread_mutex_t *mutex, void *ptr);
-void		thread_unset2(pthread_mutex_t *mutex);
+void		*chunk_error(void);
+char		chunk_check(void *ptr);
 
-void		*p_malloc(t_area *ar, size_t request);
-void		p_free(t_area *ar, void *ptr);
+t_area		*thread_set(void);
+void		thread_unset2(t_area *area);
 
 int			align(int x, int f);
-void		area_print(t_bin *bin, int a);
 
+void		area_print(t_bin *bin, int a);
 void		show_alloc_mem(void);
-void		show_free_chunk(void);
+void		show_free_mem(void);
 void		show_cand_merge(void *ptr, t_cand cand);
-void		print_addr(void *ptr);
+void		level(int fd, char *s, ...);
 
 #endif

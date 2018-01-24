@@ -6,56 +6,44 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/23 00:27:57 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 21:48:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int				align(int x, int f)
-{
-	if ((x + 16) % 16 != 0)
-		return ((x + 16) + (f - (x + 16) % f));
-	return (x + 16);
-}
-
-static void		fuck_norme1(size_t a_req, t_chunk *chunk)
+static void		set_chunk(size_t a_req, t_chunk *chunk)
 {
 	BT(chunk) = SET_BUSY(a_req);
-	*(size_t *)((void *)chunk + (*(size_t *)((void *)chunk - sizeof(size_t))
-		& ~(1 << 0)) - 2 * sizeof(size_t)) = SET_BUSY(a_req);
+	SUM(chunk) = checksum(BT(chunk));
+	LT((void *)chunk, a_req) = SET_BUSY(a_req);
+	LSUM((void *)chunk) = checksum(BT(chunk));
 }
 
-static void		fuck_norme2(size_t next_bt, void *first)
+void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 {
-	BT(first) = next_bt;
-	*(size_t *)((void *)first + (*(size_t *)((void *)first - sizeof(size_t))
-		& ~(1 << 0)) - 2 * sizeof(size_t)) = next_bt;
-}
+	size_t	s_split;
+	t_chunk	*split;
+	t_chunk	*listfree;
 
-void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t request)
-{
-	size_t	a_req;
-	size_t	next_bt;
-	t_chunk	*tmp;
-
-	tmp = NULL;
-	a_req = (request <= g_cfg.limit_tiny) ? align(request, 16) :
-		align(request, 512);
-	next_bt = (BT(chunk) & ~(1 << 0)) - a_req;
-	if ((int)(bin->freespace - a_req) < 0)
-		return (NULL);
+	if (!chunk->prev && !chunk->next)
+		bin->first = NULL;
+	if (chunk->prev)
+		(chunk->prev)->next = chunk->next;
+	if (chunk->next)
+		(best->next)->prev = chunk->prev;
+	s_split = (BT(chunk) & ~(1 << 0)) - a_req;
 	bin->freespace -= a_req;
-	fuck_norme1(a_req, chunk);
-	if (next_bt)
+	set_chunk(a_req, chunk);
+	if (s_split)
 	{
-		if (bin->first && !(BT(bin->first) & 1))
-			tmp = (t_chunk *)bin->first;
-		bin->first = (void *)chunk + a_req;
-		if ((((t_chunk *)bin->first)->next = tmp))
-			tmp->prev = ((t_chunk *)bin->first);
-		((t_chunk *)bin->first)->prev = NULL;
-		fuck_norme2(next_bt, bin->first);
+		split = (void *)chunk + a_req;
+		set_chunk(s_split, split);
+		listfree = bin->first;	
+		split->next = listfree;	
+		if (listfree)
+			listfree->prev = split;
+		bin->first = split;
 	}
 	return (chunk);
 }

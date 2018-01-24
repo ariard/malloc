@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   db_show_cand_merge.c                               :+:      :+:    :+:   */
+/*   align.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 20:28:52 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/19 18:46:55 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/24 21:48:14 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/24 21:48:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		show_cand_merge(void *ptr, t_cand cand)
+int				align(int x, int f)
 {
-	ft_printf("cand : %p low : %p high : %p\n",
-		ptr, ptr - cand.backward, ptr + cand.forward);
+	if ((x + 18) % 16 != 0)
+		return ((x + 18) + (f - (x + 18) % f));
+	return (x + 18);
 }
