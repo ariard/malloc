@@ -6,52 +6,49 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 21:49:53 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 22:11:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void	junc_freelist(t_chunk *tmp)
+static void	clean_chunk(t_chunk *tmp)
 {
+	size_t		size;
+
 	if (tmp->next)
 		(tmp->next)->prev = tmp->prev;
 	if (tmp->prev)
 		(tmp->prev)->next = tmp->next;
 	tmp->next = NULL;
 	tmp->prev = NULL;
+	size = BT(tmp);
+	SUM(tmp) = 0;
+	LSUM(tmp, size) = 0;
 }
 
-static void	set_bt(size_t new_size, t_chunk *tmp)
-{
-	*(size_t *)((void *)tmp + (*(size_t *)((void *)tmp - sizeof(size_t))
-		& ~(1 << 0)) - 2 * sizeof(size_t)) = SET_BUSY(new_size);
-}
-
-void		*chunk_merge(void *chunk, size_t forward, size_t backward)
+void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward)
 {
 	t_chunk		*tmp;
 	size_t		new_size;
 
 	new_size = forward + backward;
-	tmp = (t_chunk *)chunk;
+	tmp = chunk;
 	while (forward)
 	{
-		junc_freelist(tmp);
+		clean_chunk(tmp);
 		if ((forward -= (BT(tmp) & ~(1 << 0))) == 0)
-			set_bt(new_size, tmp);
-		else
-			tmp = (t_chunk *)((void *)tmp + (BT(tmp) & ~(1 << 0)));
+			break;
+		tmp = ((void *)tmp + (BT(tmp) & ~(1 << 0)));
 	}
-	BT(chunk) = SET_BUSY(new_size);
-	tmp = (t_chunk *)chunk;
+	tmp = chunk;
 	while (backward)
 	{
-		junc_freelist(tmp);
+		clean_chunk(tmp);
 		if ((backward -= BT(tmp) & ~(1 << 0)) == 0)
-			BT(tmp) = SET_BUSY(new_size);
-		else
-			tmp = ((void *)tmp - (BT_PREV((void *)tmp) & ~(1 << 0)));
+			break;
+		tmp = ((void *)tmp - (BT_PREV((void *)tmp) & ~(1 << 0)));
 	}
+	chunk_set(new_size, tmp);
 	return (tmp);
 }

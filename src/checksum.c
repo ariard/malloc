@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunk_check.c                                      :+:      :+:    :+:   */
+/*   checksum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 19:08:06 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 20:27:36 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/24 22:16:32 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/24 22:23:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-char		chunk_check(void *ptr)
+char		checksum(size_t size)
 {
-	(void)ptr;
-	return (1);
+	unsigned int	count;
+
+	count = 0;
+	while (size)
+	{
+		count += (size & 1);
+		size >>= 1;
+	}
+	return ((char)count);
 }

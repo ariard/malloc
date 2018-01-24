@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 21:18:51 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 22:15:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static void		add_freechk(t_bins bins, void *ptr)
 	((t_chunk *)ptr)->next = listfree;
 	listfree->prev = ptr;
 	bins.bin->first = ptr;
-	BT(ptr) = SET_FREE(*(size_t *)((void *)ptr - sizeof(size_t)));
-	*(size_t *)((void *)ptr + (*(size_t *)((void *)ptr - sizeof(size_t))
-		& ~(1 << 0)) - 2 * sizeof(size_t)) = BT(ptr);
+	chunk_set(SET_FREE(((void *)ptr - sizeof(size_t))), (t_chunk *)ptr);
 }
 
 void			free(void *ptr)
@@ -31,10 +29,9 @@ void			free(void *ptr)
 	t_bins		bs;
 	size_t		b_size;
 
-	DBG(GREEN "FREE\n" RESET)
 	pthread_once(&g_cfg.once, malloc_init);	
 	ar = thread_set();
-	if (!chunk_check(ptr))
+	if (!((SUM(ptr) != checksum(BT(ptr))) ? 0 : 1))
 		chunk_error();
 	else if (ptr)
 	{
@@ -51,6 +48,5 @@ void			free(void *ptr)
 		else
 			add_freechk(bs, ptr);
 	}
-	DBG("flag free A\n");
 	thread_unset2(ar); 
 }

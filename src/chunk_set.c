@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunk_error.c                                      :+:      :+:    :+:   */
+/*   chunk_set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 19:06:27 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:11:34 by ariard           ###   ########.fr       */
+/*   Created: 2018/01/24 22:04:59 by ariard            #+#    #+#             */
+/*   Updated: 2018/01/24 22:08:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-void	*chunk_error(void)
+ 
+void		set_chunk(size_t a_req, t_chunk *chunk)
 {
-	return (NULL);
+	BT(chunk) = SET_BUSY(a_req);
+	SUM(chunk) = checksum(BT(chunk));
+	LT((void *)chunk, a_req) = SET_BUSY(a_req);
+	LSUM((void *)chunk) = checksum(BT(chunk));
 }

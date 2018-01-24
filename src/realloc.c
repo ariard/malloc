@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 20:27:31 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 22:16:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ void		*realloc(void *ptr, size_t size)
 		free(ptr);
 	if (size && !ptr)
 		new = malloc(size);
-	DBG("flag realloc A\n");
-	if (size && ptr && !chunk_check(ptr))
+	if (size && ptr && !((SUM(ptr) != checksum(BT(ptr))) ? 0 : 1))
 		new = chunk_error();
 	else if (size && ptr)
 	{
-		DBG("flag realloc A\n");
 		new = chunk_coalesce(ar, ptr, size, 1);
 		if (!new)
 		{

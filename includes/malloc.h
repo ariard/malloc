@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 21:41:03 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 22:23:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define DBG(s, ...)	level(3, s, ##__VA_ARGS__);
 
 # define BT(x)		*(size_t *)((void *)x - sizeof(size_t))
-# define LT(x, s) 	*(size_t *)(x + s - 2 * sizeof(size_t) - 2 * sizeof(char))
+# define LT(x, s) 	*(size_t *)(x + s - 2 * sizeof(size_t) - 2 * sizeof(int))
 
-# define SUM(x)		*(char *)((void *)x - sizeof(size_t) - sizeof(char))
-# define LSUM(x, s)	*(char *)(x + s - 2 * sizeof(size_t) - sizeof(char))
+# define SUM(x)		*(int *)((void *)x - sizeof(size_t) - sizeof(int))
+# define LSUM(x, s)	*(int *)(x + s - 2 * sizeof(size_t) - sizeof(int))
 
 
-# define LT_PREV(x)	*(size_t *)(x - 2 * sizeof(size_t) - 2 * sizeof(char))
+# define LT_PREV(x)	*(int *)(x - 2 * sizeof(size_t) - 2 * sizeof(int))
 
 # define FREE(x)		x & 0
 # define SET_BUSY(x)	x | (1 << 0)
@@ -91,7 +91,7 @@ struct		s_chunk
 
 struct		s_cand
 {
-	void				*chunk;
+	t_chunk				*chunk;
 	size_t				size;
 	size_t				backward;
 	size_t				forward;
@@ -116,14 +116,15 @@ void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
 int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
-void		*chunk_merge(void *ptr, size_t forward, size_t backward);
+void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward);
 void		*chunk_error(void);
-char		chunk_check(void *ptr);
+void		chunk_set(size_t a_req, t_chunk *chunk);
 
 t_area		*thread_set(void);
 void		thread_unset2(t_area *area);
 
 int			align(int x, int f);
+char		checksum(size_t size);
 
 void		area_print(t_bin *bin, int a);
 void		show_alloc_mem(void);

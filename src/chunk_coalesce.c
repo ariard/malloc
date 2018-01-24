@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 20:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 21:49:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/24 21:57:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void		*chunk_coalesce(t_area *ar, t_chunk *free, size_t req, char range)
 				(t_ctrl){ 0, 1 });
 		cand.backward = (cand.forward + BT(free) > req) ? 0 : cand.backward;
 		cand.size = cand.forward + BT(free) + cand.backward;
-		if (range == 0)
-			free = free->next;
-		else 
-			free = NULL;
+		free (range == 0) ? free->next : NULL;
 		if (cand.size > req)
 			return (chunk_merge(cand.chunk, cand.forward
 				+ BT(cand.chunk), cand.backward));
