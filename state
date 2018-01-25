@@ -1,7 +1,9 @@
-- change to custom print
+- heap check, abort check, log
 - remettre a la norme, fonctionner test, cleaner repo, retest, lock
 
 framework test ; goal = 40 + 5 threads;
+
+(heap check, abort check, defragmentation, log, multi-thread)
 
 GOALS :
 	- best-fit with mono-coalescing list
@@ -28,3 +30,4 @@ LESSONS :
 	- N-lang : template input for sanitize them
 
 	- framework test functionnel + unit
+	- stack overflow ctrl
