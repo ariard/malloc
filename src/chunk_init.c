@@ -12,6 +12,20 @@
 
 #include "malloc.h"
 
+static void		set_freelist(void **first, t_chunk *chunk)
+{
+	if (!chunk->prev && !chunk->next)
+		*first = NULL;
+	if (chunk->prev && (chunk->prev)->next)
+		(chunk->prev)->next = chunk->next;
+	else
+		*first = chunk->next;
+	if (chunk->next && (chunk->next)->prev)
+		(chunk->next)->prev = chunk->prev;
+	chunk->next = NULL;
+	chunk->prev = NULL;
+}
+
 void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 {
 	size_t	s_split;
@@ -19,19 +33,10 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 	t_chunk	*listfree;
 
 	write(3, "chk_init\n", 9);
-	print_addr(bin);
-	print_addr(chunk);
-	print_addr(chunk->prev);
-	if (!chunk->prev && !chunk->next)
-		bin->first = NULL;
-	write(3, "ci - flag A\n", 12);
-	if (chunk->prev)
-		(chunk->prev)->next = chunk->next;
-	write(3, "ci - flag B\n", 12);
-	if (chunk->next)
-		(chunk->next)->prev = chunk->prev;
-	write(3, "ci - flag B\n", 12);
+	set_freelist(&bin->first, chunk);
 	s_split = (BT(chunk) & ~(1 << 0)) - a_req;
+	if (!(s_split = (s_split < 48) ? 0 : s_split))
+		a_req += s_split;
 	bin->freespace -= a_req;
 	chunk_set(SET_BUSY(a_req), chunk);
 	if (s_split)

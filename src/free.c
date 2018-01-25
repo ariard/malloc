@@ -22,7 +22,7 @@ static void		add_freechk(t_bins bins, void *ptr)
 	listfree = (bins.bin->first) ? bins.bin->first : NULL;
 	((t_chunk *)ptr)->next = listfree;
 	((t_chunk *)ptr)->prev = NULL;
-	print_addr(((t_chunk *)ptr)->prev);
+	print_addr(listfree->next);
 	if (listfree)
 		listfree->prev = ptr;
 	bins.bin->first = ptr;
