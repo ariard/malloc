@@ -17,7 +17,6 @@ t_bin			*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-	write(3, "bin_add\n", 8);
 	size = (request <= g_cfg.limit_tiny) ? g_cfg.tiny_area \
 		: g_cfg.small_area;
 	size = (request > g_cfg.limit_small) ? request \

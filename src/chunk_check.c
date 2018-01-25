@@ -16,8 +16,7 @@ char		chunk_check(t_area *ar, void *ptr)
 {
 	if (!bin_range(ar, ptr))
 		return (1);
-	if (SUM(ptr) != checksum(BT(ptr)))
+	if (SUM(ptr) == 0 || SUM(ptr) != checksum(BT(ptr)))
 		return (1);
-	write(3, "cc - flag D\n", 12);
 	return (0);
 }

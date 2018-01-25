@@ -14,26 +14,29 @@
 
 void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
 {
-	t_chunk	*best;
+	t_chunk	*cand;
 	t_chunk	*tmp;
 	size_t	size;
 	size_t	a_req;
-
-	write(3, "bin_pack\n", 9);
-	tmp = bin->first;
-	if ((int)(bin->freespace - (a_req = (req <= g_cfg.limit_tiny) 
-		? align(req, 16) : align(req, 512))) < 0)
-		tmp = NULL;
-	a_req = (a_req < 48) ? 48 : a_req;
-	best = NULL;
-	size = bin->freespace;
-	while (tmp)
+	
+	cand = NULL;
+	if (req <= g_cfg.limit_small)
 	{
-		best = (BT(tmp) <= size && BT(tmp) >= a_req) ? tmp : best;
-		size = (BT(tmp) <= size && BT(tmp) >= a_req) ? BT(tmp) : size;
-		tmp = tmp->next;
+		a_req = (req <= g_cfg.limit_tiny) ? align(req, 16) : align(req, 512);
+		a_req = (a_req < 48) ? 48 : a_req;
+		tmp = ((int)(bin->freespace - a_req) < 0) ? NULL : bin->first;
+		size = bin->freespace;
+		while (tmp)
+		{
+			cand = (BT(tmp) <= size && BT(tmp) >= a_req) ? tmp : cand;
+			size = (BT(tmp) <= size && BT(tmp) >= a_req) ? BT(tmp) : size;
+			tmp = tmp->next;
+		}
+		cand = (!cand && (int)(bin->freespace - a_req) > 0) 
+			? chunk_coalesce(ar, bin->first, a_req, 0) : cand;
+		cand = (cand) ? chunk_init(bin, cand, a_req) : NULL;
 	}
-	if (best == NULL)
-		best = chunk_coalesce(ar, bin->first, a_req, 0);
-	return ((best) ? chunk_init(bin, best, a_req) : NULL);
+	else if (bin->freespace > req)
+		cand = bin->first;
+	return ((void *)cand);
 }

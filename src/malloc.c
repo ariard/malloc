@@ -20,7 +20,6 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 
-	write(3, "malloc\n", 7);
 	DBG(GREEN "MALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
@@ -40,6 +39,5 @@ void			*malloc(size_t request)
 		temp = temp->next;
 	}
 	thread_unset2(ar);
-	write(3, "m - flag A\n", 11);
 	return (chunk);
 }

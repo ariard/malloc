@@ -32,7 +32,6 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 	t_chunk	*split;
 	t_chunk	*listfree;
 
-	write(3, "chk_init\n", 9);
 	set_freelist(&bin->first, chunk);
 	s_split = (BT(chunk) & ~(1 << 0)) - a_req;
 	if (!(s_split = (s_split < 48) ? 0 : s_split))

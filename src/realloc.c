@@ -17,7 +17,7 @@ void		*realloc(void *ptr, size_t size)
 	void	*new;
 	t_area	*ar;
 
-	write(3, "realloc\n", 9);
+	DBG(GREEN "REALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	new = NULL;
@@ -29,11 +29,13 @@ void		*realloc(void *ptr, size_t size)
 		new = chunk_error();
 	else if (size && ptr)
 	{
+		write(3, "flag A\n", 7);
 		new = chunk_coalesce(ar, ptr, size, 1);
 		if (!new)
 		{
 			new = malloc(size);
-			ft_memcpy(new, ptr, BT(ptr) - 2 * sizeof(size_t));
+			ft_memcpy(new, ptr, (BT(ptr) & ~(1 << 0) 
+				- 2 * sizeof(int) - 2 * sizeof(char)));
 			free(ptr); 
 		}
 	}
