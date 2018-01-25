@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:32:22 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:58:58 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/25 23:29:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			show_alloc_mem(void)
 	while (bin)
 	{
 		area_print(bin, a);
-		ptr = (void *)bin + sizeof(t_bin) + sizeof(size_t);
+		ptr = (void *)bin + sizeof(t_bin) + sizeof(size_t) + sizeof(int);
 		mem_big_print(a, ptr, &total);
 		mem_print(bin, ptr, a, &total);
 		if (!(bin = bin->next))
