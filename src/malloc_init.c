@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 20:27:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 17:31:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		malloc_init(void)
 		g_cfg.areas[i].list[1] = NULL;
 		g_cfg.areas[i].list[2] = NULL;
 		pthread_mutex_init(&g_cfg.areas[i].mutex, NULL);
-		g_cfg.areas[i].reentrancy = "a";
+		g_cfg.areas[i].reentrancy = "0";
 	}
 	pthread_key_create(&g_cfg.key, NULL);
 	srand(time(NULL));

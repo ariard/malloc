@@ -6,9 +6,9 @@ void	logmem(void *ptr, char from, t_area *ar)
 	char		name[100 + 1];
 	char		*pid;
 
-	if (!ft_strncmp(ar->reentrancy, "c", 1))
+	if (!ft_strncmp(ar->reentrancy, "2", 1))
 		return;	
-	ar->reentrancy = "c";
+	ar->reentrancy = "2";
 	if (!file)	
 	{
 		ft_bzero(name, 100);
@@ -20,6 +20,5 @@ void	logmem(void *ptr, char from, t_area *ar)
 	if (ptr && file)
 		ft_dprintf(file, "[%s] %p size : %lu\n",
 			(from == 0) ? "malloc" : "free", ptr, BT(ptr));
-		
-	ar->reentrancy = "b";
+	ar->reentrancy = "1";
 }

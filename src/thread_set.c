@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 19:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 20:28:22 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 17:31:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_area		*thread_set(void)
 		pthread_setspecific(g_cfg.key, (void *)&g_cfg.areas[i]);
 		return (&g_cfg.areas[i]);
 	}
-	if (!ft_strncmp(((t_area *)value)->reentrancy, "a", 1))
+	if (!ft_strncmp(((t_area *)value)->reentrancy, "0", 1))
 		pthread_mutex_lock(&((t_area *)value)->mutex); 
-	if (!ft_strncmp(((t_area *)value)->reentrancy, "a", 1))
-		(((t_area *)value)->reentrancy) = "b";
+	if (!ft_strncmp(((t_area *)value)->reentrancy, "0", 1))
+		(((t_area *)value)->reentrancy) = "1";
 	return (value);
 }
