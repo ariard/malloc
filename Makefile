@@ -51,6 +51,7 @@ free.c\
 realloc.c\
 align.c\
 checksum.c\
+log.c\
 area_print.c\
 db_show_free_mem.c\
 db_show_alloc_mem.c\

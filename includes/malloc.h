@@ -14,6 +14,8 @@
 # define MALLOC_H
 
 # include <unistd.h>
+# include <fcntl.h>
+# include <time.h>
 # include <sys/mman.h>
 # include <pthread.h>
 # include <stdlib.h>
@@ -53,8 +55,8 @@ struct		s_bin
 struct		s_area
 {
 	t_bin				*list[3];
-	pthread_mutex_t		mutex;
-	char				reentrancy;
+	pthread_mutex_t			mutex;
+	char				*reentrancy;
 };
 
 struct		s_config
@@ -109,13 +111,13 @@ void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
-int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+int		bin_checkin(t_bin *bin, void *ptr, char area, char pos);
 char		bin_range(t_area *area, void *ptr);
 
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
-int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
 void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward);
 void		*chunk_error(void);
@@ -125,7 +127,9 @@ void		chunk_set(size_t a_req, t_chunk *chunk);
 t_area		*thread_set(void);
 void		thread_unset2(t_area *area);
 
-int			align(int x, int f);
+void		logmem(void *ptr, char from, t_area *ar);
+
+int		align(int x, int f);
 char		checksum(size_t size);
 
 void		area_print(t_bin *bin, int a);

@@ -30,8 +30,9 @@ t_area		*thread_set(void)
 		pthread_setspecific(g_cfg.key, (void *)&g_cfg.areas[i]);
 		return (&g_cfg.areas[i]);
 	}
-	if (((t_area *)value)->reentrancy == 0) 
+	if (!ft_strncmp(((t_area *)value)->reentrancy, "a", 1))
 		pthread_mutex_lock(&((t_area *)value)->mutex); 
-	((t_area *)value)->reentrancy = 1;	
+	if (!ft_strncmp(((t_area *)value)->reentrancy, "a", 1))
+		(((t_area *)value)->reentrancy) = "b";
 	return (value);
 }

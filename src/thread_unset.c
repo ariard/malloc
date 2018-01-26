@@ -14,6 +14,8 @@
 
 void		thread_unset2(t_area *ar)
 {
-	pthread_mutex_unlock(&ar->mutex);
-	ar->reentrancy = 0;
+	if (!ft_strncmp(ar->reentrancy, "b", 1))
+		pthread_mutex_unlock(&ar->mutex);
+	if (!ft_strncmp(ar->reentrancy, "b", 1))
+		ar->reentrancy = "a";
 }

@@ -32,13 +32,14 @@ void			free(void *ptr)
 	t_bins		bs;
 	size_t		b_size;
 
-	DBG(GREEN "FREE\n" RESET);
+	//DBG(GREEN "FREE\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);	
 	ar = thread_set();
 	if (chunk_check(ar, ptr))
 		chunk_error();
 	else if (ptr)
 	{
+		logmem(ptr, 1, ar);
 		bs = chunk_find(ar, ptr);
 		bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 		b_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;

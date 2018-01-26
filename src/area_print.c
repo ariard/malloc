@@ -18,5 +18,5 @@ void		area_print(t_bin *bin, int a)
 
 	ar = (a == 0) ? "TINY" : "SMALL";
 	ar = (a == 2) ? "LARGE" : ar;
-	DBG("[%s] : %p\n", ar, bin);
+	ft_dprintf(3, "[%s] : %p\n", ar, bin);
 }

@@ -28,6 +28,7 @@ void		malloc_init(void)
 		g_cfg.areas[i].list[1] = NULL;
 		g_cfg.areas[i].list[2] = NULL;
 		pthread_mutex_init(&g_cfg.areas[i].mutex, NULL);
+		g_cfg.areas[i].reentrancy = "a";
 	}
 	pthread_key_create(&g_cfg.key, NULL);
 	srand(time(NULL));

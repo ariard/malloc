@@ -17,7 +17,7 @@ void		*realloc(void *ptr, size_t size)
 	void	*new;
 	t_area	*ar;
 
-	DBG(GREEN "REALLOC\n" RESET);
+//	DBG(GREEN "REALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	new = NULL;

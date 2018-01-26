@@ -20,7 +20,7 @@ void			*malloc(size_t request)
 	void				*chunk;
 	t_area				*ar;
 
-	DBG(GREEN "MALLOC\n" RESET);
+	//DBG(GREEN "MALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
@@ -38,6 +38,7 @@ void			*malloc(size_t request)
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}
+	logmem(chunk, 0, ar);
 	thread_unset2(ar);
 	return (chunk);
 }
