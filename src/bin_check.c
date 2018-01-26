@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:23:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 18:32:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 19:24:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ static void		list_browse(t_bin *bin, void *ptr, int a)
 	}
 }
 
+static int		wr_getenv(char *str)
+{
+	char		*s;
+
+	s = getenv(str);
+	return ((s) ? ft_atoi(s) : -1);
+}
+
 void			bin_check(t_area *ar)
 {
 	static int	start;
@@ -35,8 +43,9 @@ void			bin_check(t_area *ar)
 	void		*ptr;
 	t_bin		*bin;
 
-	start = (!start) ? ft_atoi(getenv("MallocCheckHeapStart")) : start;
-	op = (!op) ? ft_atoi(getenv("MallocCheckHeapEach")) : op;
+	write(3, "bin_check\n", 10);
+	start = (!start) ? wr_getenv("MallocCheckHeapStart") : start;
+	op = (!op) ? wr_getenv("MallocCheckHeapEach") : op;
 	start = (!(--start)) ? -1 : start;
 	op = (start < 0) ? --op : op;
 	a = -1;
@@ -53,4 +62,5 @@ void			bin_check(t_area *ar)
 					;
 		}
 	}
+	write(3, "bin_check - end\n", 16);
 }

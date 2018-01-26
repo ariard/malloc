@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 18:32:44 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 19:28:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ void			free(void *ptr)
 	pthread_once(&g_cfg.once, malloc_init);	
 	ar = thread_set();
 	bin_check(ar);
-	if (chunk_check(ar, ptr) && getenv("MallocErrorAbort"))
-		chunk_error(ptr, 0);
+	if (chunk_check(ar, ptr)) 
+	{
+		if (getenv("MallocErrorAbort"))
+			chunk_error(ptr, 0);
+	}	
 	else if (ptr)
 	{
 		logmem(ptr, 1, ar);
