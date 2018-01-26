@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:14:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 18:32:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bin			*bin_add(size_t request)
 		+ sizeof(t_bin) + 2 * sizeof(size_t) + 2 * sizeof(int) : size;
 	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON
 		| MAP_PRIVATE, -1, 0)) == MAP_FAILED)
-		bin = chunk_error();
+		chunk_error(0, 3);
 	else
 	{
 		bin->next = NULL;

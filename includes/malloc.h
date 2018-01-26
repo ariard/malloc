@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:35:02 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 18:33:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/mman.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
 # include "types.h"
@@ -111,16 +112,17 @@ void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
-int		bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
 char		bin_range(t_area *area, void *ptr);
+void		bin_check(t_area *area);
 
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
-int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
 void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward);
-void		*chunk_error(void);
+void		*chunk_error(void *ptr, int e);
 char		chunk_check(t_area *area, void *ptr);
 void		chunk_set(size_t a_req, t_chunk *chunk);
 

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:07:07 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 18:23:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void			*malloc(size_t request)
 	//DBG(GREEN "MALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
+	bin_check(ar);
 	ar->list[0] = (!ar->list[0] && request <= g_cfg.limit_tiny)
 		? bin_add(request) : ar->list[0];
 	ar->list[1] = (!ar->list[1] && request <= g_cfg.limit_small \

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:30:18 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 18:32:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		*realloc(void *ptr, size_t size)
 	void	*new;
 	t_area	*ar;
 
-//	DBG(GREEN "REALLOC\n" RESET);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	new = NULL;
@@ -25,11 +24,10 @@ void		*realloc(void *ptr, size_t size)
 		free(ptr);
 	if (size && !ptr)
 		new = malloc(size);
-	if (size && ptr && chunk_check(ar, ptr))
-		new = chunk_error();
+	if (size && ptr && chunk_check(ar, ptr)) 
+		new = (getenv("MallocErrorAbort")) ? chunk_error(ptr, 1) : NULL;
 	else if (size && ptr)
 	{
-		write(3, "flag A\n", 7);
 		new = chunk_coalesce(ar, ptr, size, 1);
 		if (!new)
 		{
