@@ -1,4 +1,13 @@
-- heap check, abort check, log
+- heap check, abort check
+
+{bin_check after thread_set
+	if env
+	while in bin, (cpy show_alloc_mem)
+		if checksum good
+			do nothing
+	}
+}
+
 - remettre a la norme, fonctionner test, cleaner repo, retest, lock
 
 framework test ; goal = 40 + 5 threads;
