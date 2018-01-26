@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 18:23:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/26 22:16:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			*malloc(size_t request)
 	t_area				*ar;
 
 	//DBG(GREEN "MALLOC\n" RESET);
+//	write(3, "malloc\n", 7);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	bin_check(ar);

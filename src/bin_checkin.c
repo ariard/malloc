@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:26:19 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/27 00:21:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
 		return (0);
 	max = (a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
 	if ((pos < 0 || pos == 0) && (char *)ptr - (LT_PREV((void *)ptr)
-		& ~(1 << 0)) > (char *)bin)
+		& ~(1 << 0)) + 1 > (char *)bin)
 		return (1);
+	//print here cmp to know why last isn t access
 	if ((pos > 0 || pos == 0) && (char *)ptr + (BT(ptr)
-		& ~(1 << 0)) < (char *)bin + max)
+		& ~(1 << 0)) - 1 < (char *)bin + max)
 		return (1);
 	return (0);
 }

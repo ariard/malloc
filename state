@@ -1,4 +1,5 @@
 - heap check, abort check
+	=> inspect check error
 
 {bin_check after thread_set
 	if env

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:23:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 19:24:46 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/27 00:15:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static void		list_browse(t_bin *bin, void *ptr, int a)
 	size_t		s_clean;
 
 	s_clean = 1;
-	while (bin_checkin(bin, ptr, (char)a, 1) && s_clean)
+	while (1)
 	{
 		if (!(s_clean = BT(ptr) & ~(1 << 0)))
 			return;
+		write(3, "addr :\n", 7);
+		print_addr(ptr);
+		print_value(SUM(ptr));
+		print_value(checksum(BT(ptr)));
 		if (SUM(ptr) == 0 || SUM(ptr) != checksum(BT(ptr)))
 			chunk_error(ptr, 2);
 		ptr = (char *)ptr + s_clean;
+		if (!bin_checkin(bin, ptr, (char)a, 1))
+			break;
 	}
 }
 
@@ -46,7 +52,7 @@ void			bin_check(t_area *ar)
 	write(3, "bin_check\n", 10);
 	start = (!start) ? wr_getenv("MallocCheckHeapStart") : start;
 	op = (!op) ? wr_getenv("MallocCheckHeapEach") : op;
-	start = (!(--start)) ? -1 : start;
+	start = (--start <= 0) ? -1 : start;
 	op = (start < 0) ? --op : op;
 	a = -1;
 	if (!op && ar)
@@ -55,6 +61,8 @@ void			bin_check(t_area *ar)
 			;
 		while (bin)
 		{
+//			write(3, "bin :\n", 6);
+//			print_addr(bin);
 			ptr = (void *)bin + sizeof(t_bin) + sizeof(size_t) + sizeof(int);
 			list_browse(bin, ptr, a);
 			if (!(bin = bin->next))
