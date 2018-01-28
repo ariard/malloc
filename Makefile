@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/26 23:15:55 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/28 20:57:04 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,13 @@ chunk_check.c\
 thread_set.c\
 thread_unset.c\
 malloc_init.c\
+malloc_print.c\
 malloc.c\
 free.c\
 realloc.c\
 align.c\
 checksum.c\
 log.c\
-area_print.c\
 db_show_free_mem.c\
 db_show_alloc_mem.c\
 db_level.c\

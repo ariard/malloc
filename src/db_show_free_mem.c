@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 20:36:57 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:59:03 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/28 20:59:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void		mem_print(t_chunk *chunk, size_t *total)
 {
 	while (chunk)
 	{
-		ft_dprintf(3, "%p - %p : %zu octets\n", chunk, (char *)chunk
-			+ BT(chunk), BT(chunk));
+		malloc_print(2, chunk, (char *)chunk + BT(chunk), BT(chunk));
 		*total += BT(chunk);
 		chunk = chunk->next;
 	}
@@ -39,13 +38,13 @@ void			show_free_mem(void)
 		;
 	while (bin)
 	{
-		area_print(bin, a);
+		area_print(2, bin, a);
 		chunk = bin->first;
 		mem_print(chunk, &total);
 		if (!(bin = bin->next))
 			while (++a != 2 && !(bin = ar->list[a]))
 				;
 	}
-	ft_dprintf(3, "Total : %zu octets\n", total);
+	total_print(2, total);
 	thread_unset2(ar);
 }

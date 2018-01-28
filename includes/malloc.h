@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 22:02:05 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/28 20:57:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 
 # define NEXT(x)		(*(size_t *)(void *)x - sizeof(size_t) & ~(1 << 0))
 # define PREV(x)		(*(size_t *)(void *)x - sizeof(size_t) & ~(1 << 0))
+
+# define FT_ABS(x)	(((x) < 0) ? -(x) : (x))
 
 struct		s_bin
 {
@@ -131,15 +133,19 @@ void		thread_unset2(t_area *area);
 
 void		logmem(void *ptr, char from, t_area *ar);
 
-int		align(int x, int f);
+int			align(int x, int f);
 char		checksum(size_t size);
 
-void		area_print(t_bin *bin, int a);
 void		show_alloc_mem(void);
 void		show_free_mem(void);
 void		show_cand_merge(void *ptr, t_cand cand);
+
+void		area_print(int fd, t_bin *bin, int a);
+void		malloc_print(int fd, void *add_one, void *add_two, size_t size);
+void		total_print(int fd, size_t total);
+void		print_addr(int fd, unsigned long i);
+void		print_value(int fd, size_t n);
+
 void		level(int fd, char *s, ...);
-void		print_addr(void *ptr);
-void		print_value(int i);
 
 #endif
