@@ -14,14 +14,16 @@
 
 char		chunk_check(t_area *ar, void *ptr)
 {
-//	size_t	size;
+	size_t	size;
 
+//	write(3, "cc - beg\n", 8);
 	if (!bin_range(ar, ptr))
 		return (1);
 	if (SUM(ptr) == 0 || SUM(ptr) != checksum(BT(ptr)))
 		return (1);
-//	size = BT(ptr);
-//	if (LSUM(ptr, size) == 0 || LSUM(ptr, size) != checksum(LT(ptr, size)))
-//		return (1);
+	size = BT(ptr);
+	if (LSUM(ptr, size) == 0 || LSUM(ptr, size) != checksum(LT(ptr, size)))
+		return (1);
+//	write(3, "cc - end\n", 8);
 	return (0);
 }

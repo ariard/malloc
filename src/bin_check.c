@@ -17,19 +17,13 @@ static void		list_browse(t_bin *bin, void *ptr, int a)
 	size_t		s_clean;
 
 	s_clean = 1;
-	while (1)
+	while (!bin_checkin(bin, ptr, (char)a, 1))
 	{
 		if (!(s_clean = BT(ptr) & ~(1 << 0)))
 			return;
-		write(3, "addr :\n", 7);
-		print_addr(ptr);
-		print_value(SUM(ptr));
-		print_value(checksum(BT(ptr)));
 		if (SUM(ptr) == 0 || SUM(ptr) != checksum(BT(ptr)))
 			chunk_error(ptr, 2);
 		ptr = (char *)ptr + s_clean;
-		if (!bin_checkin(bin, ptr, (char)a, 1))
-			break;
 	}
 }
 
@@ -49,13 +43,17 @@ void			bin_check(t_area *ar)
 	void		*ptr;
 	t_bin		*bin;
 
-	write(3, "bin_check\n", 10);
-	start = (!start) ? wr_getenv("MallocCheckHeapStart") : start;
-	op = (!op) ? wr_getenv("MallocCheckHeapEach") : op;
-	start = (--start <= 0) ? -1 : start;
-	op = (start < 0) ? --op : op;
+//	write(3, "bin_check\n", 10);
+	if (start == 0)
+		start = wr_getenv("MallocCheckHeapStart");
+	if (--start == 0)
+		start = -1;
+	if (op == 0)
+		op = wr_getenv("MallocCheckHeapEach");
+	if (op > 0)
+		--op;
 	a = -1;
-	if (!op && ar)
+	if (op == 0 && ar)
 	{
 		while (++a != 3 && !(bin = ar->list[a]))
 			;
@@ -70,5 +68,5 @@ void			bin_check(t_area *ar)
 					;
 		}
 	}
-	write(3, "bin_check - end\n", 16);
+//	write(3, "bin_check - end\n", 16);
 }

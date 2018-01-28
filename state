@@ -1,19 +1,11 @@
-- heap check, abort check
-	=> inspect check error
+- to-do : custom print + heap-check shadow last
+	=> THINK on paper (bin nbr, update chk init, chk merge, free)
+		(solve probme 1 with 2)
 
-{bin_check after thread_set
-	if env
-	while in bin, (cpy show_alloc_mem)
-		if checksum good
-			do nothing
-	}
-}
 
 - remettre a la norme, fonctionner test, cleaner repo, retest, lock
 
-framework test ; goal = 40 + 5 threads;
 
-(heap check, abort check, defragmentation, log, multi-thread)
 
 GOALS :
 	- best-fit with mono-coalescing list

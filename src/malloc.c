@@ -21,7 +21,7 @@ void			*malloc(size_t request)
 	t_area				*ar;
 
 	//DBG(GREEN "MALLOC\n" RESET);
-//	write(3, "malloc\n", 7);
+	write(3, "malloc\n", 7);
 	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	bin_check(ar);
@@ -40,7 +40,8 @@ void			*malloc(size_t request)
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}
-	logmem(chunk, 0, ar);
+//	logmem(chunk, 0, ar);
 	thread_unset2(ar);
+	write(3, "malloc - end\n", 13);
 	return (chunk);
 }

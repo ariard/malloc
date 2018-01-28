@@ -15,7 +15,9 @@
 static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 {
 	size_t		s_clean;
+	int		i;
 
+	i = 1;
 	while (bin_checkin(bin, ptr, (char)a, 1))
 	{
 		s_clean = BT(ptr) & ~(1 << 0);
@@ -23,10 +25,12 @@ static void		mem_print(t_bin *bin, void *ptr, int a, size_t *total)
 			return ;
 		if (BT(ptr) & 1)
 		{
-			ft_dprintf(3, "%p - %p : %zu octets\n", ptr, (char *)ptr
+			ft_dprintf(2, "%p - %p : %zu octets\n", ptr, (char *)ptr
 				+ s_clean, s_clean);
 			*total += s_clean;
 		}
+		while (i)
+			;
 		ptr = (char *)ptr + s_clean;
 	}
 }
@@ -35,7 +39,7 @@ static void		mem_big_print(int a, void *ptr, size_t *total)
 {
 	if (a == 2)
 	{
-		ft_dprintf(3, "%p - %p : %zu octets \n", ptr, (char *)ptr
+		ft_dprintf(2, "%p - %p : %zu octets \n", ptr, (char *)ptr
 			+ BT(ptr) - 1, BT(ptr) - 1);
 		total += SET_FREE(*(size_t *)ptr);
 	}
@@ -64,6 +68,6 @@ void			show_alloc_mem(void)
 			while (++a != 3 && !(bin = ar->list[a]))
 				;
 	}
-	ft_dprintf(3, "Total : %zu octets\n", total);
+	ft_dprintf(2, "Total : %zu octets\n", total);
 	thread_unset2(ar);
 }

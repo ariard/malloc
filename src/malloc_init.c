@@ -16,6 +16,7 @@ void		malloc_init(void)
 {
 	int						i;
 
+	write(3, "init\n", 5);
 	g_cfg.page_size = getpagesize();
 	g_cfg.tiny_area = g_cfg.page_size * 512;
 	g_cfg.small_area = g_cfg.page_size * 4096;

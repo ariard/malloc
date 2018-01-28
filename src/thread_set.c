@@ -27,6 +27,7 @@ t_area		*thread_set(void)
 			i = rand() % 4;
 			pthread_mutex_lock(&g_cfg.areas[i].mutex);
 		}
+		g_cfg.areas[i].reentrancy = "1";
 		pthread_setspecific(g_cfg.key, (void *)&g_cfg.areas[i]);
 		return (&g_cfg.areas[i]);
 	}
