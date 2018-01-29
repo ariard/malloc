@@ -6,13 +6,23 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 19:16:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/29 23:29:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		malloc_init(void)
+static void		wrapper_env(void)
+{
+	char	*s;
+
+	g_cfg.start = (s = getenv("MallocCheckHeapStart")) ? ft_atoi(s) : 0;
+	g_cfg.check = (s = getenv("MallocCheckHeapEach")) ? ft_atoi(s) : 0;
+	g_cfg.error = (s = getenv("MallocErrorAbort")) ? 1 : 0;
+	g_cfg.log = (s = getenv("MallocLogHistory")) ? 1 : 0;
+}
+
+void			malloc_init(void)
 {
 	int						i;
 
@@ -32,4 +42,5 @@ void		malloc_init(void)
 	}
 	pthread_key_create(&g_cfg.key, NULL);
 	srand(time(NULL));
+	wrapper_env();
 }

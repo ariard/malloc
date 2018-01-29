@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/28 20:57:20 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 00:03:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,15 @@
 # define SUM(x)		*(int *)((void *)x - sizeof(size_t) - sizeof(int))
 # define LSUM(x, s)	*(int *)(x + s - sizeof(size_t) - 2 * sizeof(int))
 
+# define LT_PREV(x)		*(int *)(x - 2 * sizeof(size_t) - 2 * sizeof(int))
+# define LSUM_PREV(x)	*(int *)(x - sizeof(size_t) - 2 * sizeof(int)) 
 
-# define LT_PREV(x)	*(int *)(x - 2 * sizeof(size_t) - 2 * sizeof(int))
+# define LT_ADDR(x, s)		(x + s - 2 * sizeof(size_t) - 2 * sizeof(int))
+# define LSUM_ADDR(x, s) 	(x + s - sizeof(size_t) - 2 * sizeof(int))
+
+# define SUM_ADDR(x)		((void *)x - sizeof(size_t))
+# define BT_ADDR(x) 		((void *)x - sizeof(size_t) - sizeof(int))
+
 
 # define FREE(x)		x & 0
 # define SET_BUSY(x)	x | (1 << 0)
@@ -73,6 +80,10 @@ struct		s_config
 	t_area				areas[4];
 	pthread_key_t		key;
 	pthread_once_t		once;
+	int					start;
+	int					check;						
+	int					error;	
+	int					log;
 };
 
 enum		e_status

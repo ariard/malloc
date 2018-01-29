@@ -16,7 +16,7 @@ int		main(void)
 
 	size = SIZE;
 	nbr = -1;
-	while (++nbr < 1000)
+	while (++nbr < NBR)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);

@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 # define SIZE 	150000
 
@@ -11,7 +12,7 @@ int		main(void)
 
 	memset(a, 'A', SIZE);
 	
-	ptr = malloc(strlen(a) + 1);
+	ptr = malloc(SIZE + 1);
 	strcpy(ptr, a);
 	printf("[08] %s\n", ptr);
 	free(ptr);
