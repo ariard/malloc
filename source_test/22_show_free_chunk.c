@@ -9,7 +9,7 @@ int		main(void)
 {
 	char	a[SIZE1 + 1];
 	char	b[SIZE2 + 1];
-	char	c;
+	char	*c;
 	char	*ptr[5];
 
 	memset(a, 'A', SIZE1);
@@ -25,6 +25,6 @@ int		main(void)
 	free(ptr[0]);
 	free(ptr[1]);
 	free(ptr[2]);
-//	INTERN(show_alloc_mem())
+	show_free_mem();
 	exit(0);
 }

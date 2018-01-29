@@ -9,7 +9,7 @@ int		main(void)
 {
 	char	a[SIZE1 + 1];
 	char	b[SIZE2 + 1];
-	char	c;
+	char	*c;
 	char	*ptr[5];
 
 	memset(a, 'A', SIZE1);
@@ -18,10 +18,12 @@ int		main(void)
 	
 	ptr[0] = malloc(strlen(c) + 1);
 	strcpy(ptr[0], c);
+	printf("[21] 1 %s\n", ptr[0]);
 	ptr[1] = malloc(strlen(a) + 1);
 	strcpy(ptr[1], a);
+	printf("[22] 2 %s\n", ptr[1]);
 	ptr[2] = malloc(strlen(b) + 1);
 	strcpy(ptr[2], b);
-//	INTERN(show_alloc_mem())
+	printf("[22] 3 %s\n", ptr[2]);
 	exit(0);
 }

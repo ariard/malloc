@@ -20,11 +20,10 @@ int		main(void)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);
+		printf("[11] nb %d %s\n", nbr, ptr[nbr]);
 	}	
-//	INTERN(show_alloc_mem())
 	nbr -= 1;
 	while (++nbr < NBR)
 		free(ptr[nbr]);
-//	INTERN(show_free_chunk())
 	exit(0);
 }

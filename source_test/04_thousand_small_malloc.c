@@ -13,14 +13,13 @@ int		main(void)
 	size_t	size;
 
 	memset(a, 'A', SIZE);
-
 	size = SIZE;
 	nbr = -1;
 	while (++nbr < 1000)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);
+		printf("[04] nb %d %s\n", nbr, ptr[nbr]);
 	}	
-//	INTERN(show_alloc_mem())
 	exit(0);
 }

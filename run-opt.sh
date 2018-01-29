@@ -1,6 +1,4 @@
-export MallocCheckHeapStart=10
-export MallocCheckHeapEach=1
-export MallocErrorAbort=1
-export MallocCheckHeapSleep=0
-
+export DYLD_LIBRARY_PATH=.
+export DYLD_INSERT_LIBRARIES=libft_malloc.so
+export DYLD_FORCE_FLAT_NAMESPACE=1
 $@ 3>STDBUG

@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/28 20:57:04 by ariard           ###   ########.fr        #
+#    Updated: 2018/01/29 18:59:07 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,13 +74,6 @@ all: $(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@rm -f $(SYM_NAME)
 	@ln -s $(NAME) $(SYM_NAME)
 	
-main:
-	gcc -L/Users/ariard/Projects/malloc -Wall -I includes/ main.c -o main -lmalloc
-
-main-clean:
-	rm -f main
-
-re-main: main-clean main
 
 build-test:
 	@$(MAKE) -C $(TEST_DIR)
@@ -90,15 +83,6 @@ fclean-test:
 
 re-test:
 	@$(MAKE) re -C $(TEST_DIR)
-
-build-mouli:
-	@$(MAKE) -C $(MOULI_DIR)
-
-clean-mouli:
-	@$(MAKE) fclean -C $(MOULI_DIR)
-
-re-mouli:
-	@$(MAKE) re -C $(MOULI_DIR)
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)

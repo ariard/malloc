@@ -20,15 +20,21 @@ pthread_t	ntid14;
 pthread_t	ntid15;
 pthread_t	ntid16;
 
-
 void		*thr_func(void *arg)
 {
 	char	*ptr[100];
+	char	*a;
 	int	i;
 
 	i = -1;
+	a = "hello world";	
+	(void)arg;
 	while (++i < 100)
+	{
 		ptr[i] = malloc(100);
+		strcpy(ptr[i], a);
+		printf("[04] thr %lu nb %d %s\n", (unsigned long)pthread_self(), i, ptr[i]);
+	}
 	i = -1;
 	while (++i < 100)
 		free(ptr[i]);

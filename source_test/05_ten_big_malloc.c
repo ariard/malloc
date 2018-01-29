@@ -20,7 +20,7 @@ int		main(void)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);
+		printf("[05] nb %d %s\n", nbr, ptr[nbr]);
 	}	
-//	INTERN(show_alloc_mem())
 	exit(0);
 }

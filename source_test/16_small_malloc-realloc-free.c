@@ -13,10 +13,10 @@ int		main(void)
 	
 	ptr = malloc(strlen(a) + 1);
 	strcpy(ptr, a);
-//	INTERN(show_alloc_mem())
+	printf("[16] 1 %s\n", ptr);
 	ptr = realloc(ptr, strlen(a) + 1);	
 	strcat(ptr, a);
+	printf("[16] 2 %s\n", ptr);
 	free(ptr);
-//	INTERN(show_free_chunk())
 	exit(0);
 }

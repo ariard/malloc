@@ -10,8 +10,7 @@ int		main(void)
 	a = "hello world";
 	ptr = malloc(strlen(a) + 1);
 	strcpy(ptr, a);
-//	INTERN(show_alloc_mem())
+	printf("[06] %s\n", ptr);
 	free(ptr);
-//	INTERN(show_free_chunk())
 	exit(0);
 }

@@ -1,10 +1,11 @@
-- to-do : custom print + heap-check shadow last
-	=> THINK on paper (bin nbr, update chk init, chk merge, free)
-		(solve probme 1 with 2)
-
-
 - remettre a la norme, fonctionner test, cleaner repo, retest, lock
 
+- test all
+- clean libft
+- norme
+- Makefile
+- pdf correc
+- git clone
 
 
 GOALS :

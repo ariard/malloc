@@ -23,22 +23,22 @@ int		main(void)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);
+		printf("[27] nb %d %s\n", nbr, ptr[nbr]);
 	}
 
 	nbr = -1;
 	size = SIZE;
-	while (++nbr << NBR)
+	while (++nbr < NBR)
 	{
 		ptr2[nbr] = malloc(size + 1);
 		strcpy(ptr2[nbr], b);
+		printf("[27] nb %d %s\n", nbr, ptr2[nbr]);
 	}
-//	INTERN(show_alloc_mem())
 	nbr -=1;
 	while (++nbr < NBR)
 	{
 		free(ptr[nbr]);
 		free(ptr2[nbr]);
 	}
-//	INTERN(show_free_chunk())
 	exit(0);
 }

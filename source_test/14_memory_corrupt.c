@@ -5,12 +5,14 @@
 int		main(void)
 {
 	char	*a;
+	char	*b;
 	char	*ptr;
 
 	a = "hello world";
-	b = "far far far far longuer";
+	b = "far far far far far far far far far far longuer";
 	ptr = malloc(strlen(a) + 1);
-	strncpy(ptr, b);
-//	INTERN(show_alloc_mem())
+	strcpy(ptr, b);
+	printf("[14] %s\n", ptr);
+	ptr = malloc(10);
 	exit(0);
 }
