@@ -23,10 +23,11 @@ t_bin			*bin_add(size_t request)
 		+ sizeof(t_bin) + 2 * sizeof(size_t) + 2 * sizeof(int) : size;
 	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON
 		| MAP_PRIVATE, -1, 0)) == MAP_FAILED)
-		chunk_error(0, 3);
+		bin = (getenv("MallocErrorAbort")) ? chunk_error(0, 3) : NULL;
 	else
 	{
 		bin->next = NULL;
+		bin->nb = 0;
 		bin->freespace = size - sizeof(t_bin);
 		bin->first = bin + 1;
 		bin->first = bin->first + sizeof(int) + sizeof(size_t);

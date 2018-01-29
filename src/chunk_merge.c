@@ -27,7 +27,8 @@ static void	clean_chunk(t_chunk *tmp)
 	LSUM(tmp, size) = 0;
 }
 
-void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward)
+void		*chunk_merge(t_bin *bin, 
+		t_chunk *chunk, size_t forward, size_t backward)
 {
 	t_chunk		*tmp;
 	size_t		new_size;
@@ -40,6 +41,7 @@ void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward)
 		if ((forward -= (BT(tmp) & ~(1 << 0))) == 0)
 			break;
 		tmp = ((void *)tmp + (BT(tmp) & ~(1 << 0)));
+		bin->nb--;	
 	}
 	tmp = chunk;
 	while (backward)
@@ -48,7 +50,9 @@ void		*chunk_merge(t_chunk *chunk, size_t forward, size_t backward)
 		if ((backward -= BT(tmp) & ~(1 << 0)) == 0)
 			break;
 		tmp = ((void *)tmp - (LT_PREV((void *)tmp) & ~(1 << 0)));
+		bin->nb--;
 	}
+	bin->nb++;
 	chunk_set(new_size, tmp);
 	return (tmp);
 }

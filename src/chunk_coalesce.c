@@ -32,7 +32,7 @@ void		*chunk_coalesce(t_area *ar, t_chunk *free, size_t req, char range)
 		cand.size = cand.forward + BT(free) + cand.backward;
 		free = (range == 0) ? free->next : NULL;
 		if (cand.size > req)
-			return (chunk_merge(cand.chunk, cand.forward
+			return (chunk_merge(bs.bin, cand.chunk, cand.forward
 				+ BT(cand.chunk), cand.backward));
 	}
 	return (NULL);

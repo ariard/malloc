@@ -14,6 +14,7 @@
  
 void		chunk_set(size_t a_req, t_chunk *chunk)
 {
+
 	BT(chunk) = a_req;
 	SUM(chunk) = checksum(BT(chunk));
 	LT((void *)chunk, a_req) = a_req;

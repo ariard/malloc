@@ -43,11 +43,12 @@ void			free(void *ptr)
 	}	
 	else if (ptr)
 	{
-//		logmem(ptr, 1, ar);
+		logmem(ptr, 1, ar);
 		bs = chunk_find(ar, ptr);
 		bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 		b_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
 		b_size = (bs.a == 2) ? BT(ptr) + sizeof(t_bin) : b_size;
+		bs.bin->nb--;
 		if (bs.a == 2 || bs.bin->freespace == b_size)
 		{
 			if (bs.prev)

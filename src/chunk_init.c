@@ -38,6 +38,7 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 		a_req += s_split;
 	bin->freespace -= a_req;
 	chunk_set(SET_BUSY(a_req), chunk);
+	bin->nb++;
 	if (s_split)
 	{
 		split = (void *)chunk + a_req;

@@ -20,7 +20,11 @@ void	*chunk_error(void *ptr, int e)
 	error[1] = "object realloced was not allocated";
 	error[2] = "memory corruption";
 	error[3] = "out of memory";
-	ft_dprintf(2, "[%p] %s - abort\n", ptr, error[e]);
+	write(2, "[", 1);
+	print_addr(2, (unsigned long)ptr);
+	write(2, "] ", 2);
+	write(2, error[e], ft_strlen(error[e]));
+	write(2, " - abort\n", 9);
 	raise(6);
 	return (NULL);
 }
