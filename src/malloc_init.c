@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/26 21:48:51 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/29 19:16:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		malloc_init(void)
 {
 	int						i;
 
-	write(3, "init\n", 5);
 	g_cfg.page_size = getpagesize();
 	g_cfg.tiny_area = g_cfg.page_size * 512;
 	g_cfg.small_area = g_cfg.page_size * 4096;

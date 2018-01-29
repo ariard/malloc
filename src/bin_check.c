@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:23:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 18:45:02 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/29 19:38:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ static int		wr_getenv(char *str)
 {
 	char		*s;
 
+	write(3, "flag :", 7);
+	write(3, str, ft_strlen(str));
+	write(3, "\n", 1);
 	s = getenv(str);
+	write(3, "flag C\n", 7);
 	return ((s) ? ft_atoi(s) : 0);
 }
 
@@ -47,6 +51,7 @@ void			bin_check(t_area *ar)
 	void		*ptr;
 	t_bin		*bin;
 
+	write(3, "bin check\n", 10);
 	if (start == 0 && !(start = wr_getenv("MallocCheckHeapStart")))
 		return;
 	start = (--start > 0) ? start : -1;
@@ -67,4 +72,5 @@ void			bin_check(t_area *ar)
 					;
 		}
 	}
+	write(3, "bin check - end\n", 16);
 }

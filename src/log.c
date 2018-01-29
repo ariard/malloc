@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:35:13 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 18:45:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/29 19:26:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	logmem(void *ptr, char from, t_area *ar)
 	char		name[100 + 1];
 	char		*pid;
 
-	if (!getenv("MallocLogHistory\n"))
-		return;
+//	if (!getenv("MallocLogHistory"))
+//		return;
 	if (!ft_strncmp(ar->reentrancy, "2", 1))
 		return;	
 	ar->reentrancy = "2";
