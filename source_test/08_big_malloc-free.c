@@ -11,8 +11,9 @@ int		main(void)
 	char	*ptr;
 
 	memset(a, 'A', SIZE);
+	a[SIZE] = 0;
 	
-	ptr = malloc(SIZE + 1);
+	ptr = malloc(SIZE);
 	strcpy(ptr, a);
 	printf("[08] %s\n", ptr);
 	free(ptr);

@@ -10,8 +10,9 @@ int		main(void)
 	char	*ptr;
 
 	memset(a, 'A', SIZE);
+	a[SIZE] = 0;
 	
-	ptr = malloc(strlen(a) + 1);
+	ptr = malloc(SIZE);
 	strcpy(ptr, a);
 	printf("[02] %s\n", ptr);
 	exit(0);

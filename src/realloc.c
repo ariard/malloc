@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 00:13:05 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 20:59:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ void		*realloc(void *ptr, size_t size)
 	{
 		write(3, "r - flag C\n", 11);
 		new = chunk_coalesce(ar, ptr, size, 1);
-		write(3, "r - flag D\n", 11);
 		if (!new)
 		{
-			new = malloc(size);
-			ft_memcpy(new, ptr, (BT(ptr) & ~(1 << 0) 
+			write(3, "r - flag E\n", 11);
+			//size req + actual size
+			new = malloc(size + (BT(ptr) & ~(1 << 0)));
+			ft_memcpy(new, ptr, ((BT(ptr) & ~(1 << 0))
 				- 2 * sizeof(int) - 2 * sizeof(char)));
 			free(ptr); 
 		}
 	}
-	write(3, "r - flag E\n", 11);
 	thread_unset2(ar);
+	write(3, "r - flag F\n", 11);
 	return (new);
 }

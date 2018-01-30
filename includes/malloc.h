@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 00:03:48 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 19:45:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define DBG(s, ...)	level(3, s, ##__VA_ARGS__);
 
 # define BT(x)		*(size_t *)((void *)x - sizeof(size_t))
-# define LT(x, s) 	*(size_t *)(x + s - 2 * sizeof(size_t) - 2 * sizeof(int))
+# define LT(x, s)	*(size_t *)(x + s - 2 * sizeof(size_t) - 2 * sizeof(int))
 
 # define SUM(x)		*(int *)((void *)x - sizeof(size_t) - sizeof(int))
 # define LSUM(x, s)	*(int *)(x + s - sizeof(size_t) - 2 * sizeof(int))
@@ -46,7 +46,7 @@
 # define BT_ADDR(x) 		((void *)x - sizeof(size_t) - sizeof(int))
 
 
-# define FREE(x)		x & 0
+# define FREE(x)		!(x & (1 << 0))
 # define SET_BUSY(x)	x | (1 << 0)
 # define SET_FREE(x)	x & ~(1 << 0)
 
@@ -126,16 +126,16 @@ void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
 void		*bin_pack(t_area *area, t_bin *bin, size_t request);
-int		bin_checkin(t_bin *bin, void *ptr, char area, char pos);
+int			bin_checkin(t_bin *bin, void *ptr, char area, char pos);
 char		bin_range(t_area *area, void *ptr);
 void		bin_check(t_area *area);
 
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
 void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
-int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
-void		*chunk_merge(t_bin *bin, t_chunk *chunk, size_t forward, size_t backward);
+void		*chunk_merge(t_bin *bin, t_chunk *chunk, size_t forward, size_t backward, char a);
 void		*chunk_error(void *ptr, int e);
 char		chunk_check(t_area *area, void *ptr);
 void		chunk_set(size_t a_req, t_chunk *chunk);
@@ -145,7 +145,7 @@ void		thread_unset2(t_area *area);
 
 void		logmem(void *ptr, char from, t_area *ar);
 
-int		align(int x, int f);
+int			align(int x, int f);
 char		checksum(size_t size);
 
 void		show_alloc_mem(void);

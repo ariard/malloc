@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:59:18 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 22:27:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 21:06:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl)
 	size = (ctrl.pos < 0) ? LT_PREV((void *)chunk) & ~(1 << 0) 
 		: BT(chunk) & ~(1 << 0);
 	tmp = (ctrl.pos < 0) ? chunk - size : chunk + size;
-	if (!(FREE(*(size_t *)(tmp - sizeof(size_t)))) && ctrl.sum < request)
+	if (FREE(*(size_t *)(tmp - sizeof(size_t))) && ctrl.sum < request)
 	{
 		if (BT(tmp) + ctrl.sum > request)
 			return (BT(tmp) + ctrl.sum);

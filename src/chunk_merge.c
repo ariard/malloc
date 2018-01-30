@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 18:33:08 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 21:06:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ static void	clean_chunk(t_chunk *tmp)
 {
 	size_t		size;
 
-	if (tmp->next && (tmp->next)->prev)
-		(tmp->next)->prev = tmp->prev;
-	if (tmp->prev && (tmp->prev)->next)
-		(tmp->prev)->next = tmp->next;
-	tmp->next = NULL;
-	tmp->prev = NULL;
+	if (FREE(*(size_t *)((void *)tmp - sizeof(size_t))))
+	{
+		if (tmp->next && (tmp->next)->prev)
+			(tmp->next)->prev = tmp->prev;
+		if (tmp->prev && (tmp->prev)->next)
+			(tmp->prev)->next = tmp->next;
+		tmp->next = NULL;
+		tmp->prev = NULL;
+	}
 	size = BT(tmp) & ~(1 << 0);
 //	print_value(3, size);
 //	write(3, "\n", 1);
@@ -57,9 +60,12 @@ void		*chunk_merge(t_bin *bin,
 //	write(3, "forward :", 9);
 //	print_value(3, forward);
 //	write(3, "\n", 1);
+//	write(3, "cm - flag A\n", 12);
 	while (forward)
 	{
+//		write(3, "cm - flag B\n", 12);
 		clean_chunk(tmp);
+//		write(3, "cm - flag D\n", 12);
 		if ((forward -= (BT(tmp) & ~(1 << 0))) == 0)
 			break;
 		tmp = ((void *)tmp + (BT(tmp) & ~(1 << 0)));

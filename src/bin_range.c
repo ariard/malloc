@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 23:22:29 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/24 23:53:42 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 20:30:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static char		bin_in(t_bin *bin, void *ptr, char a)
 {
 	if (a == 2)
 	{
-		if ((char *)ptr > (char *)bin && (char *)ptr != (char *)bin
-			+ sizeof(t_bin) + sizeof(char) + sizeof(size_t))
+		if ((char *)ptr == ((char *)bin + sizeof(t_bin) + sizeof(size_t)
+			+ sizeof(int)))
 			return (1);
 	}
 	if (a == 1)

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 23:00:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 19:57:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_bin			*bin_add(size_t request)
 	size = (request <= g_cfg.limit_tiny) ? g_cfg.tiny_area \
 		: g_cfg.small_area;
 	size = (request > g_cfg.limit_small) ? request \
-		+ sizeof(t_bin) + 2 * sizeof(size_t) + 2 * sizeof(int) : size;
+		+ sizeof(t_bin) + 2 * sizeof(size_t) + 2 * sizeof(int) + 24 : size;
 	if ((bin = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON
 		| MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		bin = (g_cfg.error) ? chunk_error(0, 3) : NULL;

@@ -11,10 +11,10 @@ int		main(void)
 
 	memset(a, 'A', SIZE);
 	
-	ptr = malloc(strlen(a) + 1);
+	ptr = malloc(SIZE);
 	strcpy(ptr, a);
 	printf("[16] 1 %s\n", ptr);
-	ptr = realloc(ptr, strlen(a) + 1);	
+	ptr = realloc(ptr, SIZE);	
 	strcat(ptr, a);
 	printf("[16] 2 %s\n", ptr);
 	free(ptr);

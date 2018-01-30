@@ -18,16 +18,16 @@ int		main(void)
 	{
 		ptr[nbr] = malloc(size + 1);
 		strcpy(ptr[nbr], a);
-		printf("[18] nb %d %s\n", nbr, ptr[nbr]);
+		printf("[18] 1 nb %d %s\n", nbr, ptr[nbr]);
 	}	
-	nbr -=1;
+	nbr = -1;
 	while (++nbr < NBR)
 	{
 		ptr[nbr] = realloc(ptr[nbr], size + 1);
 		strcat(ptr[nbr], a);
-		printf("[18] nb %d %s\n", nbr, ptr[nbr]);
+		printf("[18] 2 nb %d %s\n", nbr, ptr[nbr]);
 	}
-	nbr -=1;
+	nbr = -1;
 	while (++nbr < NBR)
 		free(ptr[nbr]);
 	exit(0);

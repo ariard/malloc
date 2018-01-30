@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 23:27:26 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 21:00:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,20 @@ void			free(void *ptr)
 	size_t		b_size;
 
 	pthread_once(&g_cfg.once, malloc_init);	
-//	write(3, "free\n", 5);
+	write(3, "free\n", 5);
 	ar = thread_set();
 	bin_check(ar);
-//	write(3, "f - flag A\n", 11);
-	if (chunk_check(ar, ptr))
+	write(3, "f - flag A\n", 11);
+	if (!ptr || chunk_check(ar, ptr))
 	{
+		write(3, "f - flag B\n", 11);
 		if (g_cfg.error)
 			chunk_error(ptr, 0);
-	}	
+	}
 	else if (ptr)
 	{
+		write(3, "f - flag C\n", 11);
 		logmem(ptr, 1, ar);
-	//	write(3, "f - flag B\n", 11);
 		bs = chunk_find(ar, ptr);
 		bs.bin->freespace += (BT(ptr) & ~(1 << 0));
 		b_size = (bs.a == 0) ? g_cfg.tiny_area : g_cfg.small_area;
@@ -55,11 +56,13 @@ void			free(void *ptr)
 		{
 			if (bs.prev)
 				bs.prev = bs.bin->next;
+			else
+				ar->list[2] = bs.bin->next;
 			munmap(bs.bin, b_size);
 		}
 		else
 			add_freechk(bs, ptr);
 	}
-//	write(3, "free - end\n", 11);
+	write(3, "f - flag D\n", 11);
 	thread_unset2(ar); 
 }

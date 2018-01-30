@@ -10,15 +10,14 @@ int		main(void)
 	char	a[SIZE + 1];
 	char	*ptr[NBR + 1];
 	int		nbr;
-	size_t	size;
 
 	memset(a, 'A', SIZE);
+	a[SIZE] = 0;
 
-	size = SIZE;
 	nbr = -1;
 	while (++nbr < NBR)
 	{
-		ptr[nbr] = malloc(size + 1);
+		ptr[nbr] = malloc(SIZE);
 		strcpy(ptr[nbr], a);
 		printf("[11] nb %d %s\n", nbr, ptr[nbr]);
 	}	
