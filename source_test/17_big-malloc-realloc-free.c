@@ -16,6 +16,8 @@ int		main(void)
 	ptr = malloc(SIZE + 1);
 	strcpy(ptr, a);
 	printf("[17] 1 %s\n", ptr);
+	memset(a, 'B', SIZE);
+	a[SIZE] = 0;
 	ptr = realloc(ptr, SIZE);
 	strcat(ptr, a);
 	printf("[17] 2 %s\n", ptr);

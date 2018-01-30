@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/25 00:38:08 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 21:37:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
 		cand = (cand) ? chunk_init(bin, cand, a_req) : NULL;
 	}
 	else if (bin->freespace > req)
+	{
+		bin->freespace -= req;
 		cand = bin->first;
+	}
 	return ((void *)cand);
 }

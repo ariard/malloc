@@ -23,6 +23,9 @@ int		main(void)
 		printf("[19] 1 nb %d %s\n", nbr, ptr[nbr]);
 	}	
 	nbr = -1;
+
+	memset(a, 'B', SIZE);
+	a[SIZE] = 0;
 	while (++nbr < NBR)
 	{
 		ptr[nbr] = realloc(ptr[nbr], SIZE);

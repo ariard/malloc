@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 21:06:17 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 21:21:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		*chunk_merge(t_bin *bin,
 //	write(3, "forward :", 9);
 //	print_value(3, forward);
 //	write(3, "\n", 1);
-//	write(3, "cm - flag A\n", 12);
+	write(3, "cm - flag A\n", 12);
 	while (forward)
 	{
 //		write(3, "cm - flag B\n", 12);
