@@ -20,7 +20,7 @@ int		main(void)
 		strcpy(ptr[nbr], a);
 		printf("[25] nb %d %s\n", nbr, ptr[nbr]);
 	}	
-	nbr -=1;
+	nbr = -1;
 	while (++nbr < NBR)
 		free(ptr[nbr]);
 	exit(0);

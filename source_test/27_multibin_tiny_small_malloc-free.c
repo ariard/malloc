@@ -27,14 +27,13 @@ int		main(void)
 	}
 
 	nbr = -1;
-	size = SIZE;
 	while (++nbr < NBR)
 	{
-		ptr2[nbr] = malloc(size + 1);
+		ptr2[nbr] = malloc(SIZE);
 		strcpy(ptr2[nbr], b);
 		printf("[27] nb %d %s\n", nbr, ptr2[nbr]);
 	}
-	nbr -=1;
+	nbr = -1;
 	while (++nbr < NBR)
 	{
 		free(ptr[nbr]);

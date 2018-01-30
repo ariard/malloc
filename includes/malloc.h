@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 19:45:15 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/31 00:19:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ struct		s_ctrl
 
 extern t_config			g_cfg;
 
+extern	pthread_mutex_t	debug;
+
 void		malloc_init(void);
 
 t_bin		*bin_add(size_t request);
@@ -151,6 +153,7 @@ char		checksum(size_t size);
 void		show_alloc_mem(void);
 void		show_free_mem(void);
 void		show_cand_merge(void *ptr, t_cand cand);
+void		signal_handler(int sig);
 
 void		area_print(int fd, t_bin *bin, int a);
 void		malloc_print(int fd, void *add_one, void *add_two, size_t size);

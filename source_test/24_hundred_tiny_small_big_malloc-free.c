@@ -19,10 +19,11 @@ int		main(void)
 	size_t	size;
 
 	memset(a, 'A', SIZE1);
+	a[SIZE1] = 0;
 	memset(b, 'B', SIZE2);
+	b[SIZE2] = 0;
 	c = "hello world";
 	
-
 	size = strlen(c);
 	nbr = -1;
 	while (++nbr < NBR)
@@ -32,20 +33,18 @@ int		main(void)
 		printf("[24] 1 %s\n", ptr1[nbr]);
 	}
 
-	size = SIZE1;
 	nbr = -1;
 	while (++nbr < NBR)
 	{
-		ptr2[nbr] = malloc(size + 1);
+		ptr2[nbr] = malloc(SIZE2);
 		strcpy(ptr2[nbr], a);
 		printf("[24] 2 %s\n", ptr2[nbr]);
 	}
 
-	size = SIZE2;
 	nbr = -1;
 	while (++nbr < NBR2)
 	{
-		ptr3[nbr] = malloc(size + 1);
+		ptr3[nbr] = malloc(SIZE2);
 		strcpy(ptr3[nbr], b);
 		printf("[24] 3 %s\n", ptr3[nbr]);
 	}

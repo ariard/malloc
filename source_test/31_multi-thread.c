@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <stdarg.h>
+#include <signal.h>
+#include "../includes/malloc.h"
 
 pthread_t	ntid1;
 pthread_t	ntid2;
@@ -20,6 +23,16 @@ pthread_t	ntid14;
 pthread_t	ntid15;
 pthread_t	ntid16;
 
+void		init_signals(void)
+{
+	struct	sigaction	sigact; 
+
+	sigact.sa_handler = signal_handler;
+	sigemptyset(&sigact.sa_mask);
+	sigact.sa_flags = 0;
+	sigaction(SIGSEGV, &sigact, (struct sigaction *)NULL);
+}
+
 void		*thr_func(void *arg)
 {
 	char	*ptr[100];
@@ -27,13 +40,14 @@ void		*thr_func(void *arg)
 	int	i;
 
 	i = -1;
-	a = "hello world";	
+	a = "hello world\n";	
 	(void)arg;
 	while (++i < 100)
 	{
 		ptr[i] = malloc(100);
 		strcpy(ptr[i], a);
-		printf("[04] thr %lu nb %d %s\n", (unsigned long)pthread_self(), i, ptr[i]);
+		write(1, ptr[i], 12);
+ //		printf("[32] thr %lu nb %d %s\n", (unsigned long)pthread_self(), i, ptr[i]);
 	}
 	i = -1;
 	while (++i < 100)
@@ -43,6 +57,7 @@ void		*thr_func(void *arg)
 
 int		main(void)
 {
+	init_signals();
 	pthread_create(&ntid1, NULL, thr_func, NULL);
 	pthread_create(&ntid2, NULL, thr_func, NULL);
 	pthread_create(&ntid3, NULL, thr_func, NULL);

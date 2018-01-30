@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/29 23:29:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 23:13:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void			malloc_init(void)
 	pthread_key_create(&g_cfg.key, NULL);
 	srand(time(NULL));
 	wrapper_env();
+	pthread_mutex_init(&debug, NULL);
 }

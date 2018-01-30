@@ -15,7 +15,9 @@ int		main(void)
 	char	*ptr[5];
 
 	memset(a, 'A', SIZE1);
+	a[SIZE1] = 0;
 	memset(b, 'B', SIZE2);
+	a[SIZE2] = 0;
 	c = "hello world";
 	
 	ptr[0] = malloc(strlen(c) + 1);

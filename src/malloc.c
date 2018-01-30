@@ -6,13 +6,16 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 21:38:18 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/31 00:21:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 t_config		g_cfg = { .once = PTHREAD_ONCE_INIT };
+
+
+pthread_mutex_t	debug;
 
 void			*malloc(size_t request)
 {

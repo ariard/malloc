@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 18:23:07 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 20:15:35 by ariard           ###   ########.fr       */
+/*   Updated: 2018/01/30 23:39:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			bin_checkin(t_bin *bin, void *ptr, char a, char pos)
 	if ((pos < 0 || pos == 0) && (char *)ptr - (LT_PREV((void *)ptr)
 		& ~(1 << 0)) + 1 > (char *)bin)
 		return (1);
-	//print here cmp to know why last isn t access
 	if ((pos > 0 || pos == 0) && (char *)ptr + (BT(ptr)
 		& ~(1 << 0)) - 1 < (char *)bin + max)
 		return (1);
