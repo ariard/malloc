@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/31 00:20:55 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/02 20:42:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		*chunk_merge(t_bin *bin,
 	size_t		new_size;
 	size_t		s_bin;
 
+	write(3, "cm - flag A : ", 14);
+	write(3, "\n", 1);
 	new_size = forward + backward;
 	tmp = chunk;
 	s_bin = (a == 0) ? g_cfg.tiny_area : g_cfg.small_area;

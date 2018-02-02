@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 19:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 20:19:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/02 20:30:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ t_area		*thread_set(void)
 	int		i;
 
 	i = -1;
-//	pthread_mutex_lock(&debug);
-//	write(3, "ts - flag A : ", 14);
-//	print_value(3, (unsigned long)pthread_self());
-//	write(3, "\n", 1);
-//	pthread_mutex_unlock(&debug);
 	if (!(value = pthread_getspecific(g_cfg.key)))
 	{
 		while (++i < 4 && pthread_rwlock_trywrlock(&g_cfg.areas[i].rwlock))
@@ -45,9 +40,5 @@ t_area		*thread_set(void)
 	}
 	else
 		pthread_rwlock_unlock(&((t_area *)value)->rwlock);
-
-//	write(3, "ts - flag C : ", 14);
-//	print_value(3, (unsigned long)pthread_self());
-//	write(3, "\n", 1);
 	return (value);
 }

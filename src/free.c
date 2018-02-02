@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 20:19:06 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/02 20:29:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,15 @@ void			free(void *ptr)
 	size_t		b_size;
 
 	pthread_once(&g_cfg.once, malloc_init);	
-	pthread_mutex_lock(&debug);
-	write(3, "f - flag A : ", 13);
-	print_value(3, (unsigned long)pthread_self());
-	write(3, "\n", 1);
-	pthread_mutex_unlock(&debug);
 	ar = thread_set();
 	bin_check(ar);
-	pthread_mutex_lock(&debug);
-	write(3, "f - flag B : ", 13);
-	print_value(3, (unsigned long)pthread_self());
-	write(3, "\n", 1);
-	pthread_mutex_unlock(&debug);
 	if (!ptr || chunk_check(ar, ptr))
 	{
-		pthread_mutex_lock(&debug);
-		write(3, "f - flag C : ", 13);
-		print_value(3, (unsigned long)pthread_self());
-		write(3, "\n", 1);
-		pthread_mutex_unlock(&debug);
 		if (g_cfg.error)
 			chunk_error(ptr, 0);
 	}
 	else if (ptr)
 	{
-		pthread_mutex_lock(&debug);
-		write(3, "f - flag D : ", 13);
-		print_value(3, (unsigned long)pthread_self());
-		write(3, "\n", 1);
-		pthread_mutex_unlock(&debug);
 		logmem(ptr, 1, ar);
 		bs = chunk_find(ar, ptr);
 		bs.bin->freespace += (BT(ptr) & ~(1 << 0));
@@ -80,9 +60,4 @@ void			free(void *ptr)
 			add_freechk(bs, ptr);
 	}
 	thread_unset2(ar); 
-	pthread_mutex_lock(&debug);
-	write(3, "f - flag E : ", 13);
-	print_value(3, (unsigned long)pthread_self());
-	write(3, "\n", 1);
-	pthread_mutex_unlock(&debug);
 }
