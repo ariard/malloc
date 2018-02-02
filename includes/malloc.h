@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/31 00:19:09 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/02 19:30:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ struct		s_bin
 struct		s_area
 {
 	t_bin				*list[3];
-	pthread_mutex_t			mutex;
+	pthread_rwlock_t	rwlock;
 	char				*reentrancy;
 };
 

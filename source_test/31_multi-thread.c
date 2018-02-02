@@ -23,6 +23,8 @@ pthread_t	ntid14;
 pthread_t	ntid15;
 pthread_t	ntid16;
 
+pthread_mutex_t		lock;
+
 void		init_signals(void)
 {
 	struct	sigaction	sigact; 
@@ -31,6 +33,7 @@ void		init_signals(void)
 	sigemptyset(&sigact.sa_mask);
 	sigact.sa_flags = 0;
 	sigaction(SIGSEGV, &sigact, (struct sigaction *)NULL);
+	sigaction(SIGABRT, &sigact, (struct sigaction *)NULL);
 }
 
 void		*thr_func(void *arg)
@@ -44,10 +47,16 @@ void		*thr_func(void *arg)
 	(void)arg;
 	while (++i < 100)
 	{
-		ptr[i] = malloc(100);
+ 		ptr[i] = malloc(100);
 		strcpy(ptr[i], a);
+		pthread_mutex_lock(&lock);
+		write(1, "[31] thr ", 9);
+		print_value(1, (unsigned long)pthread_self());
+		write(1, " ", 1);
+		print_value(1, i);
+		write(1, " ", 1);
 		write(1, ptr[i], 12);
- //		printf("[32] thr %lu nb %d %s\n", (unsigned long)pthread_self(), i, ptr[i]);
+		pthread_mutex_unlock(&lock);
 	}
 	i = -1;
 	while (++i < 100)
@@ -58,6 +67,7 @@ void		*thr_func(void *arg)
 int		main(void)
 {
 	init_signals();
+	pthread_mutex_init(&lock, NULL);
 	pthread_create(&ntid1, NULL, thr_func, NULL);
 	pthread_create(&ntid2, NULL, thr_func, NULL);
 	pthread_create(&ntid3, NULL, thr_func, NULL);
