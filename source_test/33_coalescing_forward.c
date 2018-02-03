@@ -16,11 +16,12 @@ int		main(void)
 	while (++i < 7709)
 		a[i] = malloc(256);
 			
+	printf("%p | %p | %p \n", a[5000], a[5001], a[4999]);
 	free(a[5000]);		
 	free(a[5001]);
 	b = realloc(a[4999], 512);
 
 	strcpy(b, c);
-	printf("[33] %s\n", b);
+	printf("[33] %p : %s\n", b, b);
 	exit(0);
 }
