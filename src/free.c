@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 21:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 20:29:36 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:34:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void		add_freechk(t_bins bins, void *ptr)	
+static void		add_freechk(t_bins bins, void *ptr)
 {
 	t_chunk		*listfree;
 
@@ -26,21 +26,37 @@ static void		add_freechk(t_bins bins, void *ptr)
 		(t_chunk *)ptr);
 }
 
+static int		check(void *ptr, t_area *ar)
+{
+	if (!ptr || chunk_check(ar, ptr))
+	{
+		if (g_cfg.error)
+			chunk_error(ptr, 0);
+		return (0);
+	}
+	else
+		return (1);
+}
+
+static void		clean_bin(t_bins bs, size_t b_size, t_area *ar)
+{
+	if (bs.prev)
+		bs.prev = bs.bin->next;
+	else
+		ar->list[2] = bs.bin->next;
+	munmap(bs.bin, b_size);
+}
+
 void			free(void *ptr)
 {
 	t_area		*ar;
 	t_bins		bs;
 	size_t		b_size;
 
-	pthread_once(&g_cfg.once, malloc_init);	
+	pthread_once(&g_cfg.once, malloc_init);
 	ar = thread_set();
 	bin_check(ar);
-	if (!ptr || chunk_check(ar, ptr))
-	{
-		if (g_cfg.error)
-			chunk_error(ptr, 0);
-	}
-	else if (ptr)
+	if (check(ptr, ar))
 	{
 		logmem(ptr, 1, ar);
 		bs = chunk_find(ar, ptr);
@@ -49,15 +65,9 @@ void			free(void *ptr)
 		b_size = (bs.a == 2) ? BT(ptr) + sizeof(t_bin) : b_size;
 		bs.bin->nb--;
 		if (bs.a == 2 || bs.bin->freespace == b_size)
-		{
-			if (bs.prev)
-				bs.prev = bs.bin->next;
-			else
-				ar->list[2] = bs.bin->next;
-			munmap(bs.bin, b_size);
-		}
+			clean_bin(bs, b_size, ar);
 		else
 			add_freechk(bs, ptr);
 	}
-	thread_unset2(ar); 
+	thread_unset2(ar);
 }

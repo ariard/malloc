@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 15:11:29 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:23:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			*malloc(size_t request)
 	while (temp)
 	{
 		if ((chunk = bin_pack(ar, temp, request)))
-			break;
+			break ;
 		temp->next = (!temp->next) ? bin_add(request) : temp->next;
 		temp = temp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 14:51:46 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:23:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		*realloc(void *ptr, size_t size)
 		free(ptr);
 	if (size && !ptr)
 		new = malloc(size);
-	if (size && ptr && chunk_check(ar, ptr)) 
+	if (size && ptr && chunk_check(ar, ptr))
 		new = (g_cfg.error) ? chunk_error(ptr, 1) : NULL;
 	else if (size && ptr)
 	{
@@ -34,7 +34,7 @@ void		*realloc(void *ptr, size_t size)
 			new = malloc(size + (BT(ptr) & ~(1 << 0)));
 			ft_memcpy(new, ptr, ((BT(ptr) & ~(1 << 0))
 				- 2 * sizeof(int) - 2 * sizeof(char)));
-			free(ptr); 
+			free(ptr);
 		}
 	}
 	thread_unset2(ar);

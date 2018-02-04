@@ -6,19 +6,25 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:19:14 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 14:26:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:47:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
+static void	*if_big(t_bin *bin, size_t req)
+{
+	bin->freespace -= req;
+	return (bin->first);
+}
+
+void		*bin_pack(t_area *ar, t_bin *bin, size_t req)
 {
 	t_chunk	*cand;
 	t_chunk	*tmp;
 	size_t	size;
 	size_t	a_req;
-	
+
 	cand = NULL;
 	if (req <= g_cfg.limit_small)
 	{
@@ -32,14 +38,11 @@ void	*bin_pack(t_area *ar, t_bin *bin, size_t req)
 			size = (BT(tmp) <= size && BT(tmp) >= a_req) ? BT(tmp) : size;
 			tmp = tmp->next;
 		}
-		cand = (!cand && ((int)bin->freespace - a_req > 0)) 
+		cand = (!cand && ((int)bin->freespace - a_req > 0))
 			? chunk_coalesce(ar, bin->first, a_req, 0) : cand;
 		cand = (cand) ? chunk_init(bin, cand, a_req) : NULL;
 	}
 	else if (bin->freespace > req)
-	{
-		bin->freespace -= req;
-		cand = bin->first;
-	}
+		cand = if_big(bin, req);
 	return ((void *)cand);
 }

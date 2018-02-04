@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 20:36:20 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/28 20:59:23 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:24:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		malloc_print(int fd, void *add_one, void *add_two, size_t size)
 	print_addr(fd, (unsigned long)add_two);
 	write(fd, " : ", 3);
 	print_value(fd, size);
-	write(fd, " octets \n", 9);	
+	write(fd, " octets \n", 9);
 }
 
 void		area_print(int fd, t_bin *bin, int a)

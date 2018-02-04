@@ -6,12 +6,12 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 22:04:59 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 14:53:32 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:36:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
- 
+
 void		chunk_set(size_t a_req, t_chunk *chunk)
 {
 	size_t	s_clean;

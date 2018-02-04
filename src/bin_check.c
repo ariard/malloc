@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:23:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 20:15:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:43:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		list_browse(t_bin *bin, void *ptr)
 {
 	size_t		s_clean;
-	int		nbr;
+	int			nbr;
 
 	s_clean = 1;
 	nbr = bin->nb;
@@ -24,7 +24,7 @@ static void		list_browse(t_bin *bin, void *ptr)
 		s_clean = BT(ptr) & ~(1 << 0);
 		if (SUM(ptr) == 0 || SUM(ptr) != checksum(BT(ptr)))
 			chunk_error(ptr, 2);
-		if (LSUM(ptr, s_clean) == 0 
+		if (LSUM(ptr, s_clean) == 0
 			|| LSUM(ptr, s_clean) != checksum(LT(ptr, s_clean)))
 			chunk_error(ptr, 2);
 		ptr = (char *)ptr + s_clean;
@@ -40,13 +40,12 @@ void			bin_check(t_area *ar)
 	t_bin		*bin;
 
 	if (start == 0 && !(start = g_cfg.start))
-		return;
+		return ;
 	start = (--start > 0) ? start : -1;
 	if (!op && !(start = g_cfg.check))
-		return;
+		return ;
 	op = (start == -1) ? --op : op;
-	a = -1;
-	if (op == 0 && ar)
+	if (op == 0 && ar && (a = -1))
 	{
 		while (++a != 3 && !(bin = ar->list[a]))
 			;

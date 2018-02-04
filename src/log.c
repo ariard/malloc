@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:35:13 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 19:13:46 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:35:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	logmem(void *ptr, char from, t_area *ar)
 {
-	static int	file;	
+	static int	file;
 	char		name[100 + 1];
 	char		*pid;
 
 	if (!g_cfg.log)
-		return;
+		return ;
 	if (!ft_strncmp(ar->reentrancy, "2", 1))
-		return;	
+		return ;
 	ar->reentrancy = "2";
-	if (!file)	
+	if (!file)
 	{
 		ft_bzero(name, 100);
 		ft_strcpy(name, "/tmp/.tmp-malloc-log-");

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:49:55 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 19:30:54 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:37:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void			*chunk_init(t_bin *bin, t_chunk *chunk, size_t a_req)
 		split = (void *)chunk + a_req;
 		chunk_set(s_split, split);
 		listfree = (bin->first) ? bin->first : NULL;
-		split->next = listfree;	
+		split->next = listfree;
 		split->prev = NULL;
 		if (listfree)
 			listfree->prev = split;

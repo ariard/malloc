@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:07:42 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 15:11:26 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:32:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ static void		wrapper_env(void)
 {
 	char	*s;
 
-	g_cfg.start = (s = getenv("MallocCheckHeapStart")) ? ft_atoi(s) : 0;
-	g_cfg.check = (s = getenv("MallocCheckHeapEach")) ? ft_atoi(s) : 0;
-	g_cfg.error = (s = getenv("MallocErrorAbort")) ? 1 : 0;
-	g_cfg.log = (s = getenv("MallocLogHistory")) ? 1 : 0;
+	s = getenv("MallocCheckHeapStart");
+	g_cfg.start = (s) ? ft_atoi(s) : 0;
+	s = getenv("MallocCheckHeapEach");
+	g_cfg.check = (s) ? ft_atoi(s) : 0;
+	s = getenv("MallocErrorAbort");
+	g_cfg.error = (s) ? 1 : 0;
+	s = getenv("MallocLogHistory");
+	g_cfg.log = (s) ? 1 : 0;
 }
 
 void			malloc_init(void)
