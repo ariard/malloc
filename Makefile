@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/02/04 15:48:29 by ariard           ###   ########.fr        #
+#    Updated: 2018/02/04 16:52:17 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ db_show_free_mem.c\
 db_show_alloc_mem.c\
 db_print_addr.c\
 db_print_value.c\
+db_level.c\
 
 TEST_BASE	= \
 
