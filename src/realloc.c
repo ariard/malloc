@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 20:15:53 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 14:36:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		*realloc(void *ptr, size_t size)
 		new = chunk_coalesce(ar, ptr, size, 1);
 		if (!new)
 		{
-			//size req + actual size
 			new = malloc(size + (BT(ptr) & ~(1 << 0)));
 			ft_memcpy(new, ptr, ((BT(ptr) & ~(1 << 0))
 				- 2 * sizeof(int) - 2 * sizeof(char)));

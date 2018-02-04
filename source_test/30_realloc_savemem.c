@@ -14,7 +14,7 @@ int		main(void)
 
 	write(3, "in test\n", 8);
 	memset(a, 'A', SIZE);
-	a[SIZE] = 0;
+	a[256] = 0;
 
 	nbr = -1;
 	while (++nbr < 7709)
@@ -23,6 +23,7 @@ int		main(void)
 	strcpy(ptr[--nbr], a);
 	printf("%p\n", ptr[nbr]);
 	
+	write(3, "\n\n", 2);
 	c = realloc(ptr[nbr], 500);
 	
 	memset(a, 'B', SIZE);

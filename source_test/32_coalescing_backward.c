@@ -14,13 +14,14 @@ int		main(void)
 
 	memset(c, 'A', SIZE);
 	i = -1;
-	while (++i < 7274)
+	while (++i < 10000)
 		a[i] = malloc(256);
 
 	printf("%p | %p\n", a[4999], a[5000]);
 	free(a[4999]);
 	free(a[5000]);
-	b = malloc(512);
+	write(3, "\n\n", 2);
+	b = malloc(448);
 	
 	strcpy(b, c);
 	printf("[32] %p  : %s\n", b, b);

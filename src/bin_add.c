@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 23:06:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/01/30 21:37:35 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 14:45:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_bin			*bin_add(size_t request)
 	t_bin			*bin;
 	size_t			size;
 
-	write(3, "bp\n", 3);
 	size = (request <= g_cfg.limit_tiny) ? g_cfg.tiny_area \
 		: g_cfg.small_area;
 	size = (request > g_cfg.limit_small) ? request \
