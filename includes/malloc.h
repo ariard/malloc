@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 14:54:22 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:19:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@
 # define LSUM(x, s)	*(int *)(x + s - sizeof(size_t) - 2 * sizeof(int))
 
 # define LT_PREV(x)		*(int *)(x - 2 * sizeof(size_t) - 2 * sizeof(int))
-# define LSUM_PREV(x)	*(int *)(x - sizeof(size_t) - 2 * sizeof(int)) 
+# define LSUM_PREV(x)	*(int *)(x - sizeof(size_t) - 2 * sizeof(int))
 
 # define LT_ADDR(x, s)		(x + s - 2 * sizeof(size_t) - 2 * sizeof(int))
 # define LSUM_ADDR(x, s) 	(x + s - sizeof(size_t) - 2 * sizeof(int))
 
 # define SUM_ADDR(x)		((void *)x - sizeof(size_t))
 # define BT_ADDR(x) 		((void *)x - sizeof(size_t) - sizeof(int))
-
 
 # define FREE(x)		!(x & (1 << 0))
 # define SET_BUSY(x)	x | (1 << 0)
@@ -57,10 +56,10 @@
 
 struct		s_bin
 {
-	struct s_bin			*next;
+	struct s_bin		*next;
 	void				*first;
 	size_t				freespace;
-	int				nb;
+	int					nb;
 };
 
 struct		s_area
@@ -81,8 +80,8 @@ struct		s_config
 	pthread_key_t		key;
 	pthread_once_t		once;
 	int					start;
-	int					check;						
-	int					error;	
+	int					check;
+	int					error;
 	int					log;
 };
 
@@ -132,10 +131,13 @@ void		bin_check(t_area *area);
 
 t_bins		chunk_find(t_area *ar, void *ptr);
 void		*chunk_init(t_bin *bin, t_chunk *chunk, size_t request);
-void		*chunk_coalesce(t_area *area, t_chunk *list, size_t request, char range);
-int			chunk_search(t_bins bs, void *chunk, size_t request, t_ctrl ctrl);
+void		*chunk_coalesce(t_area *area, t_chunk *list,
+			size_t request, char range);
+int			chunk_search(t_bins bs, void *chunk,
+			size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
-void		*chunk_merge(t_bin *bin, t_chunk *chunk, size_t forward, size_t backward, char a);
+void		*chunk_merge(t_bin *bin, t_chunk *chunk, size_t forward,
+			size_t backward, char a);
 void		*chunk_error(void *ptr, int e);
 char		chunk_check(t_area *area, void *ptr);
 void		chunk_set(size_t a_req, t_chunk *chunk);
