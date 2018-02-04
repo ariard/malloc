@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/02/04 16:52:17 by ariard           ###   ########.fr        #
+#    Updated: 2018/02/04 18:24:14 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,8 +103,8 @@ cleanlib:
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean fcleanlib
-	rm -f $(NAME)
-	rm -f $(SYM_NAME)
+	@rm -f $(NAME)
+	@rm -f $(SYM_NAME)
 
 fcleanlib:	cleanlib
 	@make -C $(LIBFT_DIR) fclean
