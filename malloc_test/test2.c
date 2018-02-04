@@ -4,7 +4,6 @@ int		main(void)
 	char	*addr;
 
 	i = 0;
-	write(3, "test\n", 5);
 	while (i < 1024)
 	{
 		addr = (char *)malloc(1024);

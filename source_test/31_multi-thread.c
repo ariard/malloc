@@ -40,9 +40,9 @@ void		*thr_func(void *arg)
 		strcpy(ptr[i], a);
 		pthread_mutex_lock(&lock);
 		write(1, "[31] thr ", 9);
-//		print_value(1, (unsigned long)pthread_self());
-//		write(1, " ", 1);
-//		print_value(1, i);
+		print_value(1, (unsigned long)pthread_self());
+		write(1, " ", 1);
+		print_value(1, i);
 		write(1, " ", 1);
 		write(1, ptr[i], 12);
 		pthread_mutex_unlock(&lock);

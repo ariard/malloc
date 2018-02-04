@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 15:19:13 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 16:10:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int			chunk_search(t_bins bs, void *chunk,
 			size_t request, t_ctrl ctrl);
 t_bins		chunk_find(t_area *area, void *ptr);
 void		*chunk_merge(t_bin *bin, t_chunk *chunk, size_t forward,
-			size_t backward, char a);
+			size_t backward);
 void		*chunk_error(void *ptr, int e);
 char		chunk_check(t_area *area, void *ptr);
 void		chunk_set(size_t a_req, t_chunk *chunk);
@@ -161,6 +161,5 @@ void		total_print(int fd, size_t total);
 void		print_addr(int fd, unsigned long i);
 void		print_value(int fd, size_t n);
 
-void		level(int fd, char *s, ...);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ariard <ariard@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/10 19:50:31 by ariard            #+#    #+#              #
-#    Updated: 2018/01/29 22:05:21 by ariard           ###   ########.fr        #
+#    Updated: 2018/02/04 16:09:37 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SRC_BASE	= \
 24_hundred_tiny_small_big_malloc-free.c\
 25_multibin_tiny_malloc.c\
 26_multibin_small_malloc.c\
-27_multibin_tiny_malloc-free.c\
+27_multibin_tiny_small_malloc-free.c\
 30_realloc_savemem.c\
 31_multi-thread.c\
 32_coalescing_backward.c\
