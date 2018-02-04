@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 20:36:20 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/04 15:24:11 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 18:29:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		area_print(int fd, t_bin *bin, int a)
 	ar = (a == 2) ? "LARGE" : ar;
 	write(fd, "[", 1);
 	write(fd, ar, ft_strlen(ar));
-	write(fd, "] : ", 3);
+	write(fd, "] : ", 4);
 	print_addr(fd, (unsigned long)bin);
 	write(fd, "\n", 1);
 }
@@ -38,6 +38,6 @@ void		area_print(int fd, t_bin *bin, int a)
 void		total_print(int fd, size_t total)
 {
 	write(fd, "Total : ", 8);
-	print_addr(fd, total);
+	print_value(fd, total);
 	write(fd, " octets\n", 7);
 }
