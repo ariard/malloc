@@ -6,16 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 20:01:04 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 20:25:41 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:11:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 t_config		g_cfg = { .once = PTHREAD_ONCE_INIT };
-
-
-pthread_mutex_t	debug;
 
 void			*malloc(size_t request)
 {
@@ -45,10 +42,3 @@ void			*malloc(size_t request)
 	thread_unset2(ar);
 	return (chunk);
 }
-
-
-//	pthread_mutex_lock(&debug);
-//	write(3, "m - flag A : ", 13);
-//	print_value(3, (unsigned long)pthread_self());
-//	write(3, "\n", 1);
-//	pthread_mutex_unlock(&debug);

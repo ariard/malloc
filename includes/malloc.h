@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 19:53:56 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 19:30:50 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 14:54:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,6 @@ struct		s_ctrl
 };
 
 extern t_config			g_cfg;
-
-extern	pthread_mutex_t	debug;
 
 void		malloc_init(void);
 

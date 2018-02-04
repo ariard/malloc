@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 23:21:43 by ariard            #+#    #+#             */
-/*   Updated: 2018/02/02 18:26:45 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 14:53:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,9 @@ t_bins		chunk_find(t_area *ar, void *ptr)
 	size_t	max;
 	char	a;
 
-//	pthread_mutex_lock(&debug);
-//	write(3, "cf - flag A : ", 14);
-//	print_value(3, (unsigned long)pthread_self());
-//	write(3, "\n ptr : ", 8);
-//	print_addr(3, (unsigned long)ptr);
-//	write(3, " addr : ", 8);
-//	print_addr(3, (unsigned long)ar->list[0]);
-//	write(3, "\n", 1);
-//	pthread_mutex_unlock(&debug);
 	max = 0;
 	max = (BT(ptr) > g_cfg.limit_tiny) ? g_cfg.small_area \
 		: g_cfg.tiny_area;
-//	pthread_mutex_lock(&debug);
-//	write(3, "cf - flag B : ", 15);
-//	print_value(3, (unsigned long)pthread_self());
-//	write(3, "\n", 1);
-//	pthread_mutex_unlock(&debug);
 	bin = (max > g_cfg.tiny_area) ? ar->list[1] : ar->list[0];
 	bin = (BT(ptr) > g_cfg.limit_small) ? ar->list[2] : bin;
 	prev = NULL;

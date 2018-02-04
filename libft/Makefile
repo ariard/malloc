@@ -29,18 +29,6 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
-btree/btree_apply_by_level.c\
-btree/btree_apply_infix.c\
-btree/btree_apply_prefix.c\
-btree/btree_apply_suffix.c\
-btree/btree_create_node.c\
-btree/btree_del.c\
-btree/btree_delone.c\
-btree/btree_insert_data.c\
-btree/btree_level_count.c\
-btree/btree_map.c\
-btree/btree_print.c\
-btree/btree_search_item.c\
 char/ft_isalnum.c\
 char/ft_isalpha.c\
 char/ft_isascii.c\
@@ -183,7 +171,6 @@ str/ft_strrev.c\
 str/ft_strsplit.c\
 str/ft_strstr.c\
 str/ft_strsub.c\
-str/ft_strtok.c\
 str/ft_strtrim.c\
 sys/dup2_close.c\
 sys/ft_getenv.c\

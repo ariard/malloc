@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:49:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/12 01:01:04 by ariard           ###   ########.fr       */
+/*   Updated: 2018/02/04 15:07:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define DG_MSG0		"{inv}{yel}%21s {bol}{blu}%-3d{eoc}"
 # define DG_MSG1		ft_path_notdir(__FILE__), __LINE__
-# define DG(f, ...)		ft_dprintf(STDBUG, DG_MSG0 f "{eoc}\n", DG_MSG1, ##__VA_ARGS__)
 
 # include <string.h>
 # include <unistd.h>
@@ -29,7 +28,6 @@
 # include "str.h"
 # include "sstr.h"
 # include "math.h"
-# include "btree.h"
 # include "mytime.h"
 # include "get_next_line.h"
 # include "color.h"
